@@ -10,15 +10,6 @@ st.set_page_config(
 )
 
 # ======================================
-# SESSION STATE
-# ======================================
-if "page" not in st.session_state:
-    st.session_state.page = "Home"
-
-if "ai_submenu" not in st.session_state:
-    st.session_state.ai_submenu = "Profile Finder"
-
-# ======================================
 # CUSTOM CSS
 # ======================================
 st.markdown("""
@@ -28,149 +19,142 @@ st.markdown("""
    GLOBAL SETTINGS
 ===================================== */
 
+/* App Background */
 .stApp {
-    background-color: #eaeaea !important;
+    background-color: #eaeaea;
 }
 
-/* Hide Streamlit default items */
+/* Hide Streamlit Items */
 #MainMenu,
 footer,
 header {
     visibility: hidden;
 }
 
-/* Reduce spacing */
+/* Reduce top spacing */
 .block-container {
     padding-top: 0.5rem;
 }
 
-/* FORCE ALL TEXT BLACK */
-p, h1, h2, h3, h4, h5, h6, span, label, div {
+/* All Text Black */
+html, body, [class*="css"] {
     color: black !important;
 }
 
-/* Links remain blue */
+/* Keep links blue */
 a {
     color: blue !important;
 }
 
 /* =====================================
-   NAVIGATION BAR
+   HEADER ALIGNMENT
 ===================================== */
 
-.navbar {
-    background-color: #0057b8;
-    padding: 10px 20px;
-    border-radius: 10px;
+.logo-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    margin-bottom: -15px;
 }
 
 /* Logo */
-.logo img {
-    vertical-align: middle;
-}
-
-/* Main menu */
-.menu {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-/* Menu items */
-.menu-item {
-    position: relative;
-    color: white !important;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-/* Hover effect */
-.menu-item:hover {
-    background-color: red;
-    transition: 0.3s;
-}
-
-/* Dropdown submenu */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #0057b8;
-    min-width: 220px;
-    top: 45px;
-    left: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 999;
-}
-
-/* Submenu items */
-.dropdown-content div {
-    color: white !important;
-    padding: 12px 16px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Hover submenu */
-.dropdown-content div:hover {
-    background-color: red;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
+.logo-container img {
+    margin-top: 0px;
 }
 
 /* =====================================
-   COMING SOON
+   TOP MENU BAR
+===================================== */
+
+div[data-baseweb="tab-list"] {
+    background-color: #0057b8;
+    padding: 12px 20px;
+    border-radius: 10px;
+    align-items: center;
+    gap: 35px;
+    margin-top: 18px;
+}
+
+/* Menu Buttons */
+button[data-baseweb="tab"] {
+    color: white !important;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 10px 16px;
+    border-radius: 5px;
+}
+
+/* Hover Effect */
+button[data-baseweb="tab"]:hover {
+    background-color: red !important;
+    color: white !important;
+    transition: 0.3s;
+}
+
+/* Active Menu */
+button[aria-selected="true"] {
+    background-color: #003f85 !important;
+    color: white !important;
+}
+
+/* =====================================
+   COMING SOON SECTION
 ===================================== */
 
 .coming-soon {
     text-align: center;
     font-size: 90px;
     font-weight: bold;
-    color: #0057b8 !important;
+    color: #0057b8;
     margin-top: 140px;
 }
 
 .sub-text {
     text-align: center;
     font-size: 28px;
-    color: black !important;
+    color: black;
     margin-top: 20px;
+}
+
+/* =====================================
+   SUBMENU
+===================================== */
+
+.submenu-title {
+    color: #0057b8;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ======================================
-# TOP SECTION
+# HEADER SECTION
 # ======================================
 col1, col2 = st.columns([1, 8])
 
 with col1:
-    st.image("logo.png", width=110)
+    st.image("logo.png", width=120)
 
+# ======================================
+# HORIZONTAL MENU
+# ======================================
 with col2:
-
-    selected_menu = st.radio(
-        "",
-        ["Home", "Our Services", "AI Analyzer", "About", "Contact"],
-        horizontal=True,
-        label_visibility="collapsed"
-    )
+    tabs = st.tabs([
+        "Home",
+        "Our Services",
+        "AI Analyzer",
+        "About",
+        "Contact"
+    ])
 
 # ======================================
 # HOME PAGE
 # ======================================
-if selected_menu == "Home":
+with tabs[0]:
 
     st.markdown(
         "<div class='coming-soon'>COMING SOON</div>",
@@ -185,7 +169,7 @@ if selected_menu == "Home":
 # ======================================
 # OUR SERVICES PAGE
 # ======================================
-elif selected_menu == "Our Services":
+with tabs[1]:
 
     st.title("Our Services")
 
@@ -206,25 +190,32 @@ elif selected_menu == "Our Services":
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-elif selected_menu == "AI Analyzer":
+with tabs[2]:
 
     st.title("AI Analyzer")
 
-    ai_submenu = st.radio(
-        "",
+    # ----------------------------------
+    # SUBMENU
+    # ----------------------------------
+    ai_menu = st.radio(
+        "Select Analyzer",
         ["Profile Finder", "Reels Analyzer"],
-        horizontal=True,
-        label_visibility="collapsed"
+        horizontal=True
     )
 
-    st.markdown("---")
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # PROFILE FINDER
-    if ai_submenu == "Profile Finder":
+    if ai_menu == "Profile Finder":
 
-        st.subheader("Profile Finder")
+        st.markdown(
+            "<div class='submenu-title'>Profile Finder</div>",
+            unsafe_allow_html=True
+        )
 
-        st.write("Upload profile-related files for AI analysis.")
+        st.write("""
+        Upload profile-related files for AI analysis.
+        """)
 
         uploaded_file = st.file_uploader(
             "Upload Profile File",
@@ -236,11 +227,16 @@ elif selected_menu == "AI Analyzer":
             st.success("Profile file uploaded successfully!")
 
     # REELS ANALYZER
-    elif ai_submenu == "Reels Analyzer":
+    elif ai_menu == "Reels Analyzer":
 
-        st.subheader("Reels Analyzer")
+        st.markdown(
+            "<div class='submenu-title'>Reels Analyzer</div>",
+            unsafe_allow_html=True
+        )
 
-        st.write("Upload reels data for AI-powered insights.")
+        st.write("""
+        Upload reels data for AI-powered insights.
+        """)
 
         uploaded_file = st.file_uploader(
             "Upload Reels File",
@@ -254,7 +250,7 @@ elif selected_menu == "AI Analyzer":
 # ======================================
 # ABOUT PAGE
 # ======================================
-elif selected_menu == "About":
+with tabs[3]:
 
     st.title("About Us")
 
@@ -269,7 +265,7 @@ elif selected_menu == "About":
 # ======================================
 # CONTACT PAGE
 # ======================================
-elif selected_menu == "Contact":
+with tabs[4]:
 
     st.title("Contact Us")
 
