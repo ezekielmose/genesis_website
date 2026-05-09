@@ -95,7 +95,7 @@ button[data-baseweb="tab"]:hover {
 /* Active Menu */
 button[aria-selected="true"] {
     background-color: #003f85 !important;
-    color: white !important;
+    color: black !important;
 }
 
 /* =====================================
