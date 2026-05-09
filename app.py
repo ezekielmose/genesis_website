@@ -10,6 +10,15 @@ st.set_page_config(
 )
 
 # ======================================
+# SESSION STATE
+# ======================================
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+if "ai_submenu" not in st.session_state:
+    st.session_state.ai_submenu = "Profile Finder"
+
+# ======================================
 # CUSTOM CSS
 # ======================================
 st.markdown("""
@@ -19,142 +28,149 @@ st.markdown("""
    GLOBAL SETTINGS
 ===================================== */
 
-/* App Background */
 .stApp {
-    background-color: #eaeaea;
+    background-color: #eaeaea !important;
 }
 
-/* Hide Streamlit Items */
+/* Hide Streamlit default items */
 #MainMenu,
 footer,
 header {
     visibility: hidden;
 }
 
-/* Reduce top spacing */
+/* Reduce spacing */
 .block-container {
     padding-top: 0.5rem;
 }
 
-/* All Text Black */
-html, body, [class*="css"] {
+/* FORCE ALL TEXT BLACK */
+p, h1, h2, h3, h4, h5, h6, span, label, div {
     color: black !important;
 }
 
-/* Keep links blue */
+/* Links remain blue */
 a {
     color: blue !important;
 }
 
 /* =====================================
-   HEADER ALIGNMENT
+   NAVIGATION BAR
 ===================================== */
 
-.logo-row {
+.navbar {
+    background-color: #0057b8;
+    padding: 10px 20px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    margin-bottom: -15px;
+    justify-content: space-between;
 }
 
 /* Logo */
-.logo-container img {
-    margin-top: 0px;
+.logo img {
+    vertical-align: middle;
 }
 
-/* =====================================
-   TOP MENU BAR
-===================================== */
-
-div[data-baseweb="tab-list"] {
-    background-color: #0057b8;
-    padding: 12px 20px;
-    border-radius: 10px;
+/* Main menu */
+.menu {
+    display: flex;
+    gap: 25px;
     align-items: center;
-    gap: 35px;
-    margin-top: 18px;
 }
 
-/* Menu Buttons */
-button[data-baseweb="tab"] {
+/* Menu items */
+.menu-item {
+    position: relative;
     color: white !important;
     font-size: 18px;
     font-weight: bold;
-    background-color: transparent !important;
-    border: none !important;
-    padding: 10px 16px;
+    cursor: pointer;
+    padding: 10px 15px;
     border-radius: 5px;
+    text-decoration: none;
 }
 
-/* Hover Effect */
-button[data-baseweb="tab"]:hover {
-    background-color: red !important;
-    color: white !important;
+/* Hover effect */
+.menu-item:hover {
+    background-color: red;
     transition: 0.3s;
 }
 
-/* Active Menu */
-button[aria-selected="true"] {
-    background-color: #003f85 !important;
+/* Dropdown submenu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0057b8;
+    min-width: 220px;
+    top: 45px;
+    left: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Submenu items */
+.dropdown-content div {
     color: white !important;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Hover submenu */
+.dropdown-content div:hover {
+    background-color: red;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 /* =====================================
-   COMING SOON SECTION
+   COMING SOON
 ===================================== */
 
 .coming-soon {
     text-align: center;
     font-size: 90px;
     font-weight: bold;
-    color: #0057b8;
+    color: #0057b8 !important;
     margin-top: 140px;
 }
 
 .sub-text {
     text-align: center;
     font-size: 28px;
-    color: black;
+    color: black !important;
     margin-top: 20px;
-}
-
-/* =====================================
-   SUBMENU
-===================================== */
-
-.submenu-title {
-    color: #0057b8;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ======================================
-# HEADER SECTION
+# TOP SECTION
 # ======================================
 col1, col2 = st.columns([1, 8])
 
 with col1:
-    st.image("logo.png", width=120)
+    st.image("logo.png", width=110)
 
-# ======================================
-# HORIZONTAL MENU
-# ======================================
 with col2:
-    tabs = st.tabs([
-        "Home",
-        "Our Services",
-        "AI Analyzer",
-        "About",
-        "Contact"
-    ])
+
+    selected_menu = st.radio(
+        "",
+        ["Home", "Our Services", "AI Analyzer", "About", "Contact"],
+        horizontal=True,
+        label_visibility="collapsed"
+    )
 
 # ======================================
 # HOME PAGE
 # ======================================
-with tabs[0]:
+if selected_menu == "Home":
 
     st.markdown(
         "<div class='coming-soon'>COMING SOON</div>",
@@ -169,7 +185,7 @@ with tabs[0]:
 # ======================================
 # OUR SERVICES PAGE
 # ======================================
-with tabs[1]:
+elif selected_menu == "Our Services":
 
     st.title("Our Services")
 
@@ -190,32 +206,25 @@ with tabs[1]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-with tabs[2]:
+elif selected_menu == "AI Analyzer":
 
     st.title("AI Analyzer")
 
-    # ----------------------------------
-    # SUBMENU
-    # ----------------------------------
-    ai_menu = st.radio(
-        "Select Analyzer",
+    ai_submenu = st.radio(
+        "",
         ["Profile Finder", "Reels Analyzer"],
-        horizontal=True
+        horizontal=True,
+        label_visibility="collapsed"
     )
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("---")
 
     # PROFILE FINDER
-    if ai_menu == "Profile Finder":
+    if ai_submenu == "Profile Finder":
 
-        st.markdown(
-            "<div class='submenu-title'>Profile Finder</div>",
-            unsafe_allow_html=True
-        )
+        st.subheader("Profile Finder")
 
-        st.write("""
-        Upload profile-related files for AI analysis.
-        """)
+        st.write("Upload profile-related files for AI analysis.")
 
         uploaded_file = st.file_uploader(
             "Upload Profile File",
@@ -227,16 +236,11 @@ with tabs[2]:
             st.success("Profile file uploaded successfully!")
 
     # REELS ANALYZER
-    elif ai_menu == "Reels Analyzer":
+    elif ai_submenu == "Reels Analyzer":
 
-        st.markdown(
-            "<div class='submenu-title'>Reels Analyzer</div>",
-            unsafe_allow_html=True
-        )
+        st.subheader("Reels Analyzer")
 
-        st.write("""
-        Upload reels data for AI-powered insights.
-        """)
+        st.write("Upload reels data for AI-powered insights.")
 
         uploaded_file = st.file_uploader(
             "Upload Reels File",
@@ -250,7 +254,7 @@ with tabs[2]:
 # ======================================
 # ABOUT PAGE
 # ======================================
-with tabs[3]:
+elif selected_menu == "About":
 
     st.title("About Us")
 
@@ -265,7 +269,7 @@ with tabs[3]:
 # ======================================
 # CONTACT PAGE
 # ======================================
-with tabs[4]:
+elif selected_menu == "Contact":
 
     st.title("Contact Us")
 
