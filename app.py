@@ -4,7 +4,7 @@ import streamlit as st
 # PAGE CONFIGURATION
 # ======================================
 st.set_page_config(
-    page_title="Genesis Website",
+    page_title="Genesis Digital",
     page_icon="🌐",
     layout="wide"
 )
@@ -200,7 +200,7 @@ with col2:
 with tabs[0]:
 
     st.markdown(
-        "<div class='coming-soon'>COMING SOON</div>",
+        "<div class='coming-soon'>UNDER DEVELOPMENT</div>",
         unsafe_allow_html=True
     )
 
@@ -255,7 +255,7 @@ with tabs[1]:
 
         uploaded_file = st.file_uploader(
             "Upload Reels File",
-            type=["csv", "mp4", "txt"],
+            type=["mp4"],
             key="reels"
         )
 
@@ -272,8 +272,8 @@ with tabs[2]:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.subheader("Web Development")
-        st.write("Modern websites and applications.")
+        st.subheader("Videos Sourcing")
+        st.write("We specialize in videos sourcing meeting the suggested guidelines.")
 
     with col2:
         st.subheader("AI Solutions")
@@ -294,7 +294,7 @@ with tabs[3]:
 
     st.write("- Artificial Intelligence")
     st.write("- Automation")
-    st.write("- Modern Web Solutions")
+    st.write("- Videos Sourcing")
 
 # ======================================
 # CONTACT PAGE
