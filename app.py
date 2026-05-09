@@ -19,7 +19,6 @@ st.markdown("""
    GLOBAL SETTINGS
 ===================================== */
 
-/* App Background */
 .stApp {
     background-color: #eaeaea;
 }
@@ -36,8 +35,8 @@ header {
     padding-top: 0.5rem;
 }
 
-/* All Text Black */
-html, body, [class*="css"] {
+/* FORCE ALL TEXT BLACK (IMPORTANT FIX) */
+* {
     color: black !important;
 }
 
@@ -56,7 +55,6 @@ a {
     margin-bottom: -15px;
 }
 
-/* Logo */
 .logo-container img {
     margin-top: 0px;
 }
@@ -167,36 +165,12 @@ with tabs[0]:
     )
 
 # ======================================
-# OUR SERVICES PAGE
+# AI ANALYZER PAGE
 # ======================================
 with tabs[1]:
 
-    st.title("Our Services")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.subheader("Web Development")
-        st.write("Modern websites and applications.")
-
-    with col2:
-        st.subheader("AI Solutions")
-        st.write("AI-powered business tools.")
-
-    with col3:
-        st.subheader("Data Analysis")
-        st.write("Professional data insights.")
-
-# ======================================
-# AI ANALYZER PAGE
-# ======================================
-with tabs[2]:
-
     st.title("AI Analyzer")
 
-    # ----------------------------------
-    # SUBMENU
-    # ----------------------------------
     ai_menu = st.radio(
         "Select Analyzer",
         ["Profile Finder", "Reels Analyzer"],
@@ -213,9 +187,7 @@ with tabs[2]:
             unsafe_allow_html=True
         )
 
-        st.write("""
-        Upload profile-related files for AI analysis.
-        """)
+        st.write("Upload profile-related files for AI analysis.")
 
         uploaded_file = st.file_uploader(
             "Upload Profile File",
@@ -234,9 +206,7 @@ with tabs[2]:
             unsafe_allow_html=True
         )
 
-        st.write("""
-        Upload reels data for AI-powered insights.
-        """)
+        st.write("Upload reels data for AI-powered insights.")
 
         uploaded_file = st.file_uploader(
             "Upload Reels File",
@@ -248,19 +218,38 @@ with tabs[2]:
             st.success("Reels file uploaded successfully!")
 
 # ======================================
+# OUR SERVICES PAGE
+# ======================================
+with tabs[2]:
+
+    st.title("Our Services")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.subheader("Web Development")
+        st.write("Modern websites and applications.")
+
+    with col2:
+        st.subheader("AI Solutions")
+        st.write("AI-powered business tools.")
+
+    with col3:
+        st.subheader("Data Analysis")
+        st.write("Professional data insights.")
+
+# ======================================
 # ABOUT PAGE
 # ======================================
 with tabs[3]:
 
     st.title("About Us")
 
-    st.write("""
-    We are a technology company focused on:
+    st.write("We are a technology company focused on:")
 
-    - Artificial Intelligence
-    - Automation
-    - Modern Web Solutions
-    """)
+    st.write("- Artificial Intelligence")
+    st.write("- Automation")
+    st.write("- Modern Web Solutions")
 
 # ======================================
 # CONTACT PAGE
