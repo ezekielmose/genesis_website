@@ -95,7 +95,7 @@ button[data-baseweb="tab"]:hover {
 /* Active Menu */
 button[aria-selected="true"] {
     background-color: #003f85 !important;
-    color: black !important;
+    color: white !important;
 }
 
 /* =====================================
@@ -104,7 +104,7 @@ button[aria-selected="true"] {
 
 .coming-soon {
     text-align: center;
-    font-size: 90px;
+    font-size: 70px;
     font-weight: bold;
     color: #0057b8;
     margin-top: 140px;
@@ -145,8 +145,8 @@ with col1:
 with col2:
     tabs = st.tabs([
         "Home",
-        "Our Services",
         "AI Analyzer",
+        "Our Services",
         "About",
         "Contact"
     ])
