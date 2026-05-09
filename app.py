@@ -13,68 +13,114 @@ st.set_page_config(
 # CUSTOM CSS
 # ======================================
 st.markdown("""
-    <style>
+<style>
 
-    /* Hide Streamlit menu and footer */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+/* Entire App Background */
+.stApp {
+    background-color: #eaeaea;
+}
 
-    /* Tabs styling */
-    div[data-baseweb="tab-list"] {
-        justify-content: center;
-        gap: 40px;
-        margin-top: 10px;
-    }
+/* Hide Streamlit default items */
+#MainMenu {
+    visibility: hidden;
+}
 
-    button[data-baseweb="tab"] {
-        font-size: 18px;
-        font-weight: bold;
-        padding: 10px 20px;
-    }
+footer {
+    visibility: hidden;
+}
 
-    /* Coming Soon Text */
-    .coming-soon {
-        text-align: center;
-        font-size: 80px;
-        font-weight: bold;
-        color: #4CAF50;
-        margin-top: 120px;
-    }
+header {
+    visibility: hidden;
+}
 
-    .sub-text {
-        text-align: center;
-        font-size: 24px;
-        color: gray;
-        margin-top: 20px;
-    }
+/* Reduce top spacing */
+.block-container {
+    padding-top: 1rem;
+}
 
-    </style>
+/* =====================================
+   TOP NAVIGATION BAR
+===================================== */
+div[data-baseweb="tab-list"] {
+    background-color: #0057b8;
+    padding: 15px 20px;
+    border-radius: 10px;
+    align-items: center;
+    gap: 40px;
+    margin-top: 0px;
+}
+
+/* Menu Buttons */
+button[data-baseweb="tab"] {
+    color: white !important;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* Hover Effect */
+button[data-baseweb="tab"]:hover {
+    background-color: red !important;
+    color: white !important;
+    transition: 0.3s;
+}
+
+/* Active Tab */
+button[aria-selected="true"] {
+    background-color: #003f85 !important;
+    color: white !important;
+}
+
+/* =====================================
+   COMING SOON SECTION
+===================================== */
+.coming-soon {
+    text-align: center;
+    font-size: 90px;
+    font-weight: bold;
+    color: #0057b8;
+    margin-top: 140px;
+}
+
+.sub-text {
+    text-align: center;
+    font-size: 28px;
+    color: #555555;
+    margin-top: 20px;
+}
+
+/* Logo spacing */
+.logo-container {
+    margin-bottom: -20px;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 # ======================================
-# TOP HEADER WITH LOGO
+# HEADER SECTION
 # ======================================
-col1, col2 = st.columns([1, 6])
+col1, col2 = st.columns([1, 8])
 
 with col1:
+    st.markdown("<div class='logo-container'>", unsafe_allow_html=True)
     st.image("logo.png", width=120)
-
-with col2:
-    st.markdown(
-        "<h1 style='padding-top:20px;'>Genesis Digital</h1>",
-        unsafe_allow_html=True
-    )
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # ======================================
 # HORIZONTAL MENU
 # ======================================
-tabs = st.tabs([
-    "Home",
-    "Our Services",
-    "AI Analyzer",
-    "About",
-    "Contact"
-])
+with col2:
+    tabs = st.tabs([
+        "Home",
+        "Our Services",
+        "AI Analyzer",
+        "About",
+        "Contact"
+    ])
 
 # ======================================
 # HOME PAGE
