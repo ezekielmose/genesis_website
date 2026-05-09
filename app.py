@@ -14,15 +14,16 @@ st.set_page_config(
 # ======================================
 st.markdown("""
     <style>
-    
-    /* Remove Streamlit default menu and footer */
+
+    /* Hide Streamlit menu and footer */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
 
-    /* Top Navigation Styling */
+    /* Tabs styling */
     div[data-baseweb="tab-list"] {
         justify-content: center;
         gap: 40px;
+        margin-top: 10px;
     }
 
     button[data-baseweb="tab"] {
@@ -31,8 +32,38 @@ st.markdown("""
         padding: 10px 20px;
     }
 
+    /* Coming Soon Text */
+    .coming-soon {
+        text-align: center;
+        font-size: 80px;
+        font-weight: bold;
+        color: #4CAF50;
+        margin-top: 120px;
+    }
+
+    .sub-text {
+        text-align: center;
+        font-size: 24px;
+        color: gray;
+        margin-top: 20px;
+    }
+
     </style>
 """, unsafe_allow_html=True)
+
+# ======================================
+# TOP HEADER WITH LOGO
+# ======================================
+col1, col2 = st.columns([1, 6])
+
+with col1:
+    st.image("logo.png", width=120)
+
+with col2:
+    st.markdown(
+        "<h1 style='padding-top:20px;'>Genesis Digital</h1>",
+        unsafe_allow_html=True
+    )
 
 # ======================================
 # HORIZONTAL MENU
@@ -50,15 +81,14 @@ tabs = st.tabs([
 # ======================================
 with tabs[0]:
 
-    st.title("Welcome to Genesis Website")
+    st.markdown(
+        "<div class='coming-soon'>COMING SOON</div>",
+        unsafe_allow_html=True
+    )
 
-    st.write("""
-    We provide modern digital solutions powered by Artificial Intelligence.
-    """)
-
-    st.image(
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-        use_container_width=True
+    st.markdown(
+        "<div class='sub-text'>Our new AI-powered platform is under development.</div>",
+        unsafe_allow_html=True
     )
 
 # ======================================
