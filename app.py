@@ -15,39 +15,63 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Entire App Background */
+/* =====================================
+   GLOBAL SETTINGS
+===================================== */
+
+/* App Background */
 .stApp {
     background-color: #eaeaea;
 }
 
-/* Hide Streamlit default items */
-#MainMenu {
-    visibility: hidden;
-}
-
-footer {
-    visibility: hidden;
-}
-
+/* Hide Streamlit Items */
+#MainMenu,
+footer,
 header {
     visibility: hidden;
 }
 
 /* Reduce top spacing */
 .block-container {
-    padding-top: 1rem;
+    padding-top: 0.5rem;
+}
+
+/* All Text Black */
+html, body, [class*="css"] {
+    color: black !important;
+}
+
+/* Keep links blue */
+a {
+    color: blue !important;
 }
 
 /* =====================================
-   TOP NAVIGATION BAR
+   HEADER ALIGNMENT
 ===================================== */
+
+.logo-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: -15px;
+}
+
+/* Logo */
+.logo-container img {
+    margin-top: 0px;
+}
+
+/* =====================================
+   TOP MENU BAR
+===================================== */
+
 div[data-baseweb="tab-list"] {
     background-color: #0057b8;
-    padding: 15px 20px;
+    padding: 12px 20px;
     border-radius: 10px;
     align-items: center;
-    gap: 40px;
-    margin-top: 0px;
+    gap: 35px;
+    margin-top: 18px;
 }
 
 /* Menu Buttons */
@@ -55,9 +79,9 @@ button[data-baseweb="tab"] {
     color: white !important;
     font-size: 18px;
     font-weight: bold;
-    background-color: transparent;
-    border: none;
-    padding: 10px 15px;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 10px 16px;
     border-radius: 5px;
 }
 
@@ -68,7 +92,7 @@ button[data-baseweb="tab"]:hover {
     transition: 0.3s;
 }
 
-/* Active Tab */
+/* Active Menu */
 button[aria-selected="true"] {
     background-color: #003f85 !important;
     color: white !important;
@@ -77,6 +101,7 @@ button[aria-selected="true"] {
 /* =====================================
    COMING SOON SECTION
 ===================================== */
+
 .coming-soon {
     text-align: center;
     font-size: 90px;
@@ -88,13 +113,19 @@ button[aria-selected="true"] {
 .sub-text {
     text-align: center;
     font-size: 28px;
-    color: #555555;
+    color: black;
     margin-top: 20px;
 }
 
-/* Logo spacing */
-.logo-container {
-    margin-bottom: -20px;
+/* =====================================
+   SUBMENU
+===================================== */
+
+.submenu-title {
+    color: #0057b8;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 </style>
@@ -106,9 +137,7 @@ button[aria-selected="true"] {
 col1, col2 = st.columns([1, 8])
 
 with col1:
-    st.markdown("<div class='logo-container'>", unsafe_allow_html=True)
     st.image("logo.png", width=120)
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # ======================================
 # HORIZONTAL MENU
@@ -165,13 +194,58 @@ with tabs[2]:
 
     st.title("AI Analyzer")
 
-    uploaded_file = st.file_uploader(
-        "Upload a file",
-        type=["csv", "txt", "pdf"]
+    # ----------------------------------
+    # SUBMENU
+    # ----------------------------------
+    ai_menu = st.radio(
+        "Select Analyzer",
+        ["Profile Finder", "Reels Analyzer"],
+        horizontal=True
     )
 
-    if uploaded_file:
-        st.success("File uploaded successfully!")
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # PROFILE FINDER
+    if ai_menu == "Profile Finder":
+
+        st.markdown(
+            "<div class='submenu-title'>Profile Finder</div>",
+            unsafe_allow_html=True
+        )
+
+        st.write("""
+        Upload profile-related files for AI analysis.
+        """)
+
+        uploaded_file = st.file_uploader(
+            "Upload Profile File",
+            type=["csv", "txt", "pdf"],
+            key="profile"
+        )
+
+        if uploaded_file:
+            st.success("Profile file uploaded successfully!")
+
+    # REELS ANALYZER
+    elif ai_menu == "Reels Analyzer":
+
+        st.markdown(
+            "<div class='submenu-title'>Reels Analyzer</div>",
+            unsafe_allow_html=True
+        )
+
+        st.write("""
+        Upload reels data for AI-powered insights.
+        """)
+
+        uploaded_file = st.file_uploader(
+            "Upload Reels File",
+            type=["csv", "mp4", "txt"],
+            key="reels"
+        )
+
+        if uploaded_file:
+            st.success("Reels file uploaded successfully!")
 
 # ======================================
 # ABOUT PAGE
