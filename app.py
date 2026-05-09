@@ -126,6 +126,51 @@ button[aria-selected="true"] {
     margin-bottom: 20px;
 }
 
+/* =====================================
+   MOBILE RESPONSIVENESS FIX
+===================================== */
+
+@media only screen and (max-width: 768px) {
+
+    /* Stack logo and menu nicely */
+    .logo-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Reduce logo size on mobile */
+    img {
+        width: 90px !important;
+    }
+
+    /* Make tabs wrap instead of overflow */
+    div[data-baseweb="tab-list"] {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+
+    /* Smaller menu buttons */
+    button[data-baseweb="tab"] {
+        font-size: 14px !important;
+        padding: 8px 10px !important;
+    }
+
+    /* Prevent horizontal scrolling */
+    html, body {
+        overflow-x: hidden;
+    }
+
+    /* Reduce big headings */
+    .coming-soon {
+        font-size: 50px !important;
+    }
+
+    .sub-text {
+        font-size: 18px !important;
+    }
+}
+
 </style>
 """, unsafe_allow_html=True)
 
