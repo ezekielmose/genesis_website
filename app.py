@@ -225,7 +225,7 @@ with tabs[0]:
 
     .main-title {
         text-align: center;
-        color: white !important;
+        color: #00d9ff !important;
         font-size: 52px;
         font-weight: bold;
         margin-top: 10px;
@@ -241,25 +241,28 @@ with tabs[0]:
         margin-bottom: 40px;
     }
 
-    .card {
+    /* CARD STYLING */
+
+    .custom-card {
         border: 2px solid #0dcfff;
-        background-color: rgba(255,255,255,0.06);
+        background-color: white;
         padding: 30px 25px;
         border-radius: 10px;
-        min-height: 240px;
-    }
-
-    .card-title {
-        color: white !important;
-        font-size: 28px;
-        font-weight: bold;
+        min-height: 260px;
         margin-bottom: 20px;
     }
 
-    .card p {
-        color: #d6e2ff !important;
+    .custom-card h3 {
+        color: #0057b8 !important;
+        font-size: 28px;
+        margin-bottom: 18px;
+    }
+
+    .custom-card p {
+        color: black !important;
         font-size: 18px;
         line-height: 1.8;
+        margin-bottom: 0;
     }
 
     @media only screen and (max-width: 768px) {
@@ -268,26 +271,26 @@ with tabs[0]:
             font-size: 34px !important;
         }
 
-        .card-title {
+        .custom-card {
+            min-height: auto;
+            padding: 24px 20px;
+        }
+
+        .custom-card h3 {
             font-size: 22px !important;
         }
 
-        .card p {
+        .custom-card p {
             font-size: 15px !important;
-        }
-
-        .card {
-            min-height: auto;
         }
     }
 
     </style>
     """, unsafe_allow_html=True)
 
-    # OPEN MAIN CONTAINER
+    # MAIN SECTION
     st.markdown('<div class="home-wrapper">', unsafe_allow_html=True)
 
-    # SECTION TITLES
     st.markdown(
         '<div class="mini-title">OUR EDGE</div>',
         unsafe_allow_html=True
@@ -307,78 +310,58 @@ with tabs[0]:
     col1, col2 = st.columns(2)
 
     with col1:
+        st.markdown("""
+        <div class="custom-card">
+            <h3>Art Meets Technology</h3>
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
-        st.markdown(
-            '<div class="card-title">Art Meets Technology</div>',
-            unsafe_allow_html=True
-        )
-
-        st.write(
-            "We fuse creative storytelling with cutting-edge digital "
-            "infrastructure to produce content that captivates and converts."
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
+            <p>
+            We fuse creative storytelling with cutting-edge digital
+            infrastructure to produce content that captivates and converts.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
+        st.markdown("""
+        <div class="custom-card">
+            <h3>Industry Expertise</h3>
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
-        st.markdown(
-            '<div class="card-title">Industry Expertise</div>',
-            unsafe_allow_html=True
-        )
-
-        st.write(
-            "Our team brings deep domain knowledge across hospitality, "
-            "travel, and digital media, ensuring every project exceeds "
-            "industry benchmarks."
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
+            <p>
+            Our team brings deep domain knowledge across hospitality,
+            travel, and digital media, ensuring every project exceeds
+            industry benchmarks.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     # SECOND ROW
     col3, col4 = st.columns(2)
 
     with col3:
+        st.markdown("""
+        <div class="custom-card">
+            <h3>Client-Centric Approach</h3>
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
-        st.markdown(
-            '<div class="card-title">Client-Centric Approach</div>',
-            unsafe_allow_html=True
-        )
-
-        st.write(
-            "Every partnership is custom-architected. We adapt to your "
-            "vision, goals, and quality standards with precision and agility."
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
+            <p>
+            Every partnership is custom-architected. We adapt to your
+            vision, goals, and quality standards with precision and agility.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col4:
+        st.markdown("""
+        <div class="custom-card">
+            <h3>Scalable Execution</h3>
 
-        st.markdown('<div class="card">', unsafe_allow_html=True)
+            <p>
+            From dozens to thousands of videos, our proven workflow scales
+            seamlessly — delivering consistent quality at any volume.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.markdown(
-            '<div class="card-title">Scalable Execution</div>',
-            unsafe_allow_html=True
-        )
-
-        st.write(
-            "From dozens to thousands of videos, our proven workflow scales "
-            "seamlessly — delivering consistent quality at any volume."
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    # CLOSE MAIN CONTAINER
     st.markdown('</div>', unsafe_allow_html=True)
-
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
