@@ -378,33 +378,86 @@ with tabs[1]:
             
                 if hotel_name:
             
+                    import requests
+                    from bs4 import BeautifulSoup
+                    import urllib.parse
+            
                     query = f"{hotel_name} {city} {country}".strip()
             
-                    search_url = (
-                        "https://www.google.com/search?q="
-                        f"site:instagram.com+%22{query}%22"
-                    )
+                    search_url = f"https://www.google.com/search?q=site:instagram.com+{urllib.parse.quote(query)}"
             
-                    st.markdown(
-                        f'''
-                        <a href="{search_url}" target="_blank">
-                            <button style="
-                                background-color:#0057b8;
-                                color:white;
-                                font-size:16px;
-                                font-weight:bold;
-                                border:none;
-                                padding:12px 20px;
-                                border-radius:10px;
-                                cursor:pointer;
-                                width:100%;
-                            ">
-                                Open Instagram Matches
-                            </button>
-                        </a>
-                        ''',
-                        unsafe_allow_html=True
-                    )
+                    headers = {
+                        "User-Agent": "Mozilla/5.0"
+                    }
+            
+                    response = requests.get(search_url, headers=headers)
+                    soup = BeautifulSoup(response.text, "html.parser")
+            
+                    links = []
+                    for a in soup.find_all("a"):
+                        href = a.get("href", "")
+                        if "instagram.com" in href and "/url?q=" in href:
+                            clean_link = href.split("/url?q=")[1].split("&")[0]
+                            links.append(clean_link)
+            
+                    # =========================
+                    # RANKING LOGIC
+                    # =========================
+                    hotel_name_lower = hotel_name.lower()
+            
+                    best_match = None
+                    best_score = 0
+            
+                    for link in links:
+            
+                        score = 0
+            
+                        link_lower = link.lower()
+            
+                        # exact hotel name match (highest weight)
+                        if hotel_name_lower.replace(" ", "") in link_lower.replace("-", ""):
+                            score += 10
+            
+                        # partial match bonus
+                        if any(word in link_lower for word in hotel_name_lower.split()):
+                            score += 3
+            
+                        if score > best_score:
+                            best_score = score
+                            best_match = link
+            
+                    # =========================
+                    # DISPLAY RESULT
+                    # =========================
+                    if best_match:
+            
+                        st.success("🎯 Best Instagram Match Found")
+            
+                        st.markdown(
+                            f"""
+                            <a href="{best_match}" target="_blank">
+                                <button style="
+                                    background-color:#0057b8;
+                                    color:white;
+                                    font-size:16px;
+                                    font-weight:bold;
+                                    border:none;
+                                    padding:12px 20px;
+                                    border-radius:10px;
+                                    cursor:pointer;
+                                    width:100%;
+                                ">
+                                    Open Best Matching Instagram Page
+                                </button>
+                            </a>
+                            """,
+                            unsafe_allow_html=True
+                        )
+            
+                        st.write("🔗 Matched URL:", best_match)
+            
+                    else:
+                        st.warning("⚠️ No strong Instagram match found.")
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
