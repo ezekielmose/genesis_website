@@ -217,21 +217,48 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
+
 with tabs[1]:
 
-    st.title("Select Your Option")
+    # CUSTOM BUTTON CSS
+    st.markdown("""
+    <style>
+
+    div.stButton > button {
+        background-color: #0057b8;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        padding: 25px 20px;
+        border-radius: 12px;
+        border: none;
+        width: 100%;
+        height: 120px;
+        transition: 0.3s;
+    }
+
+    div.stButton > button:hover {
+        background-color: red;
+        color: white;
+        border: none;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.title("🤖 AI Analyzer")
 
     st.write("Choose an AI Tool Below")
 
-    # BUTTONS
+    # BUTTON LAYOUT
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button("Profile Finder"):
+        if st.button("🔍 Profile Finder"):
             st.write("Profile Finder Selected")
 
     with col2:
-        if st.button("Analyze a Video"):
+        if st.button("🎥 Analyze a Video"):
             st.write("Analyze a Video Selected")
 
 # ======================================
