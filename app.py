@@ -478,16 +478,26 @@ with tabs[4]:
 st.markdown(
     """
     <style>
+
+    /* Make main app container behave like a flex column */
+    .main > div {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Push footer to bottom */
     .footer {
+        margin-top: auto;
         width: 100%;
-        background-color: #0d47a1; /* blue */
+        background-color: #0d47a1;
         color: white;
         text-align: center;
         padding: 15px;
         font-size: 13px;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
-        margin-top: 50px;
     }
+
     </style>
 
     <div class="footer">
