@@ -381,11 +381,7 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-ai_menu = st.radio(
-    "Select Analyzer",
-    ["Profile Finder", "Reels Analyzer"],
-    horizontal=True
-)
+
 
 # ======================================
 # OUR SERVICES PAGE
