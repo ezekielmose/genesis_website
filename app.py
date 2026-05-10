@@ -475,7 +475,7 @@ with tabs[4]:
 # FOOTER
 #===============================
 
- st.markdown(
+st.markdown(
     """
     <style>
     .footer {
