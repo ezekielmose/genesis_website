@@ -194,12 +194,14 @@ with col2:
         "Contact"
     ])
 
+
 # ======================================
 # HOME PAGE
 # ======================================
 with tabs[0]:
 
-    home_html = """
+    # CSS
+    st.markdown("""
     <style>
 
     .home-section {
@@ -207,7 +209,6 @@ with tabs[0]:
         padding: 50px 30px;
         border-radius: 12px;
         margin-top: 20px;
-        color: white !important;
     }
 
     .section-mini-title {
@@ -263,13 +264,6 @@ with tabs[0]:
         color: #d6e2ff !important;
     }
 
-    .footer {
-        background-color: #0057b8;
-        height: 90px;
-        margin-top: 40px;
-        border-radius: 10px 10px 0 0;
-    }
-
     @media only screen and (max-width: 768px) {
 
         .home-section {
@@ -283,7 +277,6 @@ with tabs[0]:
 
         .features-grid {
             grid-template-columns: 1fr;
-            gap: 18px;
         }
 
         .feature-card {
@@ -298,14 +291,13 @@ with tabs[0]:
         .feature-text {
             font-size: 16px !important;
         }
-
-        .footer {
-            height: 70px;
-        }
     }
 
     </style>
+    """, unsafe_allow_html=True)
 
+    # HTML
+    st.markdown("""
     <div class="home-section">
 
         <div class="section-mini-title">
@@ -368,9 +360,7 @@ with tabs[0]:
         </div>
 
     </div>
-    """
-
-    st.markdown(home_html, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ======================================
 # AI ANALYZER PAGE
