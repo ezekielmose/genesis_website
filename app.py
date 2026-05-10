@@ -471,10 +471,10 @@ with tabs[4]:
 
     st.write("📧 Email: mose@genesisdigital.in")
     st.write("📞 Phone: +254748468634")
-#===============================
-# FOOTER
-#===============================
 
+# =================================
+#FOOTER
+#=============================
 st.markdown(
     """
     <style>
@@ -561,7 +561,6 @@ st.markdown(
         color: #e3f2fd;
     }
 
-    /* MOBILE RESPONSIVENESS */
     @media (max-width: 768px) {
         .footer-container {
             flex-direction: column;
