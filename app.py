@@ -199,12 +199,8 @@ with col2:
 # ======================================
 with tabs[0]:
 
-    st.markdown("""
+    home_html = """
     <style>
-
-    /* =====================================
-       HOME SECTION
-    ===================================== */
 
     .home-section {
         background: linear-gradient(to right, #020d2b, #031a52);
@@ -240,10 +236,6 @@ with tabs[0]:
         border-radius: 20px;
     }
 
-    /* =====================================
-       FEATURE CARDS
-    ===================================== */
-
     .features-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -271,20 +263,12 @@ with tabs[0]:
         color: #d6e2ff !important;
     }
 
-    /* =====================================
-       FOOTER
-    ===================================== */
-
     .footer {
         background-color: #0057b8;
         height: 90px;
         margin-top: 40px;
         border-radius: 10px 10px 0 0;
     }
-
-    /* =====================================
-       MOBILE RESPONSIVENESS
-    ===================================== */
 
     @media only screen and (max-width: 768px) {
 
@@ -321,12 +305,12 @@ with tabs[0]:
     }
 
     </style>
-    """, unsafe_allow_html=True)
 
-    st.markdown("""
     <div class="home-section">
 
-        <div class="section-mini-title">OUR EDGE</div>
+        <div class="section-mini-title">
+            OUR EDGE
+        </div>
 
         <div class="main-title">
             Why Genesis Digital Stands Out
@@ -384,7 +368,9 @@ with tabs[0]:
         </div>
 
     </div>
-    """, unsafe_allow_html=True)
+    """
+
+    st.markdown(home_html, unsafe_allow_html=True)
 
 # ======================================
 # AI ANALYZER PAGE
