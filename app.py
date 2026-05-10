@@ -204,7 +204,7 @@ with col2:
 # ======================================
 with tabs[0]:
 
-    # HOME SECTION STYLING
+    # HOME CSS
     st.markdown("""
     <style>
 
@@ -246,20 +246,20 @@ with tabs[0]:
         background-color: rgba(255,255,255,0.06);
         padding: 30px 25px;
         border-radius: 10px;
-        height: 100%;
+        min-height: 240px;
     }
 
     .card-title {
         color: white !important;
         font-size: 28px;
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
-    .card-text {
+    .card p {
         color: #d6e2ff !important;
         font-size: 18px;
-        line-height: 1.7;
+        line-height: 1.8;
     }
 
     @media only screen and (max-width: 768px) {
@@ -272,17 +272,22 @@ with tabs[0]:
             font-size: 22px !important;
         }
 
-        .card-text {
+        .card p {
             font-size: 15px !important;
+        }
+
+        .card {
+            min-height: auto;
         }
     }
 
     </style>
     """, unsafe_allow_html=True)
 
-    # MAIN CONTAINER
+    # OPEN MAIN CONTAINER
     st.markdown('<div class="home-wrapper">', unsafe_allow_html=True)
 
+    # SECTION TITLES
     st.markdown(
         '<div class="mini-title">OUR EDGE</div>',
         unsafe_allow_html=True
@@ -298,63 +303,80 @@ with tabs[0]:
         unsafe_allow_html=True
     )
 
-    # ROW 1
+    # FIRST ROW
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
-        <div class="card">
-            <div class="card-title">Art Meets Technology</div>
 
-            <div class="card-text">
-                We fuse creative storytelling with cutting-edge digital
-                infrastructure to produce content that captivates and converts.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+
+        st.markdown(
+            '<div class="card-title">Art Meets Technology</div>',
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            "We fuse creative storytelling with cutting-edge digital "
+            "infrastructure to produce content that captivates and converts."
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown("""
-        <div class="card">
-            <div class="card-title">Industry Expertise</div>
 
-            <div class="card-text">
-                Our team brings deep domain knowledge across hospitality,
-                travel, and digital media, ensuring every project exceeds
-                industry benchmarks.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+
+        st.markdown(
+            '<div class="card-title">Industry Expertise</div>',
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            "Our team brings deep domain knowledge across hospitality, "
+            "travel, and digital media, ensuring every project exceeds "
+            "industry benchmarks."
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ROW 2
+    # SECOND ROW
     col3, col4 = st.columns(2)
 
     with col3:
-        st.markdown("""
-        <div class="card">
-            <div class="card-title">Client-Centric Approach</div>
 
-            <div class="card-text">
-                Every partnership is custom-architected. We adapt to your
-                vision, goals, and quality standards with precision and agility.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+
+        st.markdown(
+            '<div class="card-title">Client-Centric Approach</div>',
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            "Every partnership is custom-architected. We adapt to your "
+            "vision, goals, and quality standards with precision and agility."
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
     with col4:
-        st.markdown("""
-        <div class="card">
-            <div class="card-title">Scalable Execution</div>
 
-            <div class="card-text">
-                From dozens to thousands of videos, our proven workflow scales
-                seamlessly — delivering consistent quality at any volume.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="card">', unsafe_allow_html=True)
 
+        st.markdown(
+            '<div class="card-title">Scalable Execution</div>',
+            unsafe_allow_html=True
+        )
+
+        st.write(
+            "From dozens to thousands of videos, our proven workflow scales "
+            "seamlessly — delivering consistent quality at any volume."
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # CLOSE MAIN CONTAINER
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ======================================
