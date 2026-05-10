@@ -439,7 +439,7 @@ st.markdown(
         left: 0;
         width: 100%;
         background-color: blue;
-        text-color: white;
+        font-color: white;
         text-align: center;
         padding: 10px;
         font-size: 13px;
@@ -449,7 +449,7 @@ st.markdown(
     </style>
 
     <div class="footer">
-        © 2026 Your Company Name | All Rights Reserved
+        © 2026 Genesis Digital | All Rights Reserved
     </div>
     """,
     unsafe_allow_html=True
