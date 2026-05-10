@@ -226,14 +226,14 @@ with tabs[1]:
 
     div.stButton > button {
         background-color: #0057b8;
-        color: white;
-        font-size: 22px;
+        font-color: white;
+        font-size: 16px;
         font-weight: bold;
         padding: 25px 20px;
         border-radius: 12px;
         border: none;
-        width: 100%;
-        height: 120px;
+        width: 130%;
+        height: 50px;
         transition: 0.3s;
     }
 
