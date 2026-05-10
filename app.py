@@ -375,15 +375,34 @@ with tabs[1]:
         #===================
             
             if st.button("Instagram Page"):
-
-                if hotel_name or city or country:
             
-                    query = f"{hotel_name} {city} {country}".strip().replace("  ", " ")
+                if hotel_name:
             
-                    search_url = f"https://www.instagram.com/explore/tags/{query.replace(' ', '')}"
+                    query = f"{hotel_name} {city} {country}".strip()
+            
+                    search_url = (
+                        "https://www.google.com/search?q="
+                        f"site:instagram.com+%22{query}%22"
+                    )
             
                     st.markdown(
-                        f'<meta http-equiv="refresh" content="0; url={search_url}" />',
+                        f'''
+                        <a href="{search_url}" target="_blank">
+                            <button style="
+                                background-color:#0057b8;
+                                color:white;
+                                font-size:16px;
+                                font-weight:bold;
+                                border:none;
+                                padding:12px 20px;
+                                border-radius:10px;
+                                cursor:pointer;
+                                width:100%;
+                            ">
+                                Open Instagram Matches
+                            </button>
+                        </a>
+                        ''',
                         unsafe_allow_html=True
                     )
             
