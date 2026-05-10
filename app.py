@@ -438,16 +438,20 @@ st.markdown(
     """
     <style>
 
-    /* Ensure page takes full height */
-    .block-container {
+    /* Make the entire app a flex column */
+    html, body, [data-testid="stAppViewContainer"] {
+        height: 100%;
+    }
+
+    [data-testid="stAppViewContainer"] > .main {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
 
-    /* This pushes footer down */
-    .footer-spacer {
-        flex-grow: 1;
+    /* Push content to fill space above footer */
+    .block-container {
+        flex: 1;
     }
 
     /* Footer styling */
@@ -458,12 +462,11 @@ st.markdown(
         text-align: center;
         padding: 15px;
         font-size: 13px;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        position: sticky;
+        bottom: 0;
     }
 
     </style>
-
-    <div class="footer-spacer"></div>
 
     <div class="footer">
         © 2026 Genesis Digital | All Rights Reserved
