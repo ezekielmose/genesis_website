@@ -375,7 +375,20 @@ with tabs[1]:
         #===================
             
             if st.button("Instagram Page"):
-                pass
+
+                if hotel_name or city or country:
+            
+                    query = f"{hotel_name} {city} {country}".strip().replace("  ", " ")
+            
+                    search_url = f"https://www.instagram.com/explore/tags/{query.replace(' ', '')}"
+            
+                    st.markdown(
+                        f'<meta http-equiv="refresh" content="0; url={search_url}" />',
+                        unsafe_allow_html=True
+                    )
+            
+                else:
+                    st.warning("⚠️ Please fill in hotel details first.")
 
 
         # ======================================
