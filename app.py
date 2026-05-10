@@ -375,16 +375,22 @@ with tabs[1]:
         #===================
             
             if st.button("Instagram Page"):
-            
+
                 if hotel_name:
             
                     import requests
                     from bs4 import BeautifulSoup
                     import urllib.parse
             
+                    # =========================
+                    # BUILD SEARCH QUERY
+                    # =========================
                     query = f"{hotel_name} {city} {country}".strip()
             
-                    search_url = f"https://www.google.com/search?q=site:instagram.com+{urllib.parse.quote(query)}"
+                    search_url = (
+                        "https://www.google.com/search?q="
+                        f"site:instagram.com+{urllib.parse.quote(query)}"
+                    )
             
                     headers = {
                         "User-Agent": "Mozilla/5.0"
@@ -393,34 +399,52 @@ with tabs[1]:
                     response = requests.get(search_url, headers=headers)
                     soup = BeautifulSoup(response.text, "html.parser")
             
+                    # =========================
+                    # EXTRACT LINKS (FIXED)
+                    # =========================
                     links = []
-                    for a in soup.find_all("a"):
-                        href = a.get("href", "")
-                        if "instagram.com" in href and "/url?q=" in href:
+            
+                    for a in soup.find_all("a", href=True):
+                        href = a["href"]
+            
+                        # Google redirect format
+                        if "/url?q=" in href:
                             clean_link = href.split("/url?q=")[1].split("&")[0]
-                            links.append(clean_link)
+                            if "instagram.com" in clean_link:
+                                links.append(clean_link)
+            
+                        # direct instagram links fallback
+                        elif "instagram.com" in href:
+                            links.append(href)
+            
+                    # remove duplicates
+                    links = list(set(links))
             
                     # =========================
                     # RANKING LOGIC
                     # =========================
-                    hotel_name_lower = hotel_name.lower()
+                    hotel_name_lower = hotel_name.lower().replace(" ", "")
             
                     best_match = None
-                    best_score = 0
+                    best_score = -1
             
                     for link in links:
             
                         score = 0
+                        link_lower = link.lower().replace("-", "").replace("_", "")
             
-                        link_lower = link.lower()
-            
-                        # exact hotel name match (highest weight)
-                        if hotel_name_lower.replace(" ", "") in link_lower.replace("-", ""):
+                        # strong exact match
+                        if hotel_name_lower in link_lower:
                             score += 10
             
-                        # partial match bonus
-                        if any(word in link_lower for word in hotel_name_lower.split()):
-                            score += 3
+                        # partial word match
+                        for word in hotel_name.lower().split():
+                            if word in link_lower:
+                                score += 2
+            
+                        # bonus if it is a profile (not tag/media page)
+                        if "/p/" not in link_lower and "/reel/" not in link_lower:
+                            score += 1
             
                         if score > best_score:
                             best_score = score
@@ -457,7 +481,7 @@ with tabs[1]:
                         st.write("🔗 Matched URL:", best_match)
             
                     else:
-                        st.warning("⚠️ No strong Instagram match found.")
+                        st.warning("⚠️ No strong Instagram match found. Try refining hotel name.")
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
