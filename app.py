@@ -219,6 +219,8 @@ with tabs[0]:
 # ======================================
 with tabs[1]:
 
+    import pandas as pd
+
     # CUSTOM BUTTON CSS
     st.markdown("""
     <style>
@@ -248,7 +250,6 @@ with tabs[1]:
         color: white !important;
     }
 
-    /* HOVER TEXT */
     div.stButton > button:hover p {
         color: white !important;
     }
@@ -275,13 +276,107 @@ with tabs[1]:
     # =========================
     with right_col:
 
+        # ======================================
+        # PROFILE FINDER SECTION
+        # ======================================
         if profile_clicked:
-            st.subheader("A Profile Finder")
-            st.write("Profile Finder Selected")
 
+            st.subheader("Hotel Profiles Analyzer")
+
+            st.write("Find the best matching Instagram profile for a hotel.")
+
+            # -----------------------------
+            # GOOGLE SHEET CONFIG
+            # -----------------------------
+            SHEET_ID = "1gh2QMj4vngL-JLf6SPmWvjSuCgl9uItTAMteY3acVNg"
+            SHEET_GID = "204054788"
+
+            SHEET_URL = (
+                f"https://docs.google.com/spreadsheets/d/"
+                f"{SHEET_ID}/export?format=csv&gid={SHEET_GID}"
+            )
+
+            @st.cache_data
+            def load_sheet():
+                return pd.read_csv(SHEET_URL, dtype=str)
+
+            def clean_id(value):
+                return str(value).strip().lower() if value else ""
+
+            # -----------------------------
+            # AUTO FILL SECTION
+            # -----------------------------
+            st.subheader("⚡ Auto Fill from Item ID")
+
+            item_id = st.text_input(
+                "Item ID",
+                placeholder="e.g. 846e9ee4-e5e4-434d-b6ac-ef67c301b3e8"
+            )
+
+            if st.button("⚡ Auto Fill"):
+
+                if item_id:
+
+                    try:
+                        df = load_sheet()
+
+                        id_column = df.iloc[:, 1].apply(clean_id)
+
+                        input_id = clean_id(item_id)
+
+                        match = df[id_column == input_id]
+
+                        if not match.empty:
+
+                            st.session_state.hotel_name = str(
+                                match.iloc[0, 2]
+                            ).strip()
+
+                            st.session_state.city = str(
+                                match.iloc[0, 3]
+                            ).strip()
+
+                            st.session_state.country = str(
+                                match.iloc[0, 4]
+                            ).strip()
+
+                            st.success("✅ Auto-filled successfully!")
+
+                        else:
+                            st.error("❌ Item ID not found in sheet.")
+
+                    except Exception as e:
+                        st.error(f"Error loading sheet: {e}")
+
+                else:
+                    st.warning("⚠️ Please enter an Item ID.")
+
+            # -----------------------------
+            # INPUT FIELDS
+            # -----------------------------
+            hotel_name = st.text_input(
+                "Hotel Name",
+                value=st.session_state.get("hotel_name", "")
+            )
+
+            city = st.text_input(
+                "City",
+                value=st.session_state.get("city", "")
+            )
+
+            country = st.text_input(
+                "Country",
+                value=st.session_state.get("country", "")
+            )
+
+        # ======================================
+        # ANALYZE VIDEO SECTION
+        # ======================================
         elif video_clicked:
+
             st.subheader("Analyze a Video")
-            st.write("Analyze a Video Selected")
+
+            st.write("Video Analyzer Coming Soon...")
 # ======================================
 # SERVICES PAGE
 # ======================================
