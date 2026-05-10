@@ -226,8 +226,8 @@ with tabs[1]:
     /* BUTTON STYLE */
     div.stButton > button {
         background-color: #0057b8 !important;
-        color: white !important;
-        font-size: 22px;
+        font-color: white !important;
+        font-size: 16px;
         font-weight: bold;
         border-radius: 12px;
         border: none;
