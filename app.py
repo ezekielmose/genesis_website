@@ -267,9 +267,11 @@ with tabs[1]:
     # =========================
     with left_col:
 
-        profile_clicked = st.button("A Profile Finder")
-
-        video_clicked = st.button("Analyze a Video")
+        if st.button("A Profile Finder"):
+            st.session_state.active_tool = "profile"
+    
+        if st.button("Analyze a Video"):
+            st.session_state.active_tool = "video"
 
     # =========================
     # RIGHT SIDE RESULTS
@@ -279,7 +281,7 @@ with tabs[1]:
         # ======================================
         # PROFILE FINDER SECTION
         # ======================================
-        if profile_clicked:
+        if st.session_state.get("active_tool") == "profile":
 
             st.subheader("Hotel Profiles Analyzer")
 
@@ -372,7 +374,7 @@ with tabs[1]:
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
-        elif video_clicked:
+        elif st.session_state.get("active_tool") == "video":
 
             st.subheader("Analyze a Video")
 
