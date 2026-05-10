@@ -217,20 +217,8 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-with tabs[1]:
 
-    st.title("🤖 AI Analyzer")
 
-    analyzer_menu = st.sidebar.radio(
-        "Select Tool",
-        ["Profile Finder", "Reels Analyzer"]
-    )
-
-    if analyzer_menu == "Profile Finder":
-        st.subheader("Profile Finder")
-
-    elif analyzer_menu == "Reels Analyzer":
-        st.subheader("Reels Analyzer")
 
 # ======================================
 # SERVICES PAGE
