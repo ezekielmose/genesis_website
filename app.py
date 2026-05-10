@@ -204,170 +204,158 @@ with col2:
 # ======================================
 with tabs[0]:
 
-    # CSS
+    # HOME SECTION STYLING
     st.markdown("""
     <style>
 
-    .home-section {
+    .home-wrapper {
         background: linear-gradient(to right, #020d2b, #031a52);
-        padding: 50px 30px;
-        border-radius: 12px;
+        padding: 40px 30px;
+        border-radius: 14px;
         margin-top: 20px;
     }
-    .home-section * {
-    color: white !important;
-    }
 
-    .section-mini-title {
+    .mini-title {
         text-align: center;
         color: #00d9ff !important;
         font-size: 14px;
         font-weight: bold;
         letter-spacing: 4px;
-        margin-bottom: 10px;
     }
 
     .main-title {
         text-align: center;
+        color: white !important;
         font-size: 52px;
         font-weight: bold;
-        color: white !important;
-        margin-bottom: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
-    .title-line {
-        width: 140px;
+    .line {
+        width: 130px;
         height: 4px;
         background-color: #00d9ff;
         margin: auto;
-        margin-bottom: 45px;
         border-radius: 20px;
+        margin-bottom: 40px;
     }
 
-    .features-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-    }
-
-    .feature-card {
+    .card {
         border: 2px solid #0dcfff;
-        padding: 35px 28px;
-        background-color: rgba(255,255,255,0.08);
-        border-radius: 8px;
-        min-height: 220px;
+        background-color: rgba(255,255,255,0.06);
+        padding: 30px 25px;
+        border-radius: 10px;
+        height: 100%;
     }
 
-    .feature-title {
-        font-size: 30px;
-        font-weight: bold;
+    .card-title {
         color: white !important;
-        margin-bottom: 18px;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
     }
 
-    .feature-text {
-        font-size: 19px;
-        line-height: 1.8;
+    .card-text {
         color: #d6e2ff !important;
+        font-size: 18px;
+        line-height: 1.7;
     }
 
     @media only screen and (max-width: 768px) {
 
-        .home-section {
-            padding: 30px 18px;
-        }
-
         .main-title {
             font-size: 34px !important;
-            line-height: 1.3;
         }
 
-        .features-grid {
-            grid-template-columns: 1fr;
+        .card-title {
+            font-size: 22px !important;
         }
 
-        .feature-card {
-            min-height: auto;
-            padding: 24px 20px;
-        }
-
-        .feature-title {
-            font-size: 24px !important;
-        }
-
-        .feature-text {
-            font-size: 16px !important;
+        .card-text {
+            font-size: 15px !important;
         }
     }
 
     </style>
     """, unsafe_allow_html=True)
 
-    # HTML
-    st.markdown("""
-    <div class="home-section">
+    # MAIN CONTAINER
+    st.markdown('<div class="home-wrapper">', unsafe_allow_html=True)
 
-        <div class="section-mini-title">
-            OUR EDGE
+    st.markdown(
+        '<div class="mini-title">OUR EDGE</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="main-title">Why Genesis Digital Stands Out</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="line"></div>',
+        unsafe_allow_html=True
+    )
+
+    # ROW 1
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        <div class="card">
+            <div class="card-title">Art Meets Technology</div>
+
+            <div class="card-text">
+                We fuse creative storytelling with cutting-edge digital
+                infrastructure to produce content that captivates and converts.
+            </div>
         </div>
+        """, unsafe_allow_html=True)
 
-        <div class="main-title">
-            Why Genesis Digital Stands Out
+    with col2:
+        st.markdown("""
+        <div class="card">
+            <div class="card-title">Industry Expertise</div>
+
+            <div class="card-text">
+                Our team brings deep domain knowledge across hospitality,
+                travel, and digital media, ensuring every project exceeds
+                industry benchmarks.
+            </div>
         </div>
+        """, unsafe_allow_html=True)
 
-        <div class="title-line"></div>
+    st.markdown("<br>", unsafe_allow_html=True)
 
-        <div class="features-grid">
+    # ROW 2
+    col3, col4 = st.columns(2)
 
-            <div class="feature-card">
-                <div class="feature-title">
-                    Art Meets Technology
-                </div>
+    with col3:
+        st.markdown("""
+        <div class="card">
+            <div class="card-title">Client-Centric Approach</div>
 
-                <div class="feature-text">
-                    We fuse creative storytelling with cutting-edge digital
-                    infrastructure to produce content that captivates and converts.
-                </div>
+            <div class="card-text">
+                Every partnership is custom-architected. We adapt to your
+                vision, goals, and quality standards with precision and agility.
             </div>
-
-            <div class="feature-card">
-                <div class="feature-title">
-                    Industry Expertise
-                </div>
-
-                <div class="feature-text">
-                    Our team brings deep domain knowledge across hospitality,
-                    travel, and digital media, ensuring every project exceeds
-                    industry benchmarks.
-                </div>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-title">
-                    Client-Centric Approach
-                </div>
-
-                <div class="feature-text">
-                    Every partnership is custom-architected. We adapt to your
-                    vision, goals, and quality standards with precision and agility.
-                </div>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-title">
-                    Scalable Execution
-                </div>
-
-                <div class="feature-text">
-                    From dozens to thousands of videos, our proven workflow scales
-                    seamlessly — delivering consistent quality at any volume.
-                </div>
-            </div>
-
         </div>
+        """, unsafe_allow_html=True)
 
-    </div>
-    """, unsafe_allow_html=True)
+    with col4:
+        st.markdown("""
+        <div class="card">
+            <div class="card-title">Scalable Execution</div>
+
+            <div class="card-text">
+                From dozens to thousands of videos, our proven workflow scales
+                seamlessly — delivering consistent quality at any volume.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # ======================================
 # AI ANALYZER PAGE
