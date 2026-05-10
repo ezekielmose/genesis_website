@@ -473,9 +473,26 @@ with tabs[4]:
     st.write("📞 Phone: +254748468634")
 
 
-# ======================================
-# GLOBAL FOOTER
-# ======================================
-st.markdown("""
-<div class="footer"></div>
-""", unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 13px;
+        border-top: 1px solid #ddd;
+        z-index: 999;
+    }
+    </style>
+
+    <div class="footer">
+        © 2026 Genesis Digital | All Rights Reserved
+    </div>
+    """,
+    unsafe_allow_html=True
+)
