@@ -375,7 +375,7 @@ with tabs[1]:
         #===================
             
             if st.button("Instagram Page"):
-
+            
                 if hotel_name:
             
                     import requests
@@ -400,30 +400,47 @@ with tabs[1]:
                     soup = BeautifulSoup(response.text, "html.parser")
             
                     # =========================
-                    # EXTRACT LINKS (FIXED)
+                    # EXTRACT LINKS (IMPROVED)
                     # =========================
                     links = []
             
                     for a in soup.find_all("a", href=True):
                         href = a["href"]
             
-                        # Google redirect format
+                        # Google redirect links
                         if "/url?q=" in href:
                             clean_link = href.split("/url?q=")[1].split("&")[0]
+                            clean_link = urllib.parse.unquote(clean_link)
+            
                             if "instagram.com" in clean_link:
-                                links.append(clean_link)
+            
+                                # FILTER OUT NON-PROFILES
+                                if (
+                                    "/p/" not in clean_link and
+                                    "/reel/" not in clean_link and
+                                    "/explore" not in clean_link and
+                                    "/tv/" not in clean_link
+                                ):
+                                    links.append(clean_link)
             
                         # direct instagram links fallback
-                        elif "instagram.com" in href:
-                            links.append(href)
+                        elif "instagram.com/" in href:
+            
+                            if (
+                                "/p/" not in href and
+                                "/reel/" not in href and
+                                "/explore" not in href and
+                                "/tv/" not in href
+                            ):
+                                links.append(href)
             
                     # remove duplicates
                     links = list(set(links))
             
                     # =========================
-                    # RANKING LOGIC
+                    # RANKING LOGIC (IMPROVED)
                     # =========================
-                    hotel_name_lower = hotel_name.lower().replace(" ", "")
+                    hotel_name_clean = hotel_name.lower().replace(" ", "")
             
                     best_match = None
                     best_score = -1
@@ -431,20 +448,24 @@ with tabs[1]:
                     for link in links:
             
                         score = 0
-                        link_lower = link.lower().replace("-", "").replace("_", "")
+                        link_clean = link.lower().replace("-", "").replace("_", "")
             
-                        # strong exact match
-                        if hotel_name_lower in link_lower:
+                        # STRONG MATCH (hotel name in URL)
+                        if hotel_name_clean in link_clean:
                             score += 10
             
-                        # partial word match
+                        # WORD MATCH BOOST
                         for word in hotel_name.lower().split():
-                            if word in link_lower:
+                            if word in link_clean:
                                 score += 2
             
-                        # bonus if it is a profile (not tag/media page)
-                        if "/p/" not in link_lower and "/reel/" not in link_lower:
+                        # PROFILE BONUS (not post/reel)
+                        if "/p/" not in link_clean and "/reel/" not in link_clean:
                             score += 1
+            
+                        # PRIORITIZE CLEAN PROFILE URLS
+                        if "instagram.com/" in link_clean and len(link_clean.split("/")) <= 5:
+                            score += 2
             
                         if score > best_score:
                             best_score = score
@@ -455,7 +476,7 @@ with tabs[1]:
                     # =========================
                     if best_match:
             
-                        st.success("🎯 Best Instagram Match Found")
+                        st.success("🎯 Best Instagram Profile Found")
             
                         st.markdown(
                             f"""
@@ -471,7 +492,7 @@ with tabs[1]:
                                     cursor:pointer;
                                     width:100%;
                                 ">
-                                    Open Best Matching Instagram Page
+                                    Open Best Matching Instagram Profile
                                 </button>
                             </a>
                             """,
@@ -481,7 +502,7 @@ with tabs[1]:
                         st.write("🔗 Matched URL:", best_match)
             
                     else:
-                        st.warning("⚠️ No strong Instagram match found. Try refining hotel name.")
+                        st.warning("⚠️ No strong Instagram profile found. Try refining hotel name.")
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
