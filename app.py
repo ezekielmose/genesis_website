@@ -231,8 +231,8 @@ with tabs[1]:
         font-weight: bold !important;
         border-radius: 12px !important;
         border: none !important;
-        width: 100% !important;
-        height: 55px !important;
+        width: 120% !important;
+        height: 50px !important;
         margin-bottom: 20px !important;
         transition: 0.3s !important;
     }
@@ -256,8 +256,6 @@ with tabs[1]:
     </style>
     """, unsafe_allow_html=True)
 
-    st.title("🤖 AI Analyzer")
-
     st.write("Choose an AI Tool Below")
 
     # LEFT AND RIGHT LAYOUT
@@ -268,7 +266,7 @@ with tabs[1]:
     # =========================
     with left_col:
 
-        profile_clicked = st.button("Profile Finder")
+        profile_clicked = st.button("A Profile Finder")
 
         video_clicked = st.button("Analyze a Video")
 
@@ -278,7 +276,7 @@ with tabs[1]:
     with right_col:
 
         if profile_clicked:
-            st.subheader("Profile Finder")
+            st.subheader("A Profile Finder")
             st.write("Profile Finder Selected")
 
         elif video_clicked:
