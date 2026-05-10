@@ -375,58 +375,17 @@ with tabs[0]:
 
     # CLOSE MAIN SECTION
     st.markdown('</div>', unsafe_allow_html=True)
+
+
+
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-with tabs[1]:
-
-    st.title("AI Analyzer")
-
-    ai_menu = st.radio(
-        "Select Analyzer",
-        ["Profile Finder", "Reels Analyzer"],
-        horizontal=True
-    )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # PROFILE FINDER
-    if ai_menu == "Profile Finder":
-
-        st.markdown(
-            "<div class='submenu-title'>Profile Finder</div>",
-            unsafe_allow_html=True
-        )
-
-        st.write("Upload profile-related files for AI analysis.")
-
-        uploaded_file = st.file_uploader(
-            "Upload Profile File",
-            type=["csv", "txt", "pdf"],
-            key="profile"
-        )
-
-        if uploaded_file:
-            st.success("Profile file uploaded successfully!")
-
-    # REELS ANALYZER
-    elif ai_menu == "Reels Analyzer":
-
-        st.markdown(
-            "<div class='submenu-title'>Reels Analyzer</div>",
-            unsafe_allow_html=True
-        )
-
-        st.write("Upload reels data for AI-powered insights.")
-
-        uploaded_file = st.file_uploader(
-            "Upload Reels File",
-            type=["mp4"],
-            key="reels"
-        )
-
-        if uploaded_file:
-            st.success("Reels file uploaded successfully!")
+ai_menu = st.radio(
+    "Select Analyzer",
+    ["Profile Finder", "Reels Analyzer"],
+    horizontal=True
+)
 
 # ======================================
 # OUR SERVICES PAGE
