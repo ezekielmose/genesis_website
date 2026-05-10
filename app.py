@@ -217,48 +217,60 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-
 with tabs[1]:
 
     # CUSTOM BUTTON CSS
     st.markdown("""
     <style>
 
+    /* BUTTON STYLE */
     div.stButton > button {
-        background-color: #0057b8;
-        font-color: white;
-        font-size: 16px;
+        background-color: #0057b8 !important;
+        color: white !important;
+        font-size: 22px;
         font-weight: bold;
-        padding: 25px 20px;
         border-radius: 12px;
         border: none;
-        width: 130%;
-        height: 50px;
+        width: 100%;
+        height: 110px;
+        margin-bottom: 20px;
         transition: 0.3s;
     }
 
+    /* HOVER EFFECT */
     div.stButton > button:hover {
-        background-color: red;
-        color: white;
-        border: none;
+        background-color: red !important;
+        color: white !important;
     }
 
     </style>
     """, unsafe_allow_html=True)
 
-    st.title("🤖 AI Analyzer")
-
     st.write("Choose an AI Tool Below")
 
-    # BUTTON LAYOUT
-    col1, col2 = st.columns(2)
+    # LEFT AND RIGHT LAYOUT
+    left_col, right_col = st.columns([1, 3])
 
-    with col1:
-        if st.button("🔍 Profile Finder"):
+    # =========================
+    # LEFT SIDE BUTTONS
+    # =========================
+    with left_col:
+
+        profile_clicked = st.button("Profile Finder")
+
+        video_clicked = st.button("Analyze a Video")
+
+    # =========================
+    # RIGHT SIDE RESULTS
+    # =========================
+    with right_col:
+
+        if profile_clicked:
+            st.subheader("Profile Finder")
             st.write("Profile Finder Selected")
 
-    with col2:
-        if st.button("🎥 Analyze a Video"):
+        elif video_clicked:
+            st.subheader("Analyze a Video")
             st.write("Analyze a Video Selected")
 
 # ======================================
