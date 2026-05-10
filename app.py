@@ -9,6 +9,10 @@ st.set_page_config(
     layout="wide"
 )
 
+# Initialize session state
+if "show_ai_sidebar" not in st.session_state:
+    st.session_state["show_ai_sidebar"] = False
+
 # ======================================
 # CUSTOM CSS
 # ======================================
@@ -197,7 +201,11 @@ with col2:
         "About",
         "Contact"
     ])
+# Detect active tab index
+active_tab = st.session_state.get("active_tab", 0)
 
+# Store current tab
+st.session_state["active_tab"] = 0
 
 # ======================================
 # HOME PAGE
@@ -383,27 +391,27 @@ with tabs[0]:
 # ======================================
 with tabs[1]:
 
-    st.markdown("## 🤖 AI Analyzer")
+    st.session_state["show_ai_sidebar"] = True
 
-    # SIDEBAR MENU (only active inside AI Analyzer tab)
-    analyzer_menu = st.sidebar.radio(
-        "Select Tool",
-        ["Profile Finder", "Reels Analyzer"]
-    )
+    # Flag to show sidebar only here
+    st.session_state["show_ai_sidebar"] = True
 
-    # ======================================
-    # PROFILE FINDER SECTION
-    # ======================================
+    if st.session_state["show_ai_sidebar"]:
+        analyzer_menu = st.sidebar.radio(
+            "Select Tool",
+            ["Profile Finder", "Reels Analyzer"],
+            key="ai_menu"
+        )
+    else:
+        analyzer_menu = None
+
     if analyzer_menu == "Profile Finder":
         st.title("Profile Finder")
-        pass  # functionality to be added later
+        pass
 
-    # ======================================
-    # REELS ANALYZER SECTION
-    # ======================================
     elif analyzer_menu == "Reels Analyzer":
         st.title("Reels Analyzer")
-        pass  # functionality to be added later
+        pass
 
 # ======================================
 # OUR SERVICES PAGE
