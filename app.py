@@ -289,7 +289,7 @@ with tabs[0]:
     """, unsafe_allow_html=True)
 
     # OPEN MAIN SECTION
-    st.markdown('<div class="home-wrapper">', unsafe_allow_html=True)
+    # st.markdown('<div class="home-wrapper">', unsafe_allow_html=True)
 
     # TITLES
     st.markdown(
