@@ -231,8 +231,8 @@ with tabs[1]:
         font-weight: bold;
         border-radius: 12px;
         border: none;
-        width: 130%;
-        height: 70px;
+        width: 150%;
+        height: 50px;
         margin-bottom: 20px;
         transition: 0.3s;
     }
