@@ -479,16 +479,20 @@ st.markdown(
     """
     <style>
 
-    /* Make main app container behave like a flex column */
-    .main > div {
+    /* Ensure page takes full height */
+    .block-container {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
     }
 
-    /* Push footer to bottom */
+    /* This pushes footer down */
+    .footer-spacer {
+        flex-grow: 1;
+    }
+
+    /* Footer styling */
     .footer {
-        margin-top: auto;
         width: 100%;
         background-color: #0d47a1;
         color: white;
@@ -499,6 +503,8 @@ st.markdown(
     }
 
     </style>
+
+    <div class="footer-spacer"></div>
 
     <div class="footer">
         © 2026 Genesis Digital | All Rights Reserved
