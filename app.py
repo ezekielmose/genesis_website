@@ -311,23 +311,18 @@ with tabs[0]:
     col1, col2 = st.columns(2)
 
     with col1:
-
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
         st.markdown(
-            '<div class="card-title">Art Meets Technology</div>',
+            """
+            <div class="card">
+                <div class="card-title">Art Meets Technology</div>
+                <div class="card-text">
+                    We fuse creative storytelling with cutting-edge digital
+                    infrastructure to produce content that captivates and converts.
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
-
-        st.markdown(
-            '<div class="card-text">'
-            'We fuse creative storytelling with cutting-edge digital '
-            'infrastructure to produce content that captivates and converts.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
 
