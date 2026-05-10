@@ -433,39 +433,23 @@ with tabs[4]:
 st.markdown(
     """
     <style>
-
-    /* Make the entire app a flex column */
-    html, body, [data-testid="stAppViewContainer"] {
-        height: 100%;
-    }
-
-    [data-testid="stAppViewContainer"] > .main {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    /* Push content to fill space above footer */
-    .block-container {
-        flex: 1;
-    }
-
-    /* Footer styling */
     .footer {
-        width: 100%;
-        background-color: #0d47a1;
-        color: white;
-        text-align: center;
-        padding: 15px;
-        font-size: 13px;
-        position: sticky;
+        position: fixed;
         bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: blue;
+        text-color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 13px;
+        border-top: 1px solid #ddd;
+        z-index: 999;
     }
-
     </style>
 
     <div class="footer">
-        © 2026 Genesis Digital | All Rights Reserved
+        © 2026 Your Company Name | All Rights Reserved
     </div>
     """,
     unsafe_allow_html=True
