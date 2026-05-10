@@ -217,8 +217,22 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
+with tabs[1]:
 
+    st.title("Select Your Option")
 
+    st.write("Choose an AI Tool Below")
+
+    # BUTTONS
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Profile Finder"):
+            st.write("Profile Finder Selected")
+
+    with col2:
+        if st.button("Analyze a Video"):
+            st.write("Analyze a Video Selected")
 
 # ======================================
 # SERVICES PAGE
