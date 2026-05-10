@@ -324,62 +324,50 @@ with tabs[0]:
             unsafe_allow_html=True
         )
 
+    # FIRST ROW
     with col2:
-
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
         st.markdown(
-            '<div class="card-title">Industry Expertise</div>',
+            """
+            <div class="card">
+                <div class="card-title">Industry Expertise</div>
+                <div class="card-text">
+                    Our team brings deep domain knowledge across hospitality,
+                    travel, and digital media, ensuring every project exceeds
+                    industry benchmarks.
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
-
-        st.markdown(
-            '<div class="card-text">'
-            'Our team brings deep domain knowledge across hospitality, '
-            'travel, and digital media, ensuring every project exceeds '
-            'industry benchmarks.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
+    
     # SECOND ROW
     col3, col4 = st.columns(2)
-
+    
     with col3:
-
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
         st.markdown(
-            '<div class="card-title">Client-Centric Approach</div>',
+            """
+            <div class="card">
+                <div class="card-title">Client-Centric Approach</div>
+                <div class="card-text">
+                    Every partnership is custom-architected. We adapt to your
+                    vision, goals, and quality standards with precision and agility.
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
-
-        st.markdown(
-            '<div class="card-text">'
-            'Every partnership is custom-architected. We adapt to your '
-            'vision, goals, and quality standards with precision and agility.'
-            '</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
+    
     with col4:
-
-        st.markdown('<div class="card">', unsafe_allow_html=True)
-
         st.markdown(
-            '<div class="card-title">Scalable Execution</div>',
-            unsafe_allow_html=True
-        )
-
-        st.markdown(
-            '<div class="card-text">'
-            'From dozens to thousands of videos, our proven workflow scales '
-            'seamlessly — delivering consistent quality at any volume.'
-            '</div>',
+            """
+            <div class="card">
+                <div class="card-title">Scalable Execution</div>
+                <div class="card-text">
+                    From dozens to thousands of videos, our proven workflow scales
+                    seamlessly — delivering consistent quality at any volume.
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
 
