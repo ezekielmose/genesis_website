@@ -226,15 +226,20 @@ with tabs[1]:
     /* BUTTON STYLE */
     div.stButton > button {
         background-color: #0057b8 !important;
-        font-color: white !important;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 12px;
-        border: none;
-        width: 150%;
-        height: 50px;
-        margin-bottom: 20px;
-        transition: 0.3s;
+        color: white !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        border-radius: 12px !important;
+        border: none !important;
+        width: 100% !important;
+        height: 55px !important;
+        margin-bottom: 20px !important;
+        transition: 0.3s !important;
+    }
+
+    /* BUTTON TEXT */
+    div.stButton > button p {
+        color: white !important;
     }
 
     /* HOVER EFFECT */
@@ -243,8 +248,15 @@ with tabs[1]:
         color: white !important;
     }
 
+    /* HOVER TEXT */
+    div.stButton > button:hover p {
+        color: white !important;
+    }
+
     </style>
     """, unsafe_allow_html=True)
+
+    st.title("🤖 AI Analyzer")
 
     st.write("Choose an AI Tool Below")
 
@@ -272,7 +284,6 @@ with tabs[1]:
         elif video_clicked:
             st.subheader("Analyze a Video")
             st.write("Analyze a Video Selected")
-
 # ======================================
 # SERVICES PAGE
 # ======================================
