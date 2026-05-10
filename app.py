@@ -370,6 +370,30 @@ with tabs[1]:
                 "Country",
                 value=st.session_state.get("country", "")
             )
+            # =============================
+            # INSTAGRAM PAGE SEARCH BUTTON
+            # =============================
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            if st.button("Instagram Page"):
+            
+                if hotel_name:
+            
+                    search_query = f"""
+                    https://www.google.com/search?q=site:instagram.com+"{hotel_name}"+{city}+{country}
+                    """
+            
+                    st.markdown(
+                        f"""
+                        <a href="{search_query}" target="_blank">
+                            Click here to search Instagram pages for this hotel
+                        </a>
+                        """,
+                        unsafe_allow_html=True
+                    )
+            
+                else:
+                    st.warning("⚠️ Please load hotel details first.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
