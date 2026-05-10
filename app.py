@@ -199,15 +199,192 @@ with col2:
 # ======================================
 with tabs[0]:
 
-    st.markdown(
-        "<div class='coming-soon'>UNDER DEVELOPMENT</div>",
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <style>
 
-    st.markdown(
-        "<div class='sub-text'>Our new AI-powered platform is under development.</div>",
-        unsafe_allow_html=True
-    )
+    /* =====================================
+       HOME SECTION
+    ===================================== */
+
+    .home-section {
+        background: linear-gradient(to right, #020d2b, #031a52);
+        padding: 50px 30px;
+        border-radius: 12px;
+        margin-top: 20px;
+        color: white !important;
+    }
+
+    .section-mini-title {
+        text-align: center;
+        color: #00d9ff !important;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        margin-bottom: 10px;
+    }
+
+    .main-title {
+        text-align: center;
+        font-size: 52px;
+        font-weight: bold;
+        color: white !important;
+        margin-bottom: 15px;
+    }
+
+    .title-line {
+        width: 140px;
+        height: 4px;
+        background-color: #00d9ff;
+        margin: auto;
+        margin-bottom: 45px;
+        border-radius: 20px;
+    }
+
+    /* =====================================
+       FEATURE CARDS
+    ===================================== */
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+
+    .feature-card {
+        border: 2px solid #0dcfff;
+        padding: 35px 28px;
+        background-color: rgba(255,255,255,0.08);
+        border-radius: 8px;
+        min-height: 220px;
+    }
+
+    .feature-title {
+        font-size: 30px;
+        font-weight: bold;
+        color: white !important;
+        margin-bottom: 18px;
+    }
+
+    .feature-text {
+        font-size: 19px;
+        line-height: 1.8;
+        color: #d6e2ff !important;
+    }
+
+    /* =====================================
+       FOOTER
+    ===================================== */
+
+    .footer {
+        background-color: #0057b8;
+        height: 90px;
+        margin-top: 40px;
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* =====================================
+       MOBILE RESPONSIVENESS
+    ===================================== */
+
+    @media only screen and (max-width: 768px) {
+
+        .home-section {
+            padding: 30px 18px;
+        }
+
+        .main-title {
+            font-size: 34px !important;
+            line-height: 1.3;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .feature-card {
+            min-height: auto;
+            padding: 24px 20px;
+        }
+
+        .feature-title {
+            font-size: 24px !important;
+        }
+
+        .feature-text {
+            font-size: 16px !important;
+        }
+
+        .footer {
+            height: 70px;
+        }
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="home-section">
+
+        <div class="section-mini-title">OUR EDGE</div>
+
+        <div class="main-title">
+            Why Genesis Digital Stands Out
+        </div>
+
+        <div class="title-line"></div>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="feature-title">
+                    Art Meets Technology
+                </div>
+
+                <div class="feature-text">
+                    We fuse creative storytelling with cutting-edge digital
+                    infrastructure to produce content that captivates and converts.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-title">
+                    Industry Expertise
+                </div>
+
+                <div class="feature-text">
+                    Our team brings deep domain knowledge across hospitality,
+                    travel, and digital media, ensuring every project exceeds
+                    industry benchmarks.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-title">
+                    Client-Centric Approach
+                </div>
+
+                <div class="feature-text">
+                    Every partnership is custom-architected. We adapt to your
+                    vision, goals, and quality standards with precision and agility.
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-title">
+                    Scalable Execution
+                </div>
+
+                <div class="feature-text">
+                    From dozens to thousands of videos, our proven workflow scales
+                    seamlessly — delivering consistent quality at any volume.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    """, unsafe_allow_html=True)
 
 # ======================================
 # AI ANALYZER PAGE
@@ -305,3 +482,11 @@ with tabs[4]:
 
     st.write("📧 Email: mose@genesisdigital.in")
     st.write("📞 Phone: +254748468634")
+
+
+# ======================================
+# GLOBAL FOOTER
+# ======================================
+st.markdown("""
+<div class="footer"></div>
+""", unsafe_allow_html=True)
