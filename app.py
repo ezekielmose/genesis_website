@@ -381,7 +381,29 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
+with tabs[1]:
 
+    st.markdown("## 🤖 AI Analyzer")
+
+    # SIDEBAR MENU (only active inside AI Analyzer tab)
+    analyzer_menu = st.sidebar.radio(
+        "Select Tool",
+        ["Profile Finder", "Reels Analyzer"]
+    )
+
+    # ======================================
+    # PROFILE FINDER SECTION
+    # ======================================
+    if analyzer_menu == "Profile Finder":
+        st.title("Profile Finder")
+        pass  # functionality to be added later
+
+    # ======================================
+    # REELS ANALYZER SECTION
+    # ======================================
+    elif analyzer_menu == "Reels Analyzer":
+        st.title("Reels Analyzer")
+        pass  # functionality to be added later
 
 # ======================================
 # OUR SERVICES PAGE
