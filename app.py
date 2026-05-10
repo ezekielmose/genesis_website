@@ -35,9 +35,13 @@ header {
     padding-top: 0.5rem;
 }
 
-/* FORCE ALL TEXT BLACK (IMPORTANT FIX) */
-* {
-    color: black !important;
+/* Default Streamlit text */
+.stMarkdown,
+.stText,
+p,
+label,
+span {
+    color: black;
 }
 
 /* Keep links blue */
@@ -209,6 +213,9 @@ with tabs[0]:
         padding: 50px 30px;
         border-radius: 12px;
         margin-top: 20px;
+    }
+    .home-section * {
+    color: white !important;
     }
 
     .section-mini-title {
