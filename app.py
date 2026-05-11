@@ -371,22 +371,24 @@ with tabs[1]:
                 value=st.session_state.get("country", "")
             )
             
+
         # =========================
         # INSTAGRAM PAGE BUTTON
         # =========================
-
             if st.button("Instagram Page"):
             
                 if hotel_name:
             
+                    import requests
+                    from bs4 import BeautifulSoup
                     import urllib.parse
             
-                    # BUILD GOOGLE SEARCH QUERY
+                    # BUILD SEARCH QUERY
                     query = (
                         f"{hotel_name} "
                         f"{city} "
                         f"{country} "
-                        f"Instagram page"
+                        f"Instagram"
                     ).strip()
             
                     # GOOGLE SEARCH URL
@@ -395,23 +397,73 @@ with tabs[1]:
                         + urllib.parse.quote(query)
                     )
             
-                    st.success("🔍 Instagram Search Ready")
+                    headers = {
+                        "User-Agent": "Mozilla/5.0"
+                    }
             
-                    # OPEN GOOGLE RESULTS IN NEW TAB
-                    st.markdown(
-                        f"""
-                        <a href="{google_search_url}" target="_blank"
-                           style="
-                               color:#0057b8;
-                               font-size:18px;
-                               font-weight:bold;
-                               text-decoration:none;
-                           ">
-                           Open Profile
-                        </a>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                    try:
+                        # SEARCH GOOGLE
+                        response = requests.get(
+                            google_search_url,
+                            headers=headers
+                        )
+            
+                        soup = BeautifulSoup(response.text, "html.parser")
+            
+                        instagram_link = None
+            
+                        # EXTRACT FIRST INSTAGRAM RESULT
+                        for a in soup.find_all("a", href=True):
+            
+                            href = a["href"]
+            
+                            if "/url?q=" in href:
+            
+                                clean_link = (
+                                    href.split("/url?q=")[1]
+                                    .split("&")[0]
+                                )
+            
+                                clean_link = urllib.parse.unquote(clean_link)
+            
+                                # VALID INSTAGRAM PROFILE
+                                if (
+                                    "instagram.com/" in clean_link
+                                    and "/p/" not in clean_link
+                                    and "/reel/" not in clean_link
+                                    and "/explore/" not in clean_link
+                                ):
+            
+                                    instagram_link = clean_link
+                                    break
+            
+                        # =========================
+                        # DISPLAY RESULT
+                        # =========================
+                        if instagram_link:
+            
+                            st.success("✅ Instagram Profile Found")
+            
+                            st.markdown(
+                                f"""
+                                <a href="{instagram_link}" target="_blank"
+                                   style="
+                                       color:#0057b8;
+                                       font-size:18px;
+                                       font-weight:bold;
+                                       text-decoration:none;
+                                   ">
+                                   Open Profile
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+            
+                        else:
+                            st.warning("⚠️ No Instagram profile found.")
+            
+                    except Exception as e:
+                        st.error(f"Error: {e}")
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
