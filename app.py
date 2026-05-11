@@ -374,6 +374,7 @@ with tabs[1]:
         # =========================
         # INSTAGRAM PAGE BUTTON
         # =========================
+
             if st.button("Instagram Page"):
             
                 if hotel_name:
@@ -394,33 +395,23 @@ with tabs[1]:
                         + urllib.parse.quote(query)
                     )
             
-                    st.success("🔍 Opening Google Search Results")
+                    st.success("🔍 Instagram Search Ready")
             
                     # OPEN GOOGLE RESULTS IN NEW TAB
                     st.markdown(
                         f"""
-                        <a href="{google_search_url}" target="_blank">
-                            <button style="
-                                background-color:#0057b8;
-                                color:white;
-                                font-size:16px;
-                                font-weight:bold;
-                                border:none;
-                                padding:12px 20px;
-                                border-radius:10px;
-                                cursor:pointer;
-                                width:100%;
-                            ">
-                                Open Instagram Search Results
-                            </button>
+                        <a href="{google_search_url}" target="_blank"
+                           style="
+                               color:#0057b8;
+                               font-size:18px;
+                               font-weight:bold;
+                               text-decoration:none;
+                           ">
+                           Open Profile
                         </a>
                         """,
                         unsafe_allow_html=True
                     )
-            
-                    # OPTIONAL: SHOW SEARCH QUERY
-                    st.write("Search Query Used:")
-                    st.code(query)
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
