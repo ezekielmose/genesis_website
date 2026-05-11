@@ -374,91 +374,48 @@ with tabs[1]:
         # =========================
         # INSTAGRAM PAGE BUTTON
         # =========================
+
             if st.button("Instagram Page"):
             
                 if hotel_name:
             
-                    import requests
-                    from bs4 import BeautifulSoup
                     import urllib.parse
             
-                    # SEARCH QUERY
+                    # BUILD GOOGLE SEARCH QUERY
                     query = (
                         f"{hotel_name} "
                         f"{city} "
                         f"{country} "
-                        f"Instagram"
+                        f"Instagram page"
                     ).strip()
             
-                    # DUCKDUCKGO SEARCH
-                    search_url = (
-                        "https://html.duckduckgo.com/html/?q="
+                    # GOOGLE SEARCH URL
+                    google_search_url = (
+                        "https://www.google.com/search?q="
                         + urllib.parse.quote(query)
                     )
             
-                    headers = {
-                        "User-Agent": "Mozilla/5.0"
-                    }
+                    st.success("🔍 Instagram Search Ready")
             
-                    try:
-            
-                        response = requests.get(
-                            search_url,
-                            headers=headers,
-                            timeout=10
-                        )
-            
-                        soup = BeautifulSoup(response.text, "html.parser")
-            
-                        instagram_link = None
-            
-                        # EXTRACT INSTAGRAM LINKS
-                        for a in soup.find_all("a", href=True):
-            
-                            href = a["href"]
-            
-                            if "instagram.com" in href:
-            
-                                # FILTER NON-PROFILE LINKS
-                                if (
-                                    "/p/" not in href
-                                    and "/reel/" not in href
-                                    and "/explore/" not in href
-                                ):
-            
-                                    instagram_link = href
-                                    break
-            
-                        # =========================
-                        # DISPLAY RESULT
-                        # =========================
-                        if instagram_link:
-            
-                            st.success("✅ Instagram Profile Found")
-            
-                            st.markdown(
-                                f"""
-                                <a href="{instagram_link}" target="_blank"
-                                   style="
-                                       color:#0057b8;
-                                       font-size:18px;
-                                       font-weight:bold;
-                                       text-decoration:none;
-                                   ">
-                                   Open Profile
-                                </a>
-                                """,
-                                unsafe_allow_html=True
-                            )
-            
-                        else:
-                            st.warning("⚠️ No Instagram profile found.")
-            
-                    except Exception as e:
-                        st.error(f"Error: {e}")
+                    # OPEN GOOGLE RESULTS IN NEW TAB
+                    st.markdown(
+                        f"""
+                        <a href="{google_search_url}" target="_blank"
+                           style="
+                               color:#0057b8;
+                               font-size:18px;
+                               font-weight:bold;
+                               text-decoration:none;
+                           ">
+                           Open Profile
+                        </a>
+                        """,
+                        unsafe_allow_html=True
+                    )
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
+
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
