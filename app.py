@@ -371,7 +371,6 @@ with tabs[1]:
                 value=st.session_state.get("country", "")
             )
             
-
         # =========================
         # INSTAGRAM PAGE BUTTON
         # =========================
@@ -383,7 +382,7 @@ with tabs[1]:
                     from bs4 import BeautifulSoup
                     import urllib.parse
             
-                    # BUILD SEARCH QUERY
+                    # SEARCH QUERY
                     query = (
                         f"{hotel_name} "
                         f"{city} "
@@ -391,9 +390,9 @@ with tabs[1]:
                         f"Instagram"
                     ).strip()
             
-                    # GOOGLE SEARCH URL
-                    google_search_url = (
-                        "https://www.google.com/search?q="
+                    # DUCKDUCKGO SEARCH
+                    search_url = (
+                        "https://html.duckduckgo.com/html/?q="
                         + urllib.parse.quote(query)
                     )
             
@@ -402,39 +401,32 @@ with tabs[1]:
                     }
             
                     try:
-                        # SEARCH GOOGLE
+            
                         response = requests.get(
-                            google_search_url,
-                            headers=headers
+                            search_url,
+                            headers=headers,
+                            timeout=10
                         )
             
                         soup = BeautifulSoup(response.text, "html.parser")
             
                         instagram_link = None
             
-                        # EXTRACT FIRST INSTAGRAM RESULT
+                        # EXTRACT INSTAGRAM LINKS
                         for a in soup.find_all("a", href=True):
             
                             href = a["href"]
             
-                            if "/url?q=" in href:
+                            if "instagram.com" in href:
             
-                                clean_link = (
-                                    href.split("/url?q=")[1]
-                                    .split("&")[0]
-                                )
-            
-                                clean_link = urllib.parse.unquote(clean_link)
-            
-                                # VALID INSTAGRAM PROFILE
+                                # FILTER NON-PROFILE LINKS
                                 if (
-                                    "instagram.com/" in clean_link
-                                    and "/p/" not in clean_link
-                                    and "/reel/" not in clean_link
-                                    and "/explore/" not in clean_link
+                                    "/p/" not in href
+                                    and "/reel/" not in href
+                                    and "/explore/" not in href
                                 ):
             
-                                    instagram_link = clean_link
+                                    instagram_link = href
                                     break
             
                         # =========================
@@ -467,7 +459,6 @@ with tabs[1]:
             
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
-
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
