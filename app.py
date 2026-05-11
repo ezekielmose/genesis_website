@@ -437,47 +437,69 @@ with tabs[1]:
                     # remove duplicates
                     links = list(set(links))
             
+
                     # =========================
-                    # RANKING LOGIC (IMPROVED)
+                    # RANKING LOGIC (BETTER)
                     # =========================
-                    hotel_name_clean = hotel_name.lower().replace(" ", "")
-            
-                    best_match = None
-                    best_score = -1
-            
+                    hotel_words = hotel_name.lower().split()
+                    
+                    ranked_links = []
+                    
                     for link in links:
-            
+                    
                         score = 0
-                        link_clean = link.lower().replace("-", "").replace("_", "")
-            
-                        # STRONG MATCH (hotel name in URL)
-                        if hotel_name_clean in link_clean:
-                            score += 10
-            
-                        # WORD MATCH BOOST
-                        for word in hotel_name.lower().split():
-                            if word in link_clean:
-                                score += 2
-            
-                        # PROFILE BONUS (not post/reel)
-                        if "/p/" not in link_clean and "/reel/" not in link_clean:
-                            score += 1
-            
-                        # PRIORITIZE CLEAN PROFILE URLS
-                        if "instagram.com/" in link_clean and len(link_clean.split("/")) <= 5:
+                    
+                        link_clean = (
+                            link.lower()
+                            .replace("-", " ")
+                            .replace("_", " ")
+                        )
+                    
+                        # exact hotel name boost
+                        if hotel_name.lower() in link_clean:
+                            score += 20
+                    
+                        # word-by-word matching
+                        for word in hotel_words:
+                    
+                            if len(word) > 2 and word in link_clean:
+                                score += 5
+                    
+                        # city bonus
+                        if city and city.lower() in link_clean:
+                            score += 3
+                    
+                        # country bonus
+                        if country and country.lower() in link_clean:
                             score += 2
-            
-                        if score > best_score:
-                            best_score = score
-                            best_match = link
-            
+                    
+                        # profile bonus
+                        if (
+                            "/p/" not in link_clean and
+                            "/reel/" not in link_clean and
+                            "/tv/" not in link_clean
+                        ):
+                            score += 5
+                    
+                        ranked_links.append((score, link))
+                    
+                    # sort by highest score
+                    ranked_links = sorted(
+                        ranked_links,
+                        key=lambda x: x[0],
+                        reverse=True
+                    )
+                    
                     # =========================
-                    # DISPLAY RESULT
+                    # DISPLAY RESULTS
                     # =========================
-                    if best_match:
-            
-                        st.success("🎯 Best Instagram Profile Found")
-            
+                    if ranked_links:
+                    
+                        best_score, best_match = ranked_links[0]
+                    
+                        st.success("🎯 Instagram Profiles Found")
+                    
+                        # BEST MATCH BUTTON
                         st.markdown(
                             f"""
                             <a href="{best_match}" target="_blank">
@@ -491,6 +513,7 @@ with tabs[1]:
                                     border-radius:10px;
                                     cursor:pointer;
                                     width:100%;
+                                    margin-bottom:15px;
                                 ">
                                     Open Best Matching Instagram Profile
                                 </button>
@@ -498,15 +521,31 @@ with tabs[1]:
                             """,
                             unsafe_allow_html=True
                         )
-            
-                        st.write("🔗 Matched URL:", best_match)
-            
+                    
+                        st.write("🔗 Best Match:", best_match)
+                    
+                        # SHOW TOP MATCHES
+                        st.subheader("Other Possible Matches")
+                    
+                        shown = set()
+                    
+                        for score, link in ranked_links[:5]:
+                    
+                            if link not in shown:
+                    
+                                shown.add(link)
+                    
+                                st.markdown(
+                                    f"""
+                                    <a href="{link}" target="_blank">
+                                        {link}
+                                    </a>
+                                    """,
+                                    unsafe_allow_html=True
+                                )
+                    
                     else:
-                        st.warning("⚠️ No strong Instagram profile found. Try refining hotel name.")
-            
-                else:
-                    st.warning("⚠️ Please fill in hotel details first.")
-
+                        st.warning("⚠️ No Instagram profiles found.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
