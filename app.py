@@ -370,182 +370,60 @@ with tabs[1]:
                 "Country",
                 value=st.session_state.get("country", "")
             )
-        #=====================
-        # INSTAGRAM BUTTON
-        #===================
             
+        # =========================
+        # INSTAGRAM PAGE BUTTON
+        # =========================
             if st.button("Instagram Page"):
             
                 if hotel_name:
             
-                    import requests
-                    from bs4 import BeautifulSoup
                     import urllib.parse
             
-                    # =========================
-                    # BUILD SEARCH QUERY
-                    # =========================
-                    query = f"{hotel_name} {city} {country}".strip()
+                    # BUILD GOOGLE SEARCH QUERY
+                    query = (
+                        f"{hotel_name} "
+                        f"{city} "
+                        f"{country} "
+                        f"Instagram page"
+                    ).strip()
             
-                    search_url = (
+                    # GOOGLE SEARCH URL
+                    google_search_url = (
                         "https://www.google.com/search?q="
-                        f"site:instagram.com+{urllib.parse.quote(query)}"
+                        + urllib.parse.quote(query)
                     )
             
-                    headers = {
-                        "User-Agent": "Mozilla/5.0"
-                    }
+                    st.success("🔍 Opening Google Search Results")
             
-                    response = requests.get(search_url, headers=headers)
-                    soup = BeautifulSoup(response.text, "html.parser")
-            
-                    # =========================
-                    # EXTRACT LINKS (IMPROVED)
-                    # =========================
-                    links = []
-            
-                    for a in soup.find_all("a", href=True):
-                        href = a["href"]
-            
-                        # Google redirect links
-                        if "/url?q=" in href:
-                            clean_link = href.split("/url?q=")[1].split("&")[0]
-                            clean_link = urllib.parse.unquote(clean_link)
-            
-                            if "instagram.com" in clean_link:
-            
-                                # FILTER OUT NON-PROFILES
-                                if (
-                                    "/p/" not in clean_link and
-                                    "/reel/" not in clean_link and
-                                    "/explore" not in clean_link and
-                                    "/tv/" not in clean_link
-                                ):
-                                    links.append(clean_link)
-            
-                        # direct instagram links fallback
-                        elif "instagram.com/" in href:
-            
-                            if (
-                                "/p/" not in href and
-                                "/reel/" not in href and
-                                "/explore" not in href and
-                                "/tv/" not in href
-                            ):
-                                links.append(href)
-            
-                    # remove duplicates
-                    links = list(set(links))
-            
-
-                    # =========================
-                    # RANKING LOGIC (BETTER)
-                    # =========================
-                    hotel_words = hotel_name.lower().split()
-                    
-                    ranked_links = []
-                    
-                    for link in links:
-                    
-                        score = 0
-                    
-                        link_clean = (
-                            link.lower()
-                            .replace("-", " ")
-                            .replace("_", " ")
-                        )
-                    
-                        # exact hotel name boost
-                        if hotel_name.lower() in link_clean:
-                            score += 20
-                    
-                        # word-by-word matching
-                        for word in hotel_words:
-                    
-                            if len(word) > 2 and word in link_clean:
-                                score += 5
-                    
-                        # city bonus
-                        if city and city.lower() in link_clean:
-                            score += 3
-                    
-                        # country bonus
-                        if country and country.lower() in link_clean:
-                            score += 2
-                    
-                        # profile bonus
-                        if (
-                            "/p/" not in link_clean and
-                            "/reel/" not in link_clean and
-                            "/tv/" not in link_clean
-                        ):
-                            score += 5
-                    
-                        ranked_links.append((score, link))
-                    
-                    # sort by highest score
-                    ranked_links = sorted(
-                        ranked_links,
-                        key=lambda x: x[0],
-                        reverse=True
+                    # OPEN GOOGLE RESULTS IN NEW TAB
+                    st.markdown(
+                        f"""
+                        <a href="{google_search_url}" target="_blank">
+                            <button style="
+                                background-color:#0057b8;
+                                color:white;
+                                font-size:16px;
+                                font-weight:bold;
+                                border:none;
+                                padding:12px 20px;
+                                border-radius:10px;
+                                cursor:pointer;
+                                width:100%;
+                            ">
+                                Open Instagram Search Results
+                            </button>
+                        </a>
+                        """,
+                        unsafe_allow_html=True
                     )
-                    
-                    # =========================
-                    # DISPLAY RESULTS
-                    # =========================
-                    if ranked_links:
-                    
-                        best_score, best_match = ranked_links[0]
-                    
-                        st.success("🎯 Instagram Profiles Found")
-                    
-                        # BEST MATCH BUTTON
-                        st.markdown(
-                            f"""
-                            <a href="{best_match}" target="_blank">
-                                <button style="
-                                    background-color:#0057b8;
-                                    color:white;
-                                    font-size:16px;
-                                    font-weight:bold;
-                                    border:none;
-                                    padding:12px 20px;
-                                    border-radius:10px;
-                                    cursor:pointer;
-                                    width:100%;
-                                    margin-bottom:15px;
-                                ">
-                                    Open Best Matching Instagram Profile
-                                </button>
-                            </a>
-                            """,
-                            unsafe_allow_html=True
-                        )
-                    
-                        st.write("🔗 Best Match:", best_match)
-                    
-                        # SHOW TOP MATCHES
-                        st.subheader("Other Possible Matches")
-                    
-                        shown = set()
-                    
-                        for score, link in ranked_links[:5]:
-                    
-                            if link not in shown:
-                    
-                                shown.add(link)
-                    
-                                st.markdown(
-                                    f"""
-                                    <a href="{link}" target="_blank">
-                                        {link}
-                                    </a>
-                                    """,
-                                    unsafe_allow_html=True
-                                )
-                    
-                    else:
-                        st.warning("⚠️ No Instagram profiles found.")
+            
+                    # OPTIONAL: SHOW SEARCH QUERY
+                    st.write("Search Query Used:")
+                    st.code(query)
+            
+                else:
+                    st.warning("⚠️ Please fill in hotel details first.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
