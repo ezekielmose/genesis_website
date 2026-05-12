@@ -507,39 +507,27 @@ with tabs[1]:
                 temp_video.close()
         
                 # =========================
-                # CUSTOM VIDEO CSS
+                # CUSTOM VIDEO PLAYER
                 # =========================
-                st.markdown("""
-                <style>
+                video_bytes = open(video_path, 'rb').read()
                 
-                /* VIDEO SIZE */
-                .video-container {
-                    max-width: 400px;
-                    margin-top: 15px;
-                }
-                
-                /* STREAMLIT VIDEO */
-                .video-container video {
-                    max-width: 100px !important;
-                    max-height: 200px !important;
-                    border-radius: 12px !important;
-                }
-                
-                </style>
-                """, unsafe_allow_html=True)
-        
-                # =========================
-                # VIDEO DISPLAY
-                # =========================
                 st.markdown(
-                    '<div class="video-container">',
-                    unsafe_allow_html=True
-                )
-        
-                st.video(video_path)
-        
-                st.markdown(
-                    '</div>',
+                    f"""
+                    <div style="
+                        width:300px;
+                        margin-top:15px;
+                    ">
+                        <video width="300" height="500" controls
+                            style="
+                                border-radius:12px;
+                                width:300px;
+                                height:500px;
+                                object-fit:cover;
+                            ">
+                            <source src="data:video/mp4;base64,{video_bytes.hex()}">
+                        </video>
+                    </div>
+                    """,
                     unsafe_allow_html=True
                 )
         
