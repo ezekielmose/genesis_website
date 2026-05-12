@@ -466,7 +466,11 @@ with tabs[1]:
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
+
         elif st.session_state.get("active_tool") == "video":
+        
+            import tempfile
+            import os
         
             st.subheader("🎬 Analyze a Video")
         
@@ -482,29 +486,41 @@ with tabs[1]:
             )
         
             # =========================
-            # SESSION STORAGE
+            # PROCESS VIDEO
             # =========================
             if uploaded_video is not None:
-        
-                st.session_state.uploaded_video = uploaded_video
         
                 st.success("✅ Video uploaded successfully!")
         
                 # =========================
-                # CUSTOM VIDEO STYLE (9:16)
+                # CREATE TEMP FILE
+                # =========================
+                temp_video = tempfile.NamedTemporaryFile(
+                    delete=False,
+                    suffix=".mp4"
+                )
+        
+                temp_video.write(uploaded_video.read())
+        
+                video_path = temp_video.name
+        
+                temp_video.close()
+        
+                # =========================
+                # CUSTOM VIDEO CSS
                 # =========================
                 st.markdown("""
                 <style>
         
-                .video-wrapper {
+                .video-container {
                     width: 260px;
-                    margin-top: 15px;
                     border-radius: 18px;
                     overflow: hidden;
+                    margin-top: 15px;
                     background-color: black;
                 }
         
-                .video-wrapper video {
+                .video-container video {
                     width: 100% !important;
                     aspect-ratio: 9 / 16 !important;
                     object-fit: cover !important;
@@ -517,14 +533,20 @@ with tabs[1]:
                 # =========================
                 # VIDEO DISPLAY
                 # =========================
-                st.markdown('<div class="video-wrapper">', unsafe_allow_html=True)
+                st.markdown(
+                    '<div class="video-container">',
+                    unsafe_allow_html=True
+                )
         
-                st.video(uploaded_video)
+                st.video(video_path)
         
-                st.markdown('</div>', unsafe_allow_html=True)
+                st.markdown(
+                    '</div>',
+                    unsafe_allow_html=True
+                )
         
                 # =========================
-                # BASIC INFO
+                # VIDEO INFO
                 # =========================
                 file_size = uploaded_video.size / (1024 * 1024)
         
@@ -541,8 +563,29 @@ with tabs[1]:
         
                     st.info("🔍 Processing video...")
         
-                    # Placeholder for future AI logic
-                    st.write("AI analysis module will be connected here.")
+                    # ======================================
+                    # PLACE AI ANALYSIS CODE HERE
+                    # ======================================
+        
+                    st.write("Video path ready for AI analysis:")
+        
+                    st.code(video_path)
+        
+                    # Example future usage:
+                    #
+                    # import cv2
+                    #
+                    # cap = cv2.VideoCapture(video_path)
+                    #
+                    # while cap.isOpened():
+                    #     success, frame = cap.read()
+                    #
+                    #     if not success:
+                    #         break
+                    #
+                    #     # AI FRAME ANALYSIS HERE
+                    #
+                    # cap.release()
         
             else:
                 st.warning("Please upload a video to continue.")
