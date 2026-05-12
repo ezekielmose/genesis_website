@@ -520,8 +520,8 @@ with tabs[1]:
                 
                 /* STREAMLIT VIDEO */
                 .video-container video {
-                    max-width: 400px !important;
-                    max-height: 500px !important;
+                    max-width: 100px !important;
+                    max-height: 200px !important;
                     border-radius: 12px !important;
                 }
                 
