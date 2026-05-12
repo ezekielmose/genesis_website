@@ -379,42 +379,81 @@ with tabs[1]:
             
                 if hotel_name:
             
-                    import urllib.parse
+                    from duckduckgo_search import DDGS
             
-                    # BUILD GOOGLE SEARCH QUERY
+                    # BUILD SEARCH QUERY
                     query = (
                         f"{hotel_name} "
                         f"{city} "
                         f"{country} "
-                        f"Instagram page"
+                        f"Instagram"
                     ).strip()
             
-                    # GOOGLE SEARCH URL
-                    google_search_url = (
-                        "https://www.google.com/search?q="
-                        + urllib.parse.quote(query)
-                    )
+                    instagram_link = None
             
-                    st.success("🔍 Instagram Search Ready")
+                    try:
             
-                    # OPEN GOOGLE RESULTS IN NEW TAB
-                    st.markdown(
-                        f"""
-                        <a href="{google_search_url}" target="_blank"
-                           style="
-                               color:#0057b8;
-                               font-size:18px;
-                               font-weight:bold;
-                               text-decoration:none;
-                           ">
-                           Open Profile
-                        </a>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                        # SEARCH USING DUCKDUCKGO
+                        with DDGS() as ddgs:
+            
+                            results = ddgs.text(
+                                query,
+                                max_results=10
+                            )
+            
+                            for result in results:
+            
+                                # GET RESULT LINK
+                                link = result.get("href", "")
+            
+                                # CHECK FOR INSTAGRAM
+                                if "instagram.com" in link:
+            
+                                    # FILTER NON-PROFILE LINKS
+                                    if (
+                                        "/p/" not in link
+                                        and "/reel/" not in link
+                                        and "/explore/" not in link
+                                        and "/tv/" not in link
+                                    ):
+            
+                                        instagram_link = link
+                                        break
+            
+                        # =========================
+                        # DISPLAY RESULT
+                        # =========================
+                        if instagram_link:
+            
+                            st.success("✅ Instagram Profile Found")
+            
+                            st.markdown(
+                                f"""
+                                <a href="{instagram_link}" target="_blank"
+                                   style="
+                                       color:#0057b8;
+                                       font-size:18px;
+                                       font-weight:bold;
+                                       text-decoration:none;
+                                   ">
+                                   Open Profile
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+            
+                        else:
+                            st.warning(
+                                "⚠️ No Instagram profile found."
+                            )
+            
+                    except Exception as e:
+                        st.error(f"Error: {e}")
             
                 else:
-                    st.warning("⚠️ Please fill in hotel details first.")
+                    st.warning(
+                        "⚠️ Please fill in hotel details first."
+                    )
 
         # ======================================
         # ANALYZE VIDEO SECTION
