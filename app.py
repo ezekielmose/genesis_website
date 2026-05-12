@@ -299,7 +299,7 @@ with tabs[1]:
             )
 
             @st.cache_data
-            def load_sheet():
+            def Loading_():
                 return pd.read_csv(SHEET_URL, dtype=str)
 
             def clean_id(value):
@@ -320,7 +320,7 @@ with tabs[1]:
                 if item_id:
 
                     try:
-                        df = load_sheet()
+                        df = Loading_()
 
                         id_column = df.iloc[:, 1].apply(clean_id)
 
