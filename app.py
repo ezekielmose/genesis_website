@@ -493,8 +493,18 @@ with tabs[1]:
                 # =========================
                 # DISPLAY VIDEO PREVIEW
                 # =========================
-                st.video(uploaded_video)
-        
+
+                video_bytes = uploaded_video.read()
+                
+                st.markdown(
+                    f"""
+                    <video width="100%" height="320" controls style="border-radius:12px;">
+                        <source src="data:video/mp4;base64,{video_bytes.encode('base64') if False else ''}">
+                    </video>
+                    """,
+                    unsafe_allow_html=True
+                )
+                        
                 # =========================
                 # BASIC INFO (PLACEHOLDER FOR AI)
                 # =========================
