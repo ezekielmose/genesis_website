@@ -511,7 +511,7 @@ with tabs[1]:
                 # =========================
                 st.markdown("""
                 <style>
-        
+                
                 .video-container {
                     width: 260px;
                     border-radius: 18px;
@@ -519,14 +519,14 @@ with tabs[1]:
                     margin-top: 15px;
                     background-color: black;
                 }
-        
+                
                 .video-container video {
                     width: 100% !important;
                     aspect-ratio: 9 / 16 !important;
                     object-fit: cover !important;
                     border-radius: 18px;
                 }
-        
+                
                 </style>
                 """, unsafe_allow_html=True)
         
