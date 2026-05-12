@@ -384,7 +384,7 @@ with tabs[1]:
                 
                     query = f"{hotel_name} {city} {country} Instagram".strip()
                 
-                    st.write("Search Query:", query)
+                    #st.write("Search Query:", query)
                 
                     instagram_link = None
                 
