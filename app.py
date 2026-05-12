@@ -467,10 +467,55 @@ with tabs[1]:
         # ANALYZE VIDEO SECTION
         # ======================================
         elif st.session_state.get("active_tool") == "video":
-
-            st.subheader("Analyze a Video")
-
-            st.write("Video Analyzer Coming Soon...")
+        
+            st.subheader("🎬 Analyze a Video")
+        
+            st.write("Upload a video from your device for analysis.")
+        
+            # =========================
+            # VIDEO UPLOADER
+            # =========================
+            uploaded_video = st.file_uploader(
+                "Upload Video",
+                type=["mp4", "mov", "avi", "mkv"],
+                help="Upload a video file for analysis"
+            )
+        
+            # =========================
+            # SESSION STORAGE
+            # =========================
+            if uploaded_video is not None:
+        
+                st.session_state.uploaded_video = uploaded_video
+        
+                st.success("✅ Video uploaded successfully!")
+        
+                # =========================
+                # DISPLAY VIDEO PREVIEW
+                # =========================
+                st.video(uploaded_video)
+        
+                # =========================
+                # BASIC INFO (PLACEHOLDER FOR AI)
+                # =========================
+                file_size = uploaded_video.size / (1024 * 1024)
+        
+                st.markdown("### 📊 Video Info")
+                st.write(f"**File Name:** {uploaded_video.name}")
+                st.write(f"**Size:** {file_size:.2f} MB")
+        
+                # =========================
+                # ANALYZE BUTTON (READY FOR AI LATER)
+                # =========================
+                if st.button("Analyze Video"):
+        
+                    st.info("🔍 Processing video...")
+        
+                    # Placeholder for future AI logic
+                    st.write("AI analysis module will be connected here.")
+        
+            else:
+                st.warning("Please upload a video to continue.")
 # ======================================
 # SERVICES PAGE
 # ======================================
