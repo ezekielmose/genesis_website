@@ -9,11 +9,21 @@ st.set_page_config(
     layout="wide"
 )
 
+if "active_tool" not in st.session_state:
+    st.session_state.active_tool = "profile"
+
 # ======================================
 # GLOBAL CSS
 # ======================================
 st.markdown("""
 <style>
+
+/* ACTIVE BUTTON STATE (GOLD) */
+div.stButton > button:focus {
+    background-color: gold !important;
+    color: black !important;
+    border: 2px solid #b8860b !important;
+}
 
 /* GLOBAL SETTINGS */
 .stApp {
@@ -267,10 +277,12 @@ with tabs[1]:
     # =========================
     with left_col:
 
-        if st.button("A Profile Finder"):
+        # PROFILE FINDER BUTTON
+        if st.button("A Profile Finder", use_container_width=True):
             st.session_state.active_tool = "profile"
     
-        if st.button("Analyze a Video"):
+        # VIDEO ANALYZER BUTTON
+        if st.button("Analyze a Video", use_container_width=True):
             st.session_state.active_tool = "video"
 
     # =========================
