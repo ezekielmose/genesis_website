@@ -381,7 +381,6 @@ with tabs[1]:
             
                     from duckduckgo_search import DDGS
             
-                    # BUILD SEARCH QUERY
                     query = (
                         f"{hotel_name} "
                         f"{city} "
@@ -389,71 +388,58 @@ with tabs[1]:
                         f"Instagram"
                     ).strip()
             
-                    instagram_link = None
+                    st.write("Search Query:", query)
             
                     try:
             
-                        # SEARCH USING DUCKDUCKGO
                         with DDGS() as ddgs:
             
-                            results = ddgs.text(
-                                query,
-                                max_results=10
+                            results = list(
+                                ddgs.text(query, max_results=10)
                             )
             
-                            for result in results:
+                        st.write("RAW RESULTS:")
+                        st.write(results)
             
-                                # GET RESULT LINK
-                                link = result.get("url", "")
+                        instagram_link = None
             
-                                # CHECK FOR INSTAGRAM
-                                if "instagram.com" in link:
+                        for result in results:
             
-                                    # FILTER NON-PROFILE LINKS
-                                    if (
-                                        "/p/" not in link
-                                        and "/reel/" not in link
-                                        and "/explore/" not in link
-                                        and "/tv/" not in link
-                                    ):
+                            # TRY BOTH POSSIBLE KEYS
+                            link = (
+                                result.get("href")
+                                or result.get("url")
+                                or ""
+                            )
             
-                                        instagram_link = link
-                                        break
+                            st.write("Found Link:", link)
             
-                        # =========================
-                        # DISPLAY RESULT
-                        # =========================
+                            if "instagram.com" in link:
+            
+                                instagram_link = link
+                                break
+            
                         if instagram_link:
             
-                            st.success("✅ Instagram Profile Found")
+                            st.success("Instagram Profile Found")
             
                             st.markdown(
                                 f"""
-                                <a href="{instagram_link}" target="_blank"
-                                   style="
-                                       color:#0057b8;
-                                       font-size:18px;
-                                       font-weight:bold;
-                                       text-decoration:none;
-                                   ">
-                                   Open Profile
+                                <a href="{instagram_link}" target="_blank">
+                                    Open Profile
                                 </a>
                                 """,
                                 unsafe_allow_html=True
                             )
             
                         else:
-                            st.warning(
-                                "⚠️ No Instagram profile found."
-                            )
+                            st.warning("No Instagram profile found.")
             
                     except Exception as e:
                         st.error(f"Error: {e}")
             
                 else:
-                    st.warning(
-                        "⚠️ Please fill in hotel details first."
-                    )
+                    st.warning("Please fill in hotel details first.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
