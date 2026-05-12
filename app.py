@@ -491,31 +491,51 @@ with tabs[1]:
                 st.success("✅ Video uploaded successfully!")
         
                 # =========================
-                # DISPLAY VIDEO PREVIEW
+                # CUSTOM VIDEO STYLE (9:16)
                 # =========================
-
-                video_bytes = uploaded_video.read()
-                
-                st.markdown(
-                    f"""
-                    <video width="100%" height="320" controls style="border-radius:12px;">
-                        <source src="data:video/mp4;base64,{video_bytes.encode('base64') if False else ''}">
-                    </video>
-                    """,
-                    unsafe_allow_html=True
-                )
-                        
+                st.markdown("""
+                <style>
+        
+                .video-wrapper {
+                    width: 260px;
+                    margin-top: 15px;
+                    border-radius: 18px;
+                    overflow: hidden;
+                    background-color: black;
+                }
+        
+                .video-wrapper video {
+                    width: 100% !important;
+                    aspect-ratio: 9 / 16 !important;
+                    object-fit: cover !important;
+                    border-radius: 18px;
+                }
+        
+                </style>
+                """, unsafe_allow_html=True)
+        
                 # =========================
-                # BASIC INFO (PLACEHOLDER FOR AI)
+                # VIDEO DISPLAY
+                # =========================
+                st.markdown('<div class="video-wrapper">', unsafe_allow_html=True)
+        
+                st.video(uploaded_video)
+        
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+                # =========================
+                # BASIC INFO
                 # =========================
                 file_size = uploaded_video.size / (1024 * 1024)
         
                 st.markdown("### 📊 Video Info")
+        
                 st.write(f"**File Name:** {uploaded_video.name}")
+        
                 st.write(f"**Size:** {file_size:.2f} MB")
         
                 # =========================
-                # ANALYZE BUTTON (READY FOR AI LATER)
+                # ANALYZE BUTTON
                 # =========================
                 if st.button("Analyze Video"):
         
