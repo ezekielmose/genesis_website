@@ -371,95 +371,97 @@ with tabs[1]:
                 value=st.session_state.get("country", "")
             )
             
-        # =========================
-        # INSTAGRAM PAGE BUTTON
-        # =========================
-
-            if st.button("Instagram Page"):
-            
-                if hotel_name:
-            
-                    import urllib.parse
-                    import requests
-            
-                    query = (
-                        f"{hotel_name} "
-                        f"{city} "
-                        f"{country} "
-                        "Instagram"
-                    ).strip()
-            
-                    st.write("Search Query:", query)
-            
-                    instagram_link = None
-            
-                    # =========================
-                    # TRY DUCKDUCKGO FIRST
-                    # =========================
-                    try:
-                        from duckduckgo_search import DDGS
-            
-                        with DDGS() as ddgs:
-                            results = list(ddgs.text(query, max_results=10))
-            
-                        for r in results:
-                            link = r.get("href") or r.get("url") or ""
-            
-                            if "instagram.com" in link:
-                                instagram_link = link
-                                break
-            
-                    except Exception as e:
-                        st.warning(f"DuckDuckGo failed: {e}")
-            
-                    # =========================
-                    # FALLBACK: GOOGLE SEARCH
-                    # =========================
-                    if not instagram_link:
-            
-                        google_url = (
-                            "https://www.google.com/search?q="
-                            + urllib.parse.quote(query)
-                        )
-            
-                        st.warning("No direct profile found — opening Google results")
-            
-                        st.markdown(
-                            f"""
-                            <a href="{google_url}" target="_blank"
-                               style="
-                                   color:#0057b8;
-                                   font-size:18px;
-                                   font-weight:bold;
-                                   text-decoration:none;
-                               ">
-                               Open Profile
-                            </a>
-                            """,
-                            unsafe_allow_html=True
-                        )
-            
+                # =========================
+                # INSTAGRAM PAGE BUTTON (SERPAPI VERSION)
+                # =========================
+                
+                if st.button("Instagram Page"):
+                
+                    if hotel_name:
+                
+                        import requests
+                        import urllib.parse
+                
+                        query = f"{hotel_name} {city} {country} Instagram".strip()
+                
+                        st.write("Search Query:", query)
+                
+                        instagram_link = None
+                
+                        # =========================
+                        # SERPAPI SEARCH
+                        # =========================
+                        try:
+                            SERPAPI_KEY = "c8e0fb2951ecb7f988a06e141ba0318c76749e8bf548e25468f3eba84ea242bc"
+                
+                            params = {
+                                "engine": "google",
+                                "q": query,
+                                "api_key": SERPAPI_KEY
+                            }
+                
+                            response = requests.get("https://serpapi.com/search.json", params=params)
+                            data = response.json()
+                
+                            # extract organic results
+                            for result in data.get("organic_results", []):
+                                link = result.get("link", "")
+                
+                                if "instagram.com" in link:
+                                    instagram_link = link
+                                    break
+                
+                        except Exception as e:
+                            st.warning(f"SerpAPI failed: {e}")
+                
+                        # =========================
+                        # OUTPUT LOGIC
+                        # =========================
+                        if instagram_link:
+                
+                            st.success("Instagram Profile Found 🎯")
+                
+                            st.markdown(
+                                f"""
+                                <a href="{instagram_link}" target="_blank"
+                                   style="
+                                       color:#0057b8;
+                                       font-size:18px;
+                                       font-weight:bold;
+                                       text-decoration:none;
+                                   ">
+                                   Open Instagram Profile
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                
+                        else:
+                
+                            google_url = (
+                                "https://www.google.com/search?q="
+                                + urllib.parse.quote(query)
+                            )
+                
+                            st.warning("No Instagram profile found — opening Google results")
+                
+                            st.markdown(
+                                f"""
+                                <a href="{google_url}" target="_blank"
+                                   style="
+                                       color:#0057b8;
+                                       font-size:18px;
+                                       font-weight:bold;
+                                       text-decoration:none;
+                                   ">
+                                   Search on Google
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                
                     else:
-            
-                        st.success("Instagram Profile Found 🎯")
-            
-                        st.markdown(
-                            f"""
-                            <a href="{instagram_link}" target="_blank"
-                               style="
-                                   color:#0057b8;
-                                   font-size:18px;
-                                   font-weight:bold;
-                                   text-decoration:none;
-                               ">
-                               Open Profile
-                            </a>
-                            """,
-                            unsafe_allow_html=True
-                        )
-            
-                else:
-                    st.warning("⚠️ Please fill in hotel details first.")
+                        st.warning("⚠️ Please fill in hotel details first.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
