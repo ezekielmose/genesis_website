@@ -308,14 +308,14 @@ with tabs[1]:
             # -----------------------------
             # AUTO FILL SECTION
             # -----------------------------
-            st.subheader("⚡ Auto Fill from Item ID")
+            st.subheader(" Auto Fill from Item ID")
 
             item_id = st.text_input(
                 "Item ID",
                 placeholder="e.g. 846e9ee4-e5e4-434d-b6ac-ef67c301b3e8"
             )
 
-            if st.button("⚡ Auto Fill"):
+            if st.button(" Auto Fill"):
 
                 if item_id:
 
