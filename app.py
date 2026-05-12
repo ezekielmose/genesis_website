@@ -379,67 +379,87 @@ with tabs[1]:
             
                 if hotel_name:
             
-                    from duckduckgo_search import DDGS
+                    import urllib.parse
+                    import requests
             
                     query = (
                         f"{hotel_name} "
                         f"{city} "
                         f"{country} "
-                        f"Instagram"
+                        "Instagram"
                     ).strip()
             
                     st.write("Search Query:", query)
             
+                    instagram_link = None
+            
+                    # =========================
+                    # TRY DUCKDUCKGO FIRST
+                    # =========================
                     try:
+                        from duckduckgo_search import DDGS
             
                         with DDGS() as ddgs:
+                            results = list(ddgs.text(query, max_results=10))
             
-                            results = list(
-                                ddgs.text(query, max_results=10)
-                            )
-            
-                        st.write("RAW RESULTS:")
-                        st.write(results)
-            
-                        instagram_link = None
-            
-                        for result in results:
-            
-                            # TRY BOTH POSSIBLE KEYS
-                            link = (
-                                result.get("href")
-                                or result.get("url")
-                                or ""
-                            )
-            
-                            st.write("Found Link:", link)
+                        for r in results:
+                            link = r.get("href") or r.get("url") or ""
             
                             if "instagram.com" in link:
-            
                                 instagram_link = link
                                 break
             
-                        if instagram_link:
-            
-                            st.success("Instagram Profile Found")
-            
-                            st.markdown(
-                                f"""
-                                <a href="{instagram_link}" target="_blank">
-                                    Open Profile
-                                </a>
-                                """,
-                                unsafe_allow_html=True
-                            )
-            
-                        else:
-                            st.warning("No Instagram profile found.")
-            
                     except Exception as e:
-                        st.error(f"Error: {e}")
+                        st.warning(f"DuckDuckGo failed: {e}")
+            
+                    # =========================
+                    # FALLBACK: GOOGLE SEARCH
+                    # =========================
+                    if not instagram_link:
+            
+                        google_url = (
+                            "https://www.google.com/search?q="
+                            + urllib.parse.quote(query)
+                        )
+            
+                        st.warning("No direct profile found — opening Google results")
+            
+                        st.markdown(
+                            f"""
+                            <a href="{google_url}" target="_blank"
+                               style="
+                                   color:#0057b8;
+                                   font-size:18px;
+                                   font-weight:bold;
+                                   text-decoration:none;
+                               ">
+                               Open Profile
+                            </a>
+                            """,
+                            unsafe_allow_html=True
+                        )
+            
+                    else:
+            
+                        st.success("Instagram Profile Found 🎯")
+            
+                        st.markdown(
+                            f"""
+                            <a href="{instagram_link}" target="_blank"
+                               style="
+                                   color:#0057b8;
+                                   font-size:18px;
+                                   font-weight:bold;
+                                   text-decoration:none;
+                               ">
+                               Open Profile
+                            </a>
+                            """,
+                            unsafe_allow_html=True
+                        )
             
                 else:
-                    st.warning("Please fill in hotel details first.")
+                    st.warning("⚠️ Please fill in hotel details first.")
 
         # ======================================
         # ANALYZE VIDEO SECTION
