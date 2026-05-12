@@ -481,7 +481,7 @@ with tabs[1]:
             # =========================
             uploaded_video = st.file_uploader(
                 "Upload Video",
-                type=["mp4", "mov", "avi", "mkv"],
+                type=["mp4", "mov"],
                 help="Upload a video file for analysis"
             )
         
@@ -513,7 +513,7 @@ with tabs[1]:
                 <style>
                 
                 .video-container {
-                    width: 260px;
+                    width: 100px;
                     border-radius: 18px;
                     overflow: hidden;
                     margin-top: 15px;
