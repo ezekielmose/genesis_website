@@ -404,7 +404,7 @@ with tabs[1]:
                             for result in results:
             
                                 # GET RESULT LINK
-                                link = result.get("href", "")
+                                link = result.get("url", "")
             
                                 # CHECK FOR INSTAGRAM
                                 if "instagram.com" in link:
