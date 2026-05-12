@@ -512,18 +512,17 @@ with tabs[1]:
                 st.markdown("""
                 <style>
                 
+                /* VIDEO SIZE */
                 .video-container {
-                    width: 100px;
-                    border-radius: 18px;
-                    overflow: hidden;
+                    max-width: 400px;
                     margin-top: 15px;
-                    background-color: black;
                 }
                 
+                /* STREAMLIT VIDEO */
                 .video-container video {
-                    width: 100% !important;
-                    object-fit: cover !important;
-                    border-radius: 18px;
+                    max-width: 400px !important;
+                    max-height: 500px !important;
+                    border-radius: 12px !important;
                 }
                 
                 </style>
