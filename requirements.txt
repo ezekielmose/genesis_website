@@ -2,3 +2,4 @@ streamlit
 pandas
 requests
 beautifulsoup4==4.12.3
+duckduckgo_search==8.1.1
