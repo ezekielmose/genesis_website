@@ -522,7 +522,6 @@ with tabs[1]:
                 
                 .video-container video {
                     width: 100% !important;
-                    aspect-ratio: 9 / 16 !important;
                     object-fit: cover !important;
                     border-radius: 18px;
                 }
