@@ -466,11 +466,12 @@ with tabs[1]:
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
-
+        
         elif st.session_state.get("active_tool") == "video":
         
             import tempfile
             import os
+            import base64
         
             st.subheader("🎬 Analyze a Video")
         
@@ -501,35 +502,31 @@ with tabs[1]:
                 )
         
                 temp_video.write(uploaded_video.read())
-        
                 video_path = temp_video.name
-        
                 temp_video.close()
         
                 # =========================
-                # CUSTOM VIDEO PLAYER
+                # SMALL CLEAN VIDEO PLAYER (WORKING)
                 # =========================
-                video_bytes = open(video_path, 'rb').read()
-                
-                st.markdown(
-                    f"""
-                    <div style="
-                        width:300px;
-                        margin-top:15px;
-                    ">
-                        <video width="300" height="500" controls
-                            style="
-                                border-radius:12px;
-                                width:300px;
-                                height:500px;
-                                object-fit:cover;
-                            ">
-                            <source src="data:video/mp4;base64,{video_bytes.hex()}">
-                        </video>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                st.markdown("""
+                <style>
+        
+                /* FIX STREAMLIT VIDEO SIZE */
+                [data-testid="stVideo"] {
+                    max-width: 320px;
+                }
+        
+                [data-testid="stVideo"] video {
+                    max-width: 320px !important;
+                    max-height: 500px !important;
+                    border-radius: 12px !important;
+                }
+        
+                </style>
+                """, unsafe_allow_html=True)
+        
+                # PLAY VIDEO (KEEP STREAMLIT PLAYER)
+                st.video(video_path)
         
                 # =========================
                 # VIDEO INFO
@@ -539,7 +536,6 @@ with tabs[1]:
                 st.markdown("### 📊 Video Info")
         
                 st.write(f"**File Name:** {uploaded_video.name}")
-        
                 st.write(f"**Size:** {file_size:.2f} MB")
         
                 # =========================
@@ -549,15 +545,10 @@ with tabs[1]:
         
                     st.info("🔍 Processing video...")
         
-                    # ======================================
-                    # PLACE AI ANALYSIS CODE HERE
-                    # ======================================
-        
                     st.write("Video path ready for AI analysis:")
-        
                     st.code(video_path)
         
-                    # Example future usage:
+                    # Example future AI pipeline:
                     #
                     # import cv2
                     #
@@ -565,7 +556,6 @@ with tabs[1]:
                     #
                     # while cap.isOpened():
                     #     success, frame = cap.read()
-                    #
                     #     if not success:
                     #         break
                     #
