@@ -464,6 +464,7 @@ with tabs[1]:
                     st.warning("⚠️ Please fill in hotel details first.")
 
 
+        
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
@@ -485,7 +486,7 @@ with tabs[1]:
             <style>
         
             /* =========================
-               FILE UPLOADER CONTAINER
+               FILE UPLOADER MAIN BOX
             ========================= */
             [data-testid="stFileUploader"] {
                 background-color: white !important;
@@ -494,27 +495,43 @@ with tabs[1]:
                 padding: 15px !important;
             }
         
-            /* TEXT INSIDE UPLOADER */
-            [data-testid="stFileUploader"] * {
+            /* =========================
+               INNER DROP AREA
+               (200MB per file • MP4, MOV)
+            ========================= */
+            [data-testid="stFileUploaderDropzone"] {
+                background-color: white !important;
+                border: 2px dashed black !important;
+                border-radius: 12px !important;
                 color: black !important;
             }
         
-            /* UPLOAD BUTTON */
-            [data-testid="stFileUploader"] section button {
+            /* TEXT INSIDE DROPZONE */
+            [data-testid="stFileUploaderDropzone"] * {
+                color: black !important;
+            }
+        
+            /* =========================
+               UPLOAD BUTTON
+            ========================= */
+            [data-testid="stFileUploaderDropzone"] button {
                 background-color: #0057b8 !important;
                 color: white !important;
                 border: none !important;
                 border-radius: 10px !important;
                 font-weight: bold !important;
+                padding: 10px 18px !important;
             }
         
             /* BUTTON HOVER */
-            [data-testid="stFileUploader"] section button:hover {
+            [data-testid="stFileUploaderDropzone"] button:hover {
                 background-color: #004494 !important;
                 color: white !important;
             }
         
-            /* VIDEO SIZE */
+            /* =========================
+               VIDEO SIZE
+            ========================= */
             [data-testid="stVideo"] {
                 max-width: 320px;
             }
