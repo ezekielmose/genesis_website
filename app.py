@@ -463,6 +463,7 @@ with tabs[1]:
                 else:
                     st.warning("⚠️ Please fill in hotel details first.")
 
+
         # ======================================
         # ANALYZE VIDEO SECTION
         # ======================================
@@ -476,6 +477,57 @@ with tabs[1]:
             st.subheader("🎬 Analyze a Video")
         
             st.write("Upload a video from your device for analysis.")
+        
+            # =========================
+            # CUSTOM CSS
+            # =========================
+            st.markdown("""
+            <style>
+        
+            /* =========================
+               FILE UPLOADER CONTAINER
+            ========================= */
+            [data-testid="stFileUploader"] {
+                background-color: white !important;
+                border: 2px solid black !important;
+                border-radius: 12px !important;
+                padding: 15px !important;
+            }
+        
+            /* TEXT INSIDE UPLOADER */
+            [data-testid="stFileUploader"] * {
+                color: black !important;
+            }
+        
+            /* UPLOAD BUTTON */
+            [data-testid="stFileUploader"] section button {
+                background-color: #0057b8 !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 10px !important;
+                font-weight: bold !important;
+            }
+        
+            /* BUTTON HOVER */
+            [data-testid="stFileUploader"] section button:hover {
+                background-color: #004494 !important;
+                color: white !important;
+            }
+        
+            /* VIDEO SIZE */
+            [data-testid="stVideo"] {
+                max-width: 320px;
+            }
+        
+            /* VIDEO PLAYER */
+            [data-testid="stVideo"] video {
+                max-width: 320px !important;
+                max-height: 500px !important;
+                border-radius: 12px !important;
+            }
+        
+            </style>
+            """, unsafe_allow_html=True)
         
             # =========================
             # VIDEO UPLOADER
@@ -502,30 +554,14 @@ with tabs[1]:
                 )
         
                 temp_video.write(uploaded_video.read())
+        
                 video_path = temp_video.name
+        
                 temp_video.close()
         
                 # =========================
-                # SMALL CLEAN VIDEO PLAYER (WORKING)
+                # PLAY VIDEO
                 # =========================
-                st.markdown("""
-                <style>
-        
-                /* FIX STREAMLIT VIDEO SIZE */
-                [data-testid="stVideo"] {
-                    max-width: 320px;
-                }
-        
-                [data-testid="stVideo"] video {
-                    max-width: 320px !important;
-                    max-height: 500px !important;
-                    border-radius: 12px !important;
-                }
-        
-                </style>
-                """, unsafe_allow_html=True)
-        
-                # PLAY VIDEO (KEEP STREAMLIT PLAYER)
                 st.video(video_path)
         
                 # =========================
@@ -536,6 +572,7 @@ with tabs[1]:
                 st.markdown("### 📊 Video Info")
         
                 st.write(f"**File Name:** {uploaded_video.name}")
+        
                 st.write(f"**Size:** {file_size:.2f} MB")
         
                 # =========================
@@ -546,6 +583,7 @@ with tabs[1]:
                     st.info("🔍 Processing video...")
         
                     st.write("Video path ready for AI analysis:")
+        
                     st.code(video_path)
         
                     # Example future AI pipeline:
@@ -556,6 +594,7 @@ with tabs[1]:
                     #
                     # while cap.isOpened():
                     #     success, frame = cap.read()
+                    #
                     #     if not success:
                     #         break
                     #
