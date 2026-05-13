@@ -486,16 +486,6 @@ with tabs[1]:
             <style>
         
             /* =========================
-               FILE UPLOADER MAIN BOX
-            ========================= */
-            [data-testid="stFileUploader"] {
-                background-color: white !important;
-                border: 2px solid black !important;
-                border-radius: 12px !important;
-                padding: 15px !important;
-            }
-        
-            /* =========================
                INNER DROP AREA
                (200MB per file • MP4, MOV)
             ========================= */
