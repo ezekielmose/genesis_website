@@ -581,8 +581,8 @@ with tabs[1]:
                 st.write(f"**File Name:** {uploaded_video.name}")
         
                 st.write(f"**Size:** {file_size:.2f} MB")
-        
-        
+    
+                
                 # =========================
                 # ANALYZE BUTTON
                 # =========================
@@ -590,104 +590,266 @@ with tabs[1]:
                 
                     import cv2
                     import numpy as np
+                    import os
                 
-                    st.info("🔍 Analyzing video content...")
+                    st.info("🔍 Starting video analysis pipeline...")
                 
                     # =========================
-                    # LOAD VIDEO
+                    # OPEN VIDEO
                     # =========================
                     cap = cv2.VideoCapture(video_path)
                 
-                    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                    if not cap.isOpened():
                 
-                    # Avoid division by zero
-                    if total_frames == 0:
-                        st.error("❌ Could not read video frames.")
-                    
+                        st.error("❌ Could not open video.")
+                
                     else:
                 
                         # =========================
-                        # SAMPLE FRAMES
+                        # VIDEO METADATA
                         # =========================
-                        sample_positions = np.linspace(
-                            0,
-                            total_frames - 1,
-                            8,
-                            dtype=int
-                        )
+                        fps = cap.get(cv2.CAP_PROP_FPS)
                 
-                        hotel_scene_detected = False
+                        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
                 
-                        # Keywords/colors/visual cues placeholder
-                        # (simple first-step logic)
+                        duration = total_frames / fps if fps > 0 else 0
                 
-                        for frame_pos in sample_positions:
+                        st.markdown("## 📊 Video Metadata")
                 
-                            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos)
+                        st.write(f"**FPS:** {fps:.2f}")
+                
+                        st.write(f"**Total Frames:** {total_frames}")
+                
+                        st.write(f"**Duration:** {duration:.2f} seconds")
+                
+                        # =========================
+                        # FRAME EXTRACTION SETTINGS
+                        # =========================
+                        frame_interval_seconds = 2
+                
+                        frame_interval = int(fps * frame_interval_seconds)
+                
+                        extracted_frames = []
+                
+                        frame_count = 0
+                
+                        saved_count = 0
+                
+                        # =========================
+                        # ANALYSIS FLAGS
+                        # =========================
+                        blurry_frames = 0
+                
+                        dark_frames = 0
+                
+                        static_frames = 0
+                
+                        previous_gray = None
+                
+                        # =========================
+                        # CREATE FRAME DIRECTORY
+                        # =========================
+                        frame_dir = "extracted_frames"
+                
+                        os.makedirs(frame_dir, exist_ok=True)
+                
+                        # =========================
+                        # FRAME EXTRACTION LOOP
+                        # =========================
+                        progress_bar = st.progress(0)
+                
+                        while cap.isOpened():
                 
                             success, frame = cap.read()
                 
                             if not success:
-                                continue
-                
-                            # =========================
-                            # BASIC VISUAL CHECK
-                            # =========================
-                
-                            # Convert frame to RGB
-                            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                
-                            # Get average brightness
-                            brightness = np.mean(frame_rgb)
-                
-                            # Simple hotel-style heuristic
-                            # (bright indoor / luxury / structured scenes)
-                
-                            if brightness > 60:
-                
-                                hotel_scene_detected = True
                                 break
+                
+                            # =========================
+                            # EXTRACT FRAME
+                            # =========================
+                            if frame_count % frame_interval == 0:
+                
+                                frame_path = os.path.join(
+                                    frame_dir,
+                                    f"frame_{saved_count}.jpg"
+                                )
+                
+                                # Save frame
+                                cv2.imwrite(frame_path, frame)
+                
+                                extracted_frames.append(frame_path)
+                
+                                # =========================
+                                # BASIC ANALYSIS
+                                # =========================
+                
+                                gray = cv2.cvtColor(
+                                    frame,
+                                    cv2.COLOR_BGR2GRAY
+                                )
+                
+                                # -------------------------
+                                # BLUR DETECTION
+                                # -------------------------
+                                blur_score = cv2.Laplacian(
+                                    gray,
+                                    cv2.CV_64F
+                                ).var()
+                
+                                if blur_score < 80:
+                                    blurry_frames += 1
+                
+                                # -------------------------
+                                # DARK FRAME DETECTION
+                                # -------------------------
+                                brightness = np.mean(gray)
+                
+                                if brightness < 40:
+                                    dark_frames += 1
+                
+                                # -------------------------
+                                # STATIC FRAME DETECTION
+                                # -------------------------
+                                if previous_gray is not None:
+                
+                                    difference = cv2.absdiff(
+                                        previous_gray,
+                                        gray
+                                    )
+                
+                                    motion_score = np.mean(difference)
+                
+                                    if motion_score < 3:
+                                        static_frames += 1
+                
+                                previous_gray = gray
+                
+                                saved_count += 1
+                
+                            frame_count += 1
+                
+                            # =========================
+                            # UPDATE PROGRESS
+                            # =========================
+                            progress = min(
+                                frame_count / total_frames,
+                                1.0
+                            )
+                
+                            progress_bar.progress(progress)
                 
                         cap.release()
                 
                         # =========================
-                        # FINAL RESULT
+                        # EXTRACTION RESULTS
                         # =========================
-                        st.markdown("## 🧠 Analysis Result")
+                        st.success("✅ Frame extraction completed!")
                 
-                        if hotel_scene_detected:
+                        st.markdown("## 🖼 Extracted Frames")
                 
-                            st.success(
-                                "✅ Accepted: Video appears to showcase "
-                                "a hotel-related experience."
+                        st.write(f"Frames Extracted: {len(extracted_frames)}")
+                
+                        # =========================
+                        # DISPLAY SAMPLE FRAMES
+                        # =========================
+                        preview_frames = extracted_frames[:4]
+                
+                        cols = st.columns(len(preview_frames))
+                
+                        for idx, frame_path in enumerate(preview_frames):
+                
+                            cols[idx].image(
+                                frame_path,
+                                caption=f"Frame {idx + 1}",
+                                use_container_width=True
                             )
                 
+                        # =========================
+                        # ANALYSIS RESULTS
+                        # =========================
+                        st.markdown("## 🤖 Video Quality Analysis")
+                
+                        rejection_reasons = []
+                
+                        # -------------------------
+                        # BLUR CHECK
+                        # -------------------------
+                        if blurry_frames > 2:
+                
+                            rejection_reasons.append(
+                                "Video contains blurry scenes."
+                            )
+                
+                        # -------------------------
+                        # DARK VIDEO CHECK
+                        # -------------------------
+                        if dark_frames > 2:
+                
+                            rejection_reasons.append(
+                                "Video is too dark in several scenes."
+                            )
+                
+                        # -------------------------
+                        # STATIC FRAME CHECK
+                        # -------------------------
+                        if static_frames > 2:
+                
+                            rejection_reasons.append(
+                                "Video appears to contain static or frozen scenes."
+                            )
+                
+                        # =========================
+                        # FINAL RESULT
+                        # =========================
+                        if len(rejection_reasons) == 0:
+                
+                            st.success("""
+                            ✅ Video Passed Initial Quality Checks
+                            """)
+                
                             st.markdown("""
-                            **Detected possible scenes such as:**
-                            - Room interiors
-                            - Hotel spaces
-                            - Indoor hospitality environments
+                            ### ✔ Passed Checks
+                            - Video clarity
+                            - Brightness levels
+                            - Motion consistency
+                            - Static frame detection
                             """)
                 
                         else:
                 
-                            st.error(
-                                "❌ Rejected: Video does not clearly showcase "
-                                "a hotel experience."
-                            )
+                            st.error("❌ Video Rejected")
                 
-                            st.warning("""
-                            The uploaded video should include at least one of:
-                            - Room reveal
-                            - Lobby walk-in
-                            - Pool moment
-                            - Dining experience
-                            - Spa scene
-                            - Scenic hotel view
-                            """)
-        
-            else:
-                st.warning("Please upload a video to continue.")
+                            st.markdown("### 🚫 Rejection Reasons")
+                
+                            for reason in rejection_reasons:
+                
+                                st.warning(reason)
+                
+                        # =========================
+                        # FUTURE AI MODULES
+                        # =========================
+                        st.markdown("## 🚀 Upcoming AI Analysis Modules")
+                
+                        st.markdown("""
+                        Future pipeline stages can detect:
+                
+                        - Hotel room reveals
+                        - Lobby walk-ins
+                        - Pool scenes
+                        - Dining experiences
+                        - Spa scenes
+                        - Scenic hotel views
+                        - Fast-forward videos
+                        - Slow motion
+                        - Watermarks
+                        - Text overlays
+                        - Logos
+                        - AI-generated visuals
+                        - Poor camera movement
+                        - Shaky footage
+                        - Duplicate content
+                        """)
 # ======================================
 # SERVICES PAGE
 # ======================================
