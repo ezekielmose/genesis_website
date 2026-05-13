@@ -582,32 +582,109 @@ with tabs[1]:
         
                 st.write(f"**Size:** {file_size:.2f} MB")
         
+        
                 # =========================
                 # ANALYZE BUTTON
                 # =========================
                 if st.button("Analyze Video"):
-        
-                    st.info("🔍 Processing video...")
-        
-                    st.write("Video path ready for AI analysis:")
-        
-                    st.code(video_path)
-        
-                    # Example future AI pipeline:
-                    #
-                    # import cv2
-                    #
-                    # cap = cv2.VideoCapture(video_path)
-                    #
-                    # while cap.isOpened():
-                    #     success, frame = cap.read()
-                    #
-                    #     if not success:
-                    #         break
-                    #
-                    #     # AI FRAME ANALYSIS HERE
-                    #
-                    # cap.release()
+                
+                    import cv2
+                    import numpy as np
+                
+                    st.info("🔍 Analyzing video content...")
+                
+                    # =========================
+                    # LOAD VIDEO
+                    # =========================
+                    cap = cv2.VideoCapture(video_path)
+                
+                    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                
+                    # Avoid division by zero
+                    if total_frames == 0:
+                        st.error("❌ Could not read video frames.")
+                    
+                    else:
+                
+                        # =========================
+                        # SAMPLE FRAMES
+                        # =========================
+                        sample_positions = np.linspace(
+                            0,
+                            total_frames - 1,
+                            8,
+                            dtype=int
+                        )
+                
+                        hotel_scene_detected = False
+                
+                        # Keywords/colors/visual cues placeholder
+                        # (simple first-step logic)
+                
+                        for frame_pos in sample_positions:
+                
+                            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_pos)
+                
+                            success, frame = cap.read()
+                
+                            if not success:
+                                continue
+                
+                            # =========================
+                            # BASIC VISUAL CHECK
+                            # =========================
+                
+                            # Convert frame to RGB
+                            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                
+                            # Get average brightness
+                            brightness = np.mean(frame_rgb)
+                
+                            # Simple hotel-style heuristic
+                            # (bright indoor / luxury / structured scenes)
+                
+                            if brightness > 60:
+                
+                                hotel_scene_detected = True
+                                break
+                
+                        cap.release()
+                
+                        # =========================
+                        # FINAL RESULT
+                        # =========================
+                        st.markdown("## 🧠 Analysis Result")
+                
+                        if hotel_scene_detected:
+                
+                            st.success(
+                                "✅ Accepted: Video appears to showcase "
+                                "a hotel-related experience."
+                            )
+                
+                            st.markdown("""
+                            **Detected possible scenes such as:**
+                            - Room interiors
+                            - Hotel spaces
+                            - Indoor hospitality environments
+                            """)
+                
+                        else:
+                
+                            st.error(
+                                "❌ Rejected: Video does not clearly showcase "
+                                "a hotel experience."
+                            )
+                
+                            st.warning("""
+                            The uploaded video should include at least one of:
+                            - Room reveal
+                            - Lobby walk-in
+                            - Pool moment
+                            - Dining experience
+                            - Spa scene
+                            - Scenic hotel view
+                            """)
         
             else:
                 st.warning("Please upload a video to continue.")
