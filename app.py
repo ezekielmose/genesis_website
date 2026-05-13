@@ -635,60 +635,66 @@ with tabs[1]:
                 
                         saved_count = 0
                 
+
                         # =========================
                         # ANALYSIS FLAGS
                         # =========================
                         blurry_frames = 0
-                
+                        
                         dark_frames = 0
-                
+                        
                         static_frames = 0
-                
+                        
+                        text_overlay_frames = 0
+                        
                         previous_gray = None
-                
+                        
+                        # =========================
+                        # IMPORT OCR
+                        # =========================
+                        import pytesseract
+                        
                         # =========================
                         # CREATE FRAME DIRECTORY
                         # =========================
                         frame_dir = "extracted_frames"
-                
+                        
                         os.makedirs(frame_dir, exist_ok=True)
-                
+                        
                         # =========================
                         # FRAME EXTRACTION LOOP
                         # =========================
                         progress_bar = st.progress(0)
-                
+                        
                         while cap.isOpened():
-                
+                        
                             success, frame = cap.read()
-                
+                        
                             if not success:
                                 break
-                
+                        
                             # =========================
                             # EXTRACT FRAME
                             # =========================
                             if frame_count % frame_interval == 0:
-                
+                        
                                 frame_path = os.path.join(
                                     frame_dir,
                                     f"frame_{saved_count}.jpg"
                                 )
-                
-                                # Save frame
+                        
                                 cv2.imwrite(frame_path, frame)
-                
+                        
                                 extracted_frames.append(frame_path)
-                
+                        
                                 # =========================
                                 # BASIC ANALYSIS
                                 # =========================
-                
                                 gray = cv2.cvtColor(
                                     frame,
                                     cv2.COLOR_BGR2GRAY
                                 )
-                
+                        
                                 # -------------------------
                                 # BLUR DETECTION
                                 # -------------------------
@@ -696,39 +702,53 @@ with tabs[1]:
                                     gray,
                                     cv2.CV_64F
                                 ).var()
-                
-                                if blur_score < 80:
+                        
+                                if blur_score < 120:
                                     blurry_frames += 1
-                
+                        
                                 # -------------------------
                                 # DARK FRAME DETECTION
                                 # -------------------------
                                 brightness = np.mean(gray)
-                
+                        
                                 if brightness < 40:
                                     dark_frames += 1
-                
+                        
                                 # -------------------------
-                                # STATIC FRAME DETECTION
+                                # STATIC IMAGE DETECTION
                                 # -------------------------
                                 if previous_gray is not None:
-                
+                        
                                     difference = cv2.absdiff(
                                         previous_gray,
                                         gray
                                     )
-                
+                        
                                     motion_score = np.mean(difference)
-                
-                                    if motion_score < 3:
+                        
+                                    # Much stricter
+                                    if motion_score < 8:
                                         static_frames += 1
-                
+                        
                                 previous_gray = gray
-                
+                        
+                                # -------------------------
+                                # TEXT OVERLAY DETECTION
+                                # -------------------------
+                                detected_text = pytesseract.image_to_string(gray)
+                        
+                                # Remove spaces/newlines
+                                cleaned_text = detected_text.strip()
+                        
+                                # If enough text exists
+                                if len(cleaned_text) > 15:
+                        
+                                    text_overlay_frames += 1
+                        
                                 saved_count += 1
-                
+                        
                             frame_count += 1
-                
+                        
                             # =========================
                             # UPDATE PROGRESS
                             # =========================
@@ -736,95 +756,77 @@ with tabs[1]:
                                 frame_count / total_frames,
                                 1.0
                             )
-                
+                        
                             progress_bar.progress(progress)
-                
+                        
                         cap.release()
-                
+                        
                         # =========================
                         # EXTRACTION RESULTS
                         # =========================
                         st.success("✅ Frame extraction completed!")
-                
+                        
                         st.markdown("## 🖼 Extracted Frames")
-                
+                        
                         st.write(f"Frames Extracted: {len(extracted_frames)}")
-                
+                        
                         # =========================
                         # DISPLAY SAMPLE FRAMES
                         # =========================
                         preview_frames = extracted_frames[:4]
-                
+                        
                         cols = st.columns(len(preview_frames))
-                
+                        
                         for idx, frame_path in enumerate(preview_frames):
-                
+                        
                             cols[idx].image(
                                 frame_path,
                                 caption=f"Frame {idx + 1}",
                                 use_container_width=True
                             )
-                
+                        
                         # =========================
                         # ANALYSIS RESULTS
                         # =========================
                         st.markdown("## 🤖 Video Quality Analysis")
-                
+                        
                         rejection_reasons = []
-                
+                        
                         # -------------------------
                         # BLUR CHECK
                         # -------------------------
                         if blurry_frames > 2:
-                
+                        
                             rejection_reasons.append(
                                 "Video contains blurry scenes."
                             )
-                
+                        
                         # -------------------------
                         # DARK VIDEO CHECK
                         # -------------------------
                         if dark_frames > 2:
-                
+                        
                             rejection_reasons.append(
                                 "Video is too dark in several scenes."
                             )
-                
+                        
                         # -------------------------
-                        # STATIC FRAME CHECK
+                        # STATIC IMAGE CHECK
                         # -------------------------
                         if static_frames > 2:
-                
+                        
                             rejection_reasons.append(
-                                "Video appears to contain static or frozen scenes."
+                                "Video contains static image scenes or slideshow-like sections."
                             )
-                
-                        # =========================
-                        # FINAL RESULT
-                        # =========================
-                        if len(rejection_reasons) == 0:
-                
-                            st.success("""
-                            ✅ Video Passed Initial Quality Checks
-                            """)
-                
-                            st.markdown("""
-                            ### ✔ Passed Checks
-                            - Video clarity
-                            - Brightness levels
-                            - Motion consistency
-                            - Static frame detection
-                            """)
-                
-                        else:
-                
-                            st.error("❌ Video Rejected")
-                
-                            st.markdown("### 🚫 Rejection Reasons")
-                
-                            for reason in rejection_reasons:
-                
-                                st.warning(reason)
+                        
+                        # -------------------------
+                        # TEXT OVERLAY CHECK
+                        # -------------------------
+                        if text_overlay_frames > 1:
+                        
+                            rejection_reasons.append(
+                                "Video contains text overlays or captions."
+                            )
                 
                         # =========================
                         # FUTURE AI MODULES
