@@ -15,11 +15,19 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* GLOBAL SETTINGS */
+/* ======================================
+   GLOBAL BACKGROUND
+====================================== */
 .stApp {
-    background-color: #eaeaea;
+    background: linear-gradient(
+        135deg,
+        #d9d9d9 0%,
+        #eeeeee 40%,
+        #ffffff 100%
+    );
 }
 
+/* HIDE STREAMLIT DEFAULTS */
 #MainMenu, footer, header {
     visibility: hidden;
 }
@@ -28,6 +36,7 @@ st.markdown("""
     padding-top: 0.5rem;
 }
 
+/* GLOBAL TEXT */
 .stMarkdown, .stText, p, label, span {
     color: black;
 }
@@ -36,81 +45,147 @@ a {
     color: blue !important;
 }
 
-/* HEADER */
+/* ======================================
+   HEADER
+====================================== */
 .logo-row {
     display: flex;
     align-items: center;
     margin-bottom: -15px;
 }
 
-/* TOP MENU */
+/* ======================================
+   TOP MENU CONTAINER
+====================================== */
 div[data-baseweb="tab-list"] {
-    background-color: #0057b8;
-    padding: 12px 20px;
-    border-radius: 10px;
+
+    background: transparent !important;
+
+    border: none !important;
+
     gap: 35px;
+
+    padding-top: 15px;
+
+    padding-bottom: 10px;
+
     margin-top: 18px;
 }
 
-button[data-baseweb="tab"] {
-    color: white !important;
-    font-size: 18px;
-    font-weight: bold;
+/* REMOVE BLUE ACTIVE TAB BACKGROUND */
+button[role="tab"] {
+
     background: transparent !important;
+
     border: none !important;
-    padding: 10px 16px;
-    border-radius: 5px;
+
+    color: black !important;
+
+    font-size: 18px !important;
+
+    font-weight: 700 !important;
+
+    padding: 10px 0px !important;
+
+    border-radius: 0px !important;
+
+    transition: 0.3s ease;
 }
 
-button[data-baseweb="tab"]:hover {
-    background-color: red !important;
-    transition: 0.3s;
+/* HOVER EFFECT */
+button[role="tab"]:hover {
+
+    color: red !important;
 }
 
+/* ACTIVE TAB */
 button[aria-selected="true"] {
-    background-color: #003f85 !important;
+
+    color: black !important;
+
+    border-bottom: 3px solid red !important;
 }
 
-/* HOME CARDS */
+/* REMOVE BLUE LINE UNDER TABS */
+div[data-baseweb="tab-border"] {
+    display: none !important;
+}
+
+/* ======================================
+   HOME CARDS
+====================================== */
 .card {
+
     border: 2px solid #0dcfff;
-    background: white;
+
+    background: rgba(255,255,255,0.88);
+
+    backdrop-filter: blur(10px);
+
     padding: 30px 25px;
-    border-radius: 10px;
+
+    border-radius: 14px;
+
     min-height: 260px;
+
     margin-bottom: 20px;
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
 }
 
 .card-title {
+
     color: #0057b8 !important;
+
     font-size: 28px;
+
     font-weight: bold;
+
     margin-bottom: 18px;
 }
 
 .card-text {
+
     font-size: 18px;
+
     line-height: 1.8;
 }
 
-/* FOOTER */
+/* ======================================
+   FOOTER
+====================================== */
 .footer {
+
     position: fixed;
+
     bottom: 0;
+
     left: 0;
+
     width: 100%;
-    background-color: blue;
+
+    background-color: #0057b8;
+
+    color: white;
+
     text-align: center;
+
     padding: 10px;
+
     font-size: 13px;
+
     z-index: 999;
 }
 
-/* MOBILE */
+/* ======================================
+   MOBILE RESPONSIVE
+====================================== */
 @media only screen and (max-width: 768px) {
 
     .logo-row {
+
         flex-direction: column;
+
         align-items: flex-start;
     }
 
@@ -119,21 +194,26 @@ button[aria-selected="true"] {
     }
 
     div[data-baseweb="tab-list"] {
+
         flex-wrap: wrap !important;
-        gap: 10px !important;
-        padding: 10px !important;
+
+        gap: 16px !important;
     }
 
-    button[data-baseweb="tab"] {
+    button[role="tab"] {
+
         font-size: 14px !important;
-        padding: 8px 10px !important;
+
+        padding: 6px 0px !important;
     }
 
     .card-title {
+
         font-size: 22px !important;
     }
 
     .card-text {
+
         font-size: 15px !important;
     }
 }
