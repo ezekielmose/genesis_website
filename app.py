@@ -669,7 +669,9 @@ with tabs[1]:
                         # =========================
                         progress_bar = st.progress(0)
 
-                        reader = easyocr.Reader(['en'], gpu=False)
+                        with st.spinner("Loading OCR engine..."):
+
+                            reader = easyocr.Reader(['en'], gpu=False)
                         
                         while cap.isOpened():
                         
@@ -740,15 +742,19 @@ with tabs[1]:
                                 # -------------------------
                                 # TEXT OVERLAY DETECTION
                                 # -------------------------
-                                results = reader.readtext(frame)
-
-                                detected_text = " ".join([res[1] for res in results])
+                                if saved_count % 3 == 0:
                                 
-                                cleaned_text = detected_text.strip()
+                                    results = reader.readtext(frame)
                                 
-                                if len(cleaned_text) > 10:
+                                    detected_text = " ".join([res[1] for res in results])
                                 
-                                    text_overlay_frames += 1
+                                    cleaned_text = detected_text.strip()
+                                
+                                    if len(cleaned_text) > 10:
+                                
+                                        text_overlay_frames += 1
+                                saved_count += 1
+                                frame_count += 1
                         
                             # =========================
                             # UPDATE PROGRESS
