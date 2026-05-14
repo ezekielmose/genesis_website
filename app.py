@@ -652,8 +652,7 @@ with tabs[1]:
                         # =========================
                         # IMPORT OCR
                         # =========================
-                        import pytesseract
-                        pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
+
                         
                         # =========================
                         # CREATE FRAME DIRECTORY
@@ -736,19 +735,7 @@ with tabs[1]:
                                 # -------------------------
                                 # TEXT OVERLAY DETECTION
                                 # -------------------------
-                                detected_text = pytesseract.image_to_string(gray)
-                        
-                                # Remove spaces/newlines
-                                cleaned_text = detected_text.strip()
-                        
-                                # If enough text exists
-                                if len(cleaned_text) > 15:
-                        
-                                    text_overlay_frames += 1
-                        
-                                saved_count += 1
-                        
-                            frame_count += 1
+
                         
                             # =========================
                             # UPDATE PROGRESS
