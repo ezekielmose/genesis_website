@@ -157,8 +157,7 @@ with col2:
         "Home",
         "AI Analyzer",
         "Our Services",
-        "About",
-        "Contact"
+        "About Us"
     ])
 
 # ======================================
@@ -614,14 +613,9 @@ with tabs[3]:
     st.title("About Us")
     st.write("AI, Automation, and Digital Solutions Company.")
 
-# ======================================
-# CONTACT PAGE
-# ======================================
-with tabs[4]:
-
     st.title("Contact Us")
-    st.write("📧 mose@genesisdigital.in")
-    st.write("📞 +254748468634")
+    st.write("📧 aravind@genesisdigital.in")
+    st.write("📞 +919731016770")
 
 # ======================================
 # FOOTER
