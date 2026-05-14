@@ -653,6 +653,7 @@ with tabs[1]:
                         # IMPORT OCR
                         # =========================
                         import pytesseract
+                        pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
                         
                         # =========================
                         # CREATE FRAME DIRECTORY
