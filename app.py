@@ -586,11 +586,14 @@ with tabs[1]:
                 # =========================
                 # ANALYZE BUTTON
                 # =========================
+
+                
                 if st.button("Analyze Video"):
                 
                     import cv2
                     import numpy as np
                     import os
+                    import easyocr
                 
                     st.info("🔍 Starting video analysis pipeline...")
                 
@@ -665,6 +668,8 @@ with tabs[1]:
                         # FRAME EXTRACTION LOOP
                         # =========================
                         progress_bar = st.progress(0)
+
+                        reader = easyocr.Reader(['en'], gpu=False)
                         
                         while cap.isOpened():
                         
@@ -735,7 +740,15 @@ with tabs[1]:
                                 # -------------------------
                                 # TEXT OVERLAY DETECTION
                                 # -------------------------
+                                results = reader.readtext(frame)
 
+                                detected_text = " ".join([res[1] for res in results])
+                                
+                                cleaned_text = detected_text.strip()
+                                
+                                if len(cleaned_text) > 10:
+                                
+                                    text_overlay_frames += 1
                         
                             # =========================
                             # UPDATE PROGRESS
