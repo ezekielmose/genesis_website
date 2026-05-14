@@ -63,13 +63,19 @@ div[data-baseweb="tab-list"] {
 
     border: none !important;
 
-    gap: 35px;
+    gap: 45px;
 
     padding-top: 15px;
 
     padding-bottom: 10px;
 
     margin-top: 18px;
+
+    justify-content: center !important;
+
+    display: flex !important;
+
+    width: 100%;
 }
 
 /* REMOVE BLUE ACTIVE TAB BACKGROUND */
@@ -83,13 +89,17 @@ button[role="tab"] {
 
     font-size: 18px !important;
 
-    font-weight: 700 !important;
+    font-weight: 900 !important;
+
+    font-family: Arial, sans-serif !important;
 
     padding: 10px 0px !important;
 
     border-radius: 0px !important;
 
     transition: 0.3s ease;
+
+    justify-content: center !important;
 }
 
 /* HOVER EFFECT */
