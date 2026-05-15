@@ -425,99 +425,93 @@ with tabs[0]:
     </div>
     """, unsafe_allow_html=True)
     
-    # ======================================
-    # TEAM MEMBERS
-    # ======================================
+# ======================================
+# TEAM MEMBERS
+# ======================================
     team1, team2, team3 = st.columns(3)
     
+    # MEMBER 1
     with team1:
     
-        st.image(
-            "aravind.png",
-            width=180
-        )
+        st.image("aravind.png", width=180)
     
         st.markdown(
             """
             <div style='text-align:center;'>
-        
-                <div style='
-                    font-size:22px;
-                    font-weight:800;
+    
+                <h3 style='
                     color:#0057b8;
+                    margin-bottom:0px;
                 '>
                     Aravind Konnte
-                </div>
-        
-                <div style='
-                    font-size:15px;
+                </h3>
+    
+                <p style='
                     color:#555;
+                    font-size:15px;
+                    margin-top:5px;
                 '>
                     Chief Executive Officer
-                </div>
-        
+                </p>
+    
             </div>
             """,
             unsafe_allow_html=True
         )
     
+    # MEMBER 2
     with team2:
     
-        st.image(
-            "havala.png",
-            width=180
-        )
+        st.image("havala.png", width=180)
     
         st.markdown(
             """
             <div style='text-align:center;'>
-        
-                <div style='
-                    font-size:22px;
-                    font-weight:800;
+    
+                <h3 style='
                     color:#0057b8;
+                    margin-bottom:0px;
                 '>
-                    Dr. Havalla Allan
-                </div>
-        
-                <div style='
-                    font-size:15px;
+                    Dr. Havala Allan
+                </h3>
+    
+                <p style='
                     color:#555;
+                    font-size:15px;
+                    margin-top:5px;
                 '>
-                    Chief Operations Officer 
-                </div>
-        
+                    Chief Operations Officer
+                </p>
+    
             </div>
             """,
             unsafe_allow_html=True
         )
     
+    # MEMBER 3
     with team3:
     
-        st.image(
-            "ezekiel.png",
-            width=180
-        )
+        st.image("ezekiel.png", width=180)
     
         st.markdown(
             """
             <div style='text-align:center;'>
-        
-                <div style='
-                    font-size:22px;
-                    font-weight:800;
+    
+                <h3 style='
                     color:#0057b8;
+                    margin-bottom:0px;
                 '>
                     Ezekiel Mose
-                </div>
-        
-                <div style='
-                    font-size:15px;
+                </h3>
+    
+                <p style='
                     color:#555;
+                    font-size:15px;
+                    margin-top:5px;
                 '>
                     Head of Analytics
-                </div>
-        
+                </p>
+    
             </div>
             """,
             unsafe_allow_html=True
