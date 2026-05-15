@@ -442,17 +442,10 @@ with tabs[0]:
             <div style="text-align:center;">
                 <div style="
                     color:#0057b8;
-                    font-size:22px;
-                    font-weight:800;
+                    font-size:18px;
+                    font-weight:600;
                 ">
                     Aravind Konnte
-                </div>
-    
-                <div style="
-                    color:#555;
-                    font-size:15px;
-                    margin-top:4px;
-                ">
                     Chief Executive Officer
                 </div>
             </div>
@@ -469,17 +462,10 @@ with tabs[0]:
             <div style="text-align:center;">
                 <div style="
                     color:#0057b8;
-                    font-size:22px;
-                    font-weight:800;
+                    font-size:18px;
+                    font-weight:600;
                 ">
                     Dr. Havala Allan
-                </div>
-    
-                <div style="
-                    color:#555;
-                    font-size:15px;
-                    margin-top:4px;
-                ">
                     Chief Operations Officer
                 </div>
             </div>
@@ -496,19 +482,13 @@ with tabs[0]:
             <div style="text-align:center;">
                 <div style="
                     color:#0057b8;
-                    font-size:22px;
-                    font-weight:800;
+                    font-size:18px;
+                    font-weight:600;
                 ">
                     Ezekiel Mose
-                </div>
-    
-                <div style="
-                    color:#555;
-                    font-size:15px;
-                    margin-top:4px;
-                ">
                     Head of Analytics
                 </div>
+
             </div>
             """,
             unsafe_allow_html=True
