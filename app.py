@@ -330,39 +330,118 @@ with tabs[0]:
     """, unsafe_allow_html=True)
 
     # ======================================
-    # TEAM IMAGE PLACEHOLDERS
+    # TEAM SLIDER CSS
     # ======================================
-    team1, team2, team3 = st.columns(3)
+    st.markdown("""
+    <style>
 
-    with team1:
-        st.image(
-            "aravind.png",
-            use_container_width=True
-        )
-        st.markdown(
-            "<center><b>Aravind Konnte</b></center>",
-            unsafe_allow_html=True
-        )
+    .team-slider {
+        overflow: hidden;
+        width: 100%;
+        margin-top: 20px;
+    }
 
-    with team2:
-        st.image(
-            "havala.png",
-            use_container_width=True
-        )
-        st.markdown(
-            "<center><b>Dr Havala Allan</b></center>",
-            unsafe_allow_html=True
-        )
+    .team-track {
+        display: flex;
+        width: max-content;
+        animation: scrollTeam 10s linear infinite;
+        gap: 40px;
+    }
 
-    with team3:
-        st.image(
-            "ezekiel.png",
-            use_container_width=True
-        )
-        st.markdown(
-            "<center><b>Ezekiel Mose</b></center>",
-            unsafe_allow_html=True
-        )
+    .team-card {
+        min-width: 220px;
+        text-align: center;
+    }
+
+    .team-card img {
+        width: 180px !important;
+        height: 180px !important;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #0057b8;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .team-name {
+        font-size: 22px;
+        font-weight: 800;
+        color: black;
+        margin-top: 15px;
+    }
+
+    .team-role {
+        font-size: 16px;
+        color: #0057b8;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    @keyframes scrollTeam {
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    # ======================================
+    # TEAM SLIDER
+    # ======================================
+    st.markdown("""
+    <div class="team-slider">
+
+        <div class="team-track">
+
+            <!-- MEMBER 1 -->
+            <div class="team-card">
+                <img src="app/static/aravind.png">
+                <div class="team-name">Aravind Konnte</div>
+                <div class="team-role">Founder & CEO</div>
+            </div>
+
+            <!-- MEMBER 2 -->
+            <div class="team-card">
+                <img src="app/static/havala.png">
+                <div class="team-name">Dr Havala Allan</div>
+                <div class="team-role">AI Research Lead</div>
+            </div>
+
+            <!-- MEMBER 3 -->
+            <div class="team-card">
+                <img src="app/static/ezekiel.png">
+                <div class="team-name">Ezekiel Mose</div>
+                <div class="team-role">Software Engineer</div>
+            </div>
+
+            <!-- DUPLICATES FOR SMOOTH LOOP -->
+
+            <div class="team-card">
+                <img src="app/static/aravind.png">
+                <div class="team-name">Aravind Konnte</div>
+                <div class="team-role">Founder & CEO</div>
+            </div>
+
+            <div class="team-card">
+                <img src="app/static/havala.png">
+                <div class="team-name">Dr Havala Allan</div>
+                <div class="team-role">AI Research Lead</div>
+            </div>
+
+            <div class="team-card">
+                <img src="app/static/ezekiel.png">
+                <div class="team-name">Ezekiel Mose</div>
+                <div class="team-role">Software Engineer</div>
+            </div>
+
+        </div>
+
+    </div>
+    """, unsafe_allow_html=True)
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
