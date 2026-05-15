@@ -340,7 +340,7 @@ with tabs[0]:
             use_container_width=True
         )
         st.markdown(
-            "<center><b>Team Member 1</b></center>",
+            "<center><b>Aravind Konnte</b></center>",
             unsafe_allow_html=True
         )
 
@@ -350,7 +350,7 @@ with tabs[0]:
             use_container_width=True
         )
         st.markdown(
-            "<center><b>Team Member 2</b></center>",
+            "<center><b>Dr Havala Allan</b></center>",
             unsafe_allow_html=True
         )
 
@@ -360,11 +360,7 @@ with tabs[0]:
             use_container_width=True
         )
         st.markdown(
-            "<center><b>Team Member 3</b></center>",
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            "<center><b>Team Member 4</b></center>",
+            "<center><b>Ezekiel Mose</b></center>",
             unsafe_allow_html=True
         )
 # ======================================
