@@ -302,7 +302,71 @@ with tabs[0]:
             </div>
         </div>
         """, unsafe_allow_html=True)
+    # ======================================
+    # THIN BLUE LINE
+    # ======================================
+    st.markdown("""
+    <div style="
+        width:100%;
+        height:2px;
+        background-color:#0057b8;
+        margin-top:25px;
+        margin-bottom:25px;
+    "></div>
+    """, unsafe_allow_html=True)
 
+    # ======================================
+    # OUR TEAM TITLE
+    # ======================================
+    st.markdown("""
+    <div style="
+        color:#0057b8;
+        font-size:34px;
+        font-weight:900;
+        margin-bottom:25px;
+    ">
+        Our Team
+    </div>
+    """, unsafe_allow_html=True)
+
+    # ======================================
+    # TEAM IMAGE PLACEHOLDERS
+    # ======================================
+    team1, team2, team3 = st.columns(3)
+
+    with team1:
+        st.image(
+            "team1.jpg",
+            use_container_width=True
+        )
+        st.markdown(
+            "<center><b>Team Member 1</b></center>",
+            unsafe_allow_html=True
+        )
+
+    with team2:
+        st.image(
+            "team2.jpg",
+            use_container_width=True
+        )
+        st.markdown(
+            "<center><b>Team Member 2</b></center>",
+            unsafe_allow_html=True
+        )
+
+    with team3:
+        st.image(
+            "team3.jpg",
+            use_container_width=True
+        )
+        st.markdown(
+            "<center><b>Team Member 3</b></center>",
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            "<center><b>Team Member 4</b></center>",
+            unsafe_allow_html=True
+        )
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
@@ -701,7 +765,8 @@ with tabs[2]:
 with tabs[3]:
 
     st.title("About Us")
-    st.write("AI, Automation, and Digital Solutions Company.")
+    st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project.
+")
 
     st.title("Contact Us")
     st.write("📧 aravind@genesisdigital.in")
