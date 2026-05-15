@@ -411,71 +411,102 @@ with tabs[0]:
     
     </style>
     """, unsafe_allow_html=True)
-    
-    # ======================================
-    # TEAM SLIDER
-    # ======================================
+# ======================================
+# OUR TEAM TITLE
+# ======================================
     st.markdown("""
-    <div class="team-slider-container">
-    
-        <div class="team-slider">
-    
-            <!-- MEMBER 1 -->
-            <div class="team-card">
-                <img src="aravind.png">
-                <div class="team-name">Aravind Konnte</div>
-                <div class="team-role">
-                    Founder & Digital Strategist
-                </div>
-            </div>
-    
-            <!-- MEMBER 2 -->
-            <div class="team-card">
-                <img src="havala.png">
-                <div class="team-name">Dr Havala Allan</div>
-                <div class="team-role">
-                    AI Research & Innovation Lead
-                </div>
-            </div>
-    
-            <!-- MEMBER 3 -->
-            <div class="team-card">
-                <img src="ezekiel.png">
-                <div class="team-name">Ezekiel Mose</div>
-                <div class="team-role">
-                    Data & Automation Engineer
-                </div>
-            </div>
-    
-            <!-- DUPLICATES FOR SMOOTH LOOP -->
-            <div class="team-card">
-                <img src="aravind.png">
-                <div class="team-name">Aravind Konnte</div>
-                <div class="team-role">
-                    Founder & Digital Strategist
-                </div>
-            </div>
-    
-            <div class="team-card">
-                <img src="havala.png">
-                <div class="team-name">Dr Havala Allan</div>
-                <div class="team-role">
-                    AI Research & Innovation Lead
-                </div>
-            </div>
-    
-            <div class="team-card">
-                <img src="ezekiel.png">
-                <div class="team-name">Ezekiel Mose</div>
-                <div class="team-role">
-                    Data & Automation Engineer
-                </div>
-            </div>
-    
-        </div>
-    
+    <div style="
+        color:#0057b8;
+        font-size:34px;
+        font-weight:900;
+        margin-bottom:25px;
+    ">
+        Our Team
     </div>
     """, unsafe_allow_html=True)
+    
+    # ======================================
+    # TEAM MEMBERS
+    # ======================================
+    team1, team2, team3 = st.columns(3)
+    
+    with team1:
+    
+        st.image(
+            "aravind.png",
+            width=180
+        )
+    
+        st.markdown("""
+        <div style="text-align:center;">
+            <div style="
+                font-size:22px;
+                font-weight:800;
+                color:#0057b8;
+            ">
+                Aravind Konnte
+            </div>
+    
+            <div style="
+                font-size:15px;
+                color:#555;
+            ">
+                Founder & Digital Strategist
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with team2:
+    
+        st.image(
+            "havala.png",
+            width=180
+        )
+    
+        st.markdown("""
+        <div style="text-align:center;">
+            <div style="
+                font-size:22px;
+                font-weight:800;
+                color:#0057b8;
+            ">
+                Dr Havala Allan
+            </div>
+    
+            <div style="
+                font-size:15px;
+                color:#555;
+            ">
+                AI Research & Innovation Lead
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with team3:
+    
+        st.image(
+            "ezekiel.png",
+            width=180
+        )
+    
+        st.markdown("""
+        <div style="text-align:center;">
+            <div style="
+                font-size:22px;
+                font-weight:800;
+                color:#0057b8;
+            ">
+                Ezekiel Mose
+            </div>
+    
+            <div style="
+                font-size:15px;
+                color:#555;
+            ">
+                Data & Automation Engineer
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
