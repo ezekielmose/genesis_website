@@ -765,8 +765,7 @@ with tabs[2]:
 with tabs[3]:
 
     st.title("About Us")
-    st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project.
-")
+    st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project")
 
     st.title("Contact Us")
     st.write("📧 aravind@genesisdigital.in")
