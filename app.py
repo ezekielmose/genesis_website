@@ -336,7 +336,7 @@ with tabs[0]:
 
     with team1:
         st.image(
-            "team1.jpg",
+            "aravind.png",
             use_container_width=True
         )
         st.markdown(
@@ -346,7 +346,7 @@ with tabs[0]:
 
     with team2:
         st.image(
-            "team2.jpg",
+            "havala.png",
             use_container_width=True
         )
         st.markdown(
@@ -356,7 +356,7 @@ with tabs[0]:
 
     with team3:
         st.image(
-            "team3.jpg",
+            "ezekiel.png",
             use_container_width=True
         )
         st.markdown(
