@@ -315,131 +315,165 @@ with tabs[0]:
     "></div>
     """, unsafe_allow_html=True)
 
-    # ======================================
-    # OUR TEAM TITLE
-    # ======================================
-    st.markdown("""
-    <div style="
-        color:#0057b8;
-        font-size:34px;
-        font-weight:900;
-        margin-bottom:25px;
-    ">
-        Our Team
-    </div>
-    """, unsafe_allow_html=True)
-
-    # ======================================
-    # TEAM SLIDER CSS
-    # ======================================
+# ======================================
+# OUR TEAM SLIDER CSS
+# ======================================
     st.markdown("""
     <style>
-
-    .team-slider {
-        overflow: hidden;
+    
+    /* TEAM SECTION */
+    .team-slider-container {
+    
         width: 100%;
+    
+        overflow: hidden;
+    
+        position: relative;
+    
         margin-top: 20px;
+    
+        margin-bottom: 40px;
     }
-
-    .team-track {
+    
+    /* SLIDING ROW */
+    .team-slider {
+    
         display: flex;
+    
+        gap: 30px;
+    
         width: max-content;
-        animation: scrollTeam 10s linear infinite;
-        gap: 40px;
+    
+        animation: slideTeam 10s linear infinite;
     }
-
+    
+    /* INDIVIDUAL CARD */
     .team-card {
+    
+        background: rgba(255,255,255,0.9);
+    
+        border-radius: 14px;
+    
+        padding: 18px;
+    
         min-width: 220px;
+    
         text-align: center;
+    
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
-
+    
+    /* TEAM IMAGE */
     .team-card img {
-        width: 180px !important;
-        height: 180px !important;
+    
+        width: 170px;
+    
+        height: 170px;
+    
         object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid #0057b8;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    
+        border-radius: 12px;
+    
+        margin-bottom: 12px;
     }
-
+    
+    /* TEAM NAME */
     .team-name {
-        font-size: 22px;
+    
+        font-size: 20px;
+    
         font-weight: 800;
-        color: black;
-        margin-top: 15px;
-    }
-
-    .team-role {
-        font-size: 16px;
+    
         color: #0057b8;
-        font-weight: 600;
-        margin-top: 5px;
+    
+        margin-bottom: 5px;
     }
-
-    @keyframes scrollTeam {
+    
+    /* TEAM TITLE */
+    .team-role {
+    
+        font-size: 15px;
+    
+        color: #555;
+    }
+    
+    /* SLIDE ANIMATION */
+    @keyframes slideTeam {
+    
         0% {
             transform: translateX(0%);
         }
-
+    
         100% {
             transform: translateX(-50%);
         }
     }
-
+    
     </style>
     """, unsafe_allow_html=True)
-
+    
     # ======================================
     # TEAM SLIDER
     # ======================================
     st.markdown("""
-    <div class="team-slider">
-
-        <div class="team-track">
-
+    <div class="team-slider-container">
+    
+        <div class="team-slider">
+    
             <!-- MEMBER 1 -->
             <div class="team-card">
-                <img src="app/static/aravind.png">
+                <img src="aravind.png">
                 <div class="team-name">Aravind Konnte</div>
-                <div class="team-role">Founder & CEO</div>
+                <div class="team-role">
+                    Founder & Digital Strategist
+                </div>
             </div>
-
+    
             <!-- MEMBER 2 -->
             <div class="team-card">
-                <img src="app/static/havala.png">
+                <img src="havala.png">
                 <div class="team-name">Dr Havala Allan</div>
-                <div class="team-role">AI Research Lead</div>
+                <div class="team-role">
+                    AI Research & Innovation Lead
+                </div>
             </div>
-
+    
             <!-- MEMBER 3 -->
             <div class="team-card">
-                <img src="app/static/ezekiel.png">
+                <img src="ezekiel.png">
                 <div class="team-name">Ezekiel Mose</div>
-                <div class="team-role">Software Engineer</div>
+                <div class="team-role">
+                    Data & Automation Engineer
+                </div>
             </div>
-
+    
             <!-- DUPLICATES FOR SMOOTH LOOP -->
-
             <div class="team-card">
-                <img src="app/static/aravind.png">
+                <img src="aravind.png">
                 <div class="team-name">Aravind Konnte</div>
-                <div class="team-role">Founder & CEO</div>
+                <div class="team-role">
+                    Founder & Digital Strategist
+                </div>
             </div>
-
+    
             <div class="team-card">
-                <img src="app/static/havala.png">
+                <img src="havala.png">
                 <div class="team-name">Dr Havala Allan</div>
-                <div class="team-role">AI Research Lead</div>
+                <div class="team-role">
+                    AI Research & Innovation Lead
+                </div>
             </div>
-
+    
             <div class="team-card">
-                <img src="app/static/ezekiel.png">
+                <img src="ezekiel.png">
                 <div class="team-name">Ezekiel Mose</div>
-                <div class="team-role">Software Engineer</div>
+                <div class="team-role">
+                    Data & Automation Engineer
+                </div>
             </div>
-
+    
         </div>
-
+    
     </div>
     """, unsafe_allow_html=True)
 # ======================================
