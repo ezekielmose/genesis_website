@@ -437,24 +437,29 @@ with tabs[0]:
             width=180
         )
     
-        st.markdown("""
-        <div style="text-align:center;">
-            <div style="
-                font-size:22px;
-                font-weight:800;
-                color:#0057b8;
-            ">
-                Aravind Konnte
+        st.markdown(
+            """
+            <div style='text-align:center;'>
+        
+                <div style='
+                    font-size:22px;
+                    font-weight:800;
+                    color:#0057b8;
+                '>
+                    Aravind Konnte
+                </div>
+        
+                <div style='
+                    font-size:15px;
+                    color:#555;
+                '>
+                    Chief Executive Officer
+                </div>
+        
             </div>
-    
-            <div style="
-                font-size:15px;
-                color:#555;
-            ">
-                Founder & Digital Strategist
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
     
     with team2:
     
@@ -463,24 +468,29 @@ with tabs[0]:
             width=180
         )
     
-        st.markdown("""
-        <div style="text-align:center;">
-            <div style="
-                font-size:22px;
-                font-weight:800;
-                color:#0057b8;
-            ">
-                Dr Havala Allan
+        st.markdown(
+            """
+            <div style='text-align:center;'>
+        
+                <div style='
+                    font-size:22px;
+                    font-weight:800;
+                    color:#0057b8;
+                '>
+                    Dr. Havalla Allan
+                </div>
+        
+                <div style='
+                    font-size:15px;
+                    color:#555;
+                '>
+                    Chief Operations Officer 
+                </div>
+        
             </div>
-    
-            <div style="
-                font-size:15px;
-                color:#555;
-            ">
-                AI Research & Innovation Lead
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
     
     with team3:
     
@@ -489,24 +499,29 @@ with tabs[0]:
             width=180
         )
     
-        st.markdown("""
-        <div style="text-align:center;">
-            <div style="
-                font-size:22px;
-                font-weight:800;
-                color:#0057b8;
-            ">
-                Ezekiel Mose
+        st.markdown(
+            """
+            <div style='text-align:center;'>
+        
+                <div style='
+                    font-size:22px;
+                    font-weight:800;
+                    color:#0057b8;
+                '>
+                    Ezekiel Mose
+                </div>
+        
+                <div style='
+                    font-size:15px;
+                    color:#555;
+                '>
+                    Head of Analytics
+                </div>
+        
             </div>
-    
-            <div style="
-                font-size:15px;
-                color:#555;
-            ">
-                Data & Automation Engineer
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True
+        )
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
