@@ -59,9 +59,9 @@ st.markdown("""
 
     color: #0057b8;
 
-    font-size: 18px;
+    font-size: 28px;
 
-    font-weight: 700;
+    font-weight: 800;
 
     letter-spacing: 1px;
 }
