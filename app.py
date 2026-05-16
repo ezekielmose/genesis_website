@@ -41,6 +41,31 @@ st.markdown("""
     color: black;
 }
 
+/* ======================================
+   HOME SECTION TITLE
+====================================== */
+.home-title {
+
+    text-align: center;
+
+    color: #0057b8;
+
+    font-weight: 900;
+}
+
+.home-subtitle {
+
+    text-align: center;
+
+    color: #0057b8;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
 a {
     color: blue !important;
 }
@@ -255,8 +280,15 @@ with col2:
 # ======================================
 with tabs[0]:
 
-    st.markdown("### OUR EDGE")
-    st.markdown("# Why Genesis Digital Stands Out")
+    st.markdown(
+        '<div class="home-subtitle">OUR EDGE</div>',
+        unsafe_allow_html=True
+    )
+    
+    st.markdown(
+        '<div class="home-title">Why Genesis Digital Stands Out</div>',
+        unsafe_allow_html=True
+    )
     st.markdown("---")
 
     col1, col2 = st.columns(2)
