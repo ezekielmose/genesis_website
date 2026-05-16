@@ -302,197 +302,7 @@ with tabs[0]:
             </div>
         </div>
         """, unsafe_allow_html=True)
-    # ======================================
-    # THIN BLUE LINE
-    # ======================================
-    st.markdown("""
-    <div style="
-        width:100%;
-        height:2px;
-        background-color:#0057b8;
-        margin-top:25px;
-        margin-bottom:25px;
-    "></div>
-    """, unsafe_allow_html=True)
 
-# ======================================
-# OUR TEAM SLIDER CSS
-# ======================================
-    st.markdown("""
-    <style>
-    
-    /* TEAM SECTION */
-    .team-slider-container {
-    
-        width: 100%;
-    
-        overflow: hidden;
-    
-        position: relative;
-    
-        margin-top: 20px;
-    
-        margin-bottom: 40px;
-    }
-    
-    /* SLIDING ROW */
-    .team-slider {
-    
-        display: flex;
-    
-        gap: 30px;
-    
-        width: max-content;
-    
-        animation: slideTeam 10s linear infinite;
-    }
-    
-    /* INDIVIDUAL CARD */
-    .team-card {
-    
-        background: rgba(255,255,255,0.9);
-    
-        border-radius: 14px;
-    
-        padding: 18px;
-    
-        min-width: 220px;
-    
-        text-align: center;
-    
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    
-    /* TEAM IMAGE */
-    .team-card img {
-    
-        width: 170px;
-    
-        height: 170px;
-    
-        object-fit: cover;
-    
-        border-radius: 12px;
-    
-        margin-bottom: 12px;
-    }
-    
-    /* TEAM NAME */
-    .team-name {
-    
-        font-size: 20px;
-    
-        font-weight: 800;
-    
-        color: #0057b8;
-    
-        margin-bottom: 5px;
-    }
-    
-    /* TEAM TITLE */
-    .team-role {
-    
-        font-size: 15px;
-    
-        color: #555;
-    }
-    
-    /* SLIDE ANIMATION */
-    @keyframes slideTeam {
-    
-        0% {
-            transform: translateX(0%);
-        }
-    
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-    
-    </style>
-    """, unsafe_allow_html=True)
-# ======================================
-# OUR TEAM TITLE
-# ======================================
-    st.markdown("""
-    <div style="
-        color:#0057b8;
-        font-size:34px;
-        font-weight:900;
-        margin-bottom:25px;
-    ">
-        Our Team
-    </div>
-    """, unsafe_allow_html=True)
-    
-# ======================================
-# TEAM MEMBERS
-# ======================================
-# ======================================
-# TEAM MEMBERS
-# ======================================
-    team1, team2, team3 = st.columns(3)
-    
-    with team1:
-    
-        st.image("aravind.png", width=180)
-    
-        st.markdown(
-            """
-            <div style="text-align:center;">
-                <div style="
-                    color:#0057b8;
-                    font-size:18px;
-                    font-weight:600;
-                ">
-                    Aravind Konnte
-                    Chief Executive Officer
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    
-    with team2:
-    
-        st.image("havala.png", width=180)
-    
-        st.markdown(
-            """
-            <div style="text-align:center;">
-                <div style="
-                    color:#0057b8;
-                    font-size:18px;
-                    font-weight:600;
-                ">
-                    Dr. Havala Allan
-                    Chief Operations Officer
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    
-    with team3:
-    
-        st.image("ezekiel.png", width=180)
-    
-        st.markdown(
-            """
-            <div style="text-align:center;">
-                <div style="
-                    color:#0057b8;
-                    font-size:18px;
-                    font-weight:600;
-                ">
-                    Ezekiel Mose
-                    Head of Analytics
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
@@ -893,6 +703,201 @@ with tabs[3]:
     st.title("About Us")
     st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project")
 
+    # ======================================
+    # THIN BLUE LINE
+    # ======================================
+    st.markdown("""
+    <div style="
+        width:100%;
+        height:2px;
+        background-color:#0057b8;
+        margin-top:25px;
+        margin-bottom:25px;
+    "></div>
+    """, unsafe_allow_html=True)
+
+# ======================================
+# OUR TEAM SLIDER CSS
+# ======================================
+    st.markdown("""
+    <style>
+    
+    /* TEAM SECTION */
+    .team-slider-container {
+    
+        width: 100%;
+    
+        overflow: hidden;
+    
+        position: relative;
+    
+        margin-top: 20px;
+    
+        margin-bottom: 40px;
+    }
+    
+    /* SLIDING ROW */
+    .team-slider {
+    
+        display: flex;
+    
+        gap: 30px;
+    
+        width: max-content;
+    
+        animation: slideTeam 10s linear infinite;
+    }
+    
+    /* INDIVIDUAL CARD */
+    .team-card {
+    
+        background: rgba(255,255,255,0.9);
+    
+        border-radius: 14px;
+    
+        padding: 18px;
+    
+        min-width: 220px;
+    
+        text-align: center;
+    
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    
+    /* TEAM IMAGE */
+    .team-card img {
+    
+        width: 170px;
+    
+        height: 170px;
+    
+        object-fit: cover;
+    
+        border-radius: 12px;
+    
+        margin-bottom: 12px;
+    }
+    
+    /* TEAM NAME */
+    .team-name {
+    
+        font-size: 20px;
+    
+        font-weight: 800;
+    
+        color: #0057b8;
+    
+        margin-bottom: 5px;
+    }
+    
+    /* TEAM TITLE */
+    .team-role {
+    
+        font-size: 15px;
+    
+        color: #555;
+    }
+    
+    /* SLIDE ANIMATION */
+    @keyframes slideTeam {
+    
+        0% {
+            transform: translateX(0%);
+        }
+    
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    </style>
+    """, unsafe_allow_html=True)
+# ======================================
+# OUR TEAM TITLE
+# ======================================
+    st.markdown("""
+    <div style="
+        color:#0057b8;
+        font-size:34px;
+        font-weight:900;
+        margin-bottom:25px;
+    ">
+        Our Team
+    </div>
+    """, unsafe_allow_html=True)
+    
+# ======================================
+# TEAM MEMBERS
+# ======================================
+# ======================================
+# TEAM MEMBERS
+# ======================================
+    team1, team2, team3 = st.columns(3)
+    
+    with team1:
+    
+        st.image("aravind.png", width=180)
+    
+        st.markdown(
+            """
+            <div style="text-align:center;">
+                <div style="
+                    color:#0057b8;
+                    font-size:18px;
+                    font-weight:600;
+                ">
+                    Aravind Konnte
+                    - Chief Executive Officer
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    with team2:
+    
+        st.image("havala.png", width=180)
+    
+        st.markdown(
+            """
+            <div style="text-align:center;">
+                <div style="
+                    color:#0057b8;
+                    font-size:18px;
+                    font-weight:600;
+                ">
+                    Dr. Havala Allan
+                    - Chief Operations Officer
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    with team3:
+    
+        st.image("ezekiel.png", width=180)
+    
+        st.markdown(
+            """
+            <div style="text-align:center;">
+                <div style="
+                    color:#0057b8;
+                    font-size:18px;
+                    font-weight:600;
+                ">
+                    Ezekiel Mose
+                    - Head of Analytics
+                </div>
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+# =========================================
+# CONTACT US
+#=========================================
     st.title("Contact Us")
     st.write("📧 aravind@genesisdigital.in")
     st.write("📞 +919731016770")
