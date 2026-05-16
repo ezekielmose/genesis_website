@@ -675,6 +675,8 @@ with tabs[1]:
                 # =========================
                 # ANALYZE BUTTON
                 # =========================
+                if st.button ("Analyze the Video"):
+                    st.write("COMING SOON")
                 
 
 # ======================================
