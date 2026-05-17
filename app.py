@@ -408,7 +408,7 @@ with tabs[1]:
                 </script>
                 """,
                 unsafe_allow_html=True
-            )"
+            )
     
 
 
