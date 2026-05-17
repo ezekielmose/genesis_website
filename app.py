@@ -387,12 +387,30 @@ with tabs[1]:
     # LEFT SIDE BUTTONS
     # =========================
     with left_col:
-
+    
         if st.button("A Profile Finder"):
             st.session_state.active_tool = "profile"
-    
+
         if st.button("Analyze a Video"):
             st.session_state.active_tool = "video"
+        # =========================
+        # UPLOAD TO AIR BUTTON
+        # =========================
+        if st.button("Upload to Air"):
+        
+            st.markdown(
+                """
+                <script>
+                    window.open(
+                        'https://app.air.inc/d/fc799c155',
+                        '_blank'
+                    );
+                </script>
+                """,
+                unsafe_allow_html=True
+            )"
+    
+
 
     # =========================
     # RIGHT SIDE RESULTS
@@ -708,9 +726,8 @@ with tabs[1]:
                 # ANALYZE BUTTON
                 # =========================
                 if st.button ("Analyze the Video"):
-                    st.write("COMING SOON")
-                
-
+                    st.write("UNDER DEVELOPMENT")
+                    
 # ======================================
 # SERVICES PAGE
 # ======================================
