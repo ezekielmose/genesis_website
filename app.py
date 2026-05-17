@@ -396,19 +396,19 @@ with tabs[1]:
         # =========================
         # UPLOAD TO AIR BUTTON
         # =========================
-        if st.button("Upload to Air"):
+       # if st.button("Upload to Air"):
         
-            st.markdown(
-                """
-                <script>
-                    window.open(
-                        'https://app.air.inc/d/fc799c155',
-                        '_blank'
-                    );
-                </script>
-                """,
-                unsafe_allow_html=True
-            )
+           # st.markdown(
+              #  """
+               # <script>
+                  #  window.open(
+                      #  'https://app.air.inc/d/fc799c155',
+                      #  '_blank'
+                   # );
+               # </script>
+               # """,
+              #  unsafe_allow_html=True
+            #)
     
 
 
