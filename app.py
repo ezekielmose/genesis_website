@@ -349,7 +349,7 @@ div[data-baseweb="tab-border"] {
 
         max-width: 240px;
 
-        height: 230px;
+        height: 150px;
 
         border-radius: 22px;
     }
