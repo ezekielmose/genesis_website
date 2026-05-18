@@ -945,6 +945,288 @@ with tabs[0]:
     components.html(partners_slider, height=160)
 
 # ======================================
+# NUMBERS SECTION
+# ======================================
+
+    numbers_section = """
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+    
+    <style>
+    
+    /* SECTION */
+    .numbers-section {
+    
+        width: 100%;
+    
+        background: linear-gradient(
+            180deg,
+            #120022 0%,
+            #1d0038 100%
+        );
+    
+        border-radius: 20px;
+    
+        padding-top: 50px;
+    
+        padding-bottom: 60px;
+    
+        margin-top: 50px;
+    
+        overflow: hidden;
+    }
+    
+    /* TITLE */
+    .numbers-title {
+    
+        text-align: center;
+    
+        color: white;
+    
+        font-size: 60px;
+    
+        font-weight: 900;
+    
+        line-height: 1.0;
+    
+        margin-bottom: 50px;
+    
+        font-family: Arial, sans-serif;
+    }
+    
+    /* CARDS ROW */
+    .numbers-row {
+    
+        display: flex;
+    
+        justify-content: center;
+    
+        gap: 45px;
+    
+        flex-wrap: wrap;
+    }
+    
+    /* CARD */
+    .number-card {
+    
+        width: 260px;
+    
+        height: 330px;
+    
+        border-radius: 140px;
+    
+        position: relative;
+    
+        overflow: hidden;
+    
+        background: linear-gradient(
+            180deg,
+            #42004f 0%,
+            #8a008f 100%
+        );
+    
+        border: 2px solid #5f4bff;
+    
+        display: flex;
+    
+        flex-direction: column;
+    
+        justify-content: center;
+    
+        align-items: center;
+    
+        box-shadow: 0 0 25px rgba(138,0,143,0.45);
+    }
+    
+    /* INNER GLOW */
+    .number-card::after {
+    
+        content: "";
+    
+        position: absolute;
+    
+        bottom: -50px;
+    
+        width: 120%;
+    
+        height: 120px;
+    
+        background: rgba(255,255,255,0.18);
+    
+        border-radius: 50%;
+    
+        filter: blur(18px);
+    }
+    
+    /* NUMBER */
+    .counter {
+    
+        color: white;
+    
+        font-size: 82px;
+    
+        font-weight: 900;
+    
+        line-height: 1;
+    }
+    
+    /* LABEL */
+    .counter-label {
+    
+        color: white;
+    
+        font-size: 20px;
+    
+        text-align: center;
+    
+        margin-top: 25px;
+    
+        line-height: 1.5;
+    }
+    
+    /* MOBILE */
+    @media only screen and (max-width: 768px) {
+    
+        .numbers-title {
+    
+            font-size: 42px;
+        }
+    
+        .number-card {
+    
+            width: 220px;
+    
+            height: 290px;
+        }
+    
+        .counter {
+    
+            font-size: 62px;
+        }
+    
+        .counter-label {
+    
+            font-size: 17px;
+        }
+    }
+    
+    </style>
+    
+    </head>
+    
+    <body>
+    
+    <div class="numbers-section">
+    
+        <div class="numbers-title">
+            THE NUMBERS<br>DON'T LIE
+        </div>
+    
+        <div class="numbers-row">
+    
+            <!-- CARD 1 -->
+            <div class="number-card">
+    
+                <div class="counter" id="videosShared">
+                    0
+                </div>
+    
+                <div class="counter-label">
+                    Videos<br>Shared
+                </div>
+    
+            </div>
+    
+            <!-- CARD 2 -->
+            <div class="number-card">
+    
+                <div class="counter" id="videosApproved">
+                    0
+                </div>
+    
+                <div class="counter-label">
+                    Videos<br>Approved
+                </div>
+    
+            </div>
+    
+            <!-- CARD 3 -->
+            <div class="number-card">
+    
+                <div class="counter">
+                    80%
+                </div>
+    
+                <div class="counter-label">
+                    Approval<br>Rate
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* ======================================
+       COUNTER ANIMATION
+    ====================================== */
+    
+    /* VIDEOS SHARED */
+    let shared = 0;
+    
+    const sharedTarget = 28;
+    
+    const sharedCounter = document.getElementById("videosShared");
+    
+    const sharedInterval = setInterval(() => {
+    
+        shared++;
+    
+        sharedCounter.innerHTML = shared + "k+";
+    
+        if (shared >= sharedTarget) {
+    
+            clearInterval(sharedInterval);
+        }
+    
+    }, 80);
+    
+    
+    /* VIDEOS APPROVED */
+    let approved = 0;
+    
+    const approvedTarget = 19.5;
+    
+    const approvedCounter = document.getElementById("videosApproved");
+    
+    const approvedInterval = setInterval(() => {
+    
+        approved += 0.5;
+    
+        approvedCounter.innerHTML = approved.toFixed(1) + "k+";
+    
+        if (approved >= approvedTarget) {
+    
+            approvedCounter.innerHTML = "19.5k+";
+    
+            clearInterval(approvedInterval);
+        }
+    
+    }, 80);
+    
+    </script>
+    
+    </body>
+    </html>
+    """
+    
+    components.html(numbers_section, height=700)
+    
+# ======================================
 # AI ANALYZER PAGE
 # ======================================
 with tabs[1]:
