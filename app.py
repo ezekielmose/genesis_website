@@ -1282,7 +1282,7 @@ with tabs[0]:
     </body>
     </html>
     """
-    components.html(numbers_section, height=520)
+    components.html(numbers_section, height=1000, scrolling=True)
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
