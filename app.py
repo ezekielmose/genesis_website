@@ -898,40 +898,40 @@ partners_slider = """
 
         <!-- PARTNER 1 -->
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo1.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/unravel.JPG">
         </div>
 
         <!-- PARTNER 2 -->
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo2.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/booking.JPG">
         </div>
 
         <!-- PARTNER 3 -->
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo3.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/yafreeka.JPG">
         </div>
 
         <!-- PARTNER 4 -->
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo4.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/airtel.JPG">
         </div>
 
         <!-- DUPLICATES FOR SMOOTH LOOP -->
 
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo1.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/unravel.JPG">
         </div>
 
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo2.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/booking.JPG">
         </div>
 
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo3.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/yafreeka.JPG">
         </div>
 
         <div class="partner-logo">
-            <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/logo4.png">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/blob/main/airtel.JPG">
         </div>
 
     </div>
