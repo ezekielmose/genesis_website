@@ -944,10 +944,10 @@ with tabs[0]:
         
     components.html(partners_slider, height=160)
 
+    components.html(numbers_section, height=520)
 # ======================================
 # NUMBERS SECTION
 # ======================================
-
     numbers_section = """
     <!DOCTYPE html>
     <html>
@@ -961,21 +961,13 @@ with tabs[0]:
     
         width: 100%;
     
-        background: linear-gradient(
-            180deg,
-            #120022 0%,
-            #1d0038 100%
-        );
+        padding-top: 30px;
     
-        border-radius: 20px;
-    
-        padding-top: 50px;
-    
-        padding-bottom: 60px;
+        padding-bottom: 40px;
     
         margin-top: 50px;
     
-        overflow: hidden;
+        background: transparent;
     }
     
     /* TITLE */
@@ -983,17 +975,17 @@ with tabs[0]:
     
         text-align: center;
     
-        color: white;
+        color: #0057b8;
     
-        font-size: 60px;
+        font-size: 32px;
     
-        font-weight: 900;
+        font-weight: 800;
     
-        line-height: 1.0;
-    
-        margin-bottom: 50px;
+        margin-bottom: 35px;
     
         font-family: Arial, sans-serif;
+    
+        letter-spacing: 1px;
     }
     
     /* CARDS ROW */
@@ -1008,82 +1000,80 @@ with tabs[0]:
         flex-wrap: wrap;
     }
     
-    /* CARD */
+    /* OUTER CARD */
     .number-card {
     
-        width: 260px;
+        width: 290px;
     
-        height: 330px;
+        height: 430px;
     
-        border-radius: 140px;
+        border-radius: 160px;
+    
+        background: #14003a;
     
         position: relative;
     
         overflow: hidden;
     
-        background: linear-gradient(
-            180deg,
-            #42004f 0%,
-            #8a008f 100%
-        );
-    
-        border: 2px solid #5f4bff;
-    
         display: flex;
-    
-        flex-direction: column;
-    
-        justify-content: center;
     
         align-items: center;
     
-        box-shadow: 0 0 25px rgba(138,0,143,0.45);
+        justify-content: center;
+    
+        box-shadow:
+            0 0 25px rgba(98,0,255,0.45),
+            inset 0 0 20px rgba(255,255,255,0.06);
     }
     
     /* INNER GLOW */
-    .number-card::after {
+    .number-card::before {
     
         content: "";
     
         position: absolute;
     
-        bottom: -50px;
+        inset: 14px;
     
-        width: 120%;
+        border-radius: 160px;
     
-        height: 120px;
-    
-        background: rgba(255,255,255,0.18);
-    
-        border-radius: 50%;
-    
-        filter: blur(18px);
+        border: 2px solid #5c2dff;
     }
     
-    /* NUMBER */
-    .counter {
+    /* CARD CONTENT */
+    .number-content {
+    
+        position: relative;
+    
+        z-index: 5;
+    
+        text-align: center;
     
         color: white;
+    }
     
-        font-size: 82px;
+    /* BIG NUMBER */
+    .number-value {
+    
+        font-size: 92px;
     
         font-weight: 900;
     
         line-height: 1;
+    
+        margin-bottom: 22px;
+    
+        font-family: Arial Black, sans-serif;
     }
     
     /* LABEL */
-    .counter-label {
+    .number-label {
     
-        color: white;
-    
-        font-size: 20px;
-    
-        text-align: center;
-    
-        margin-top: 25px;
+        font-size: 22px;
     
         line-height: 1.5;
+    
+        font-family: Arial, sans-serif;
     }
     
     /* MOBILE */
@@ -1091,24 +1081,24 @@ with tabs[0]:
     
         .numbers-title {
     
-            font-size: 42px;
+            font-size: 24px;
         }
     
         .number-card {
     
             width: 220px;
     
-            height: 290px;
+            height: 330px;
         }
     
-        .counter {
+        .number-value {
     
             font-size: 62px;
         }
     
-        .counter-label {
+        .number-label {
     
-            font-size: 17px;
+            font-size: 18px;
         }
     }
     
@@ -1121,7 +1111,7 @@ with tabs[0]:
     <div class="numbers-section">
     
         <div class="numbers-title">
-            THE NUMBERS<br>DON'T LIE
+            THE NUMBERS DON'T LIE
         </div>
     
         <div class="numbers-row">
@@ -1129,12 +1119,16 @@ with tabs[0]:
             <!-- CARD 1 -->
             <div class="number-card">
     
-                <div class="counter" id="videosShared">
-                    0
-                </div>
+                <div class="number-content">
     
-                <div class="counter-label">
-                    Videos<br>Shared
+                    <div class="number-value" id="videosShared">
+                        0
+                    </div>
+    
+                    <div class="number-label">
+                        Videos<br>Shared
+                    </div>
+    
                 </div>
     
             </div>
@@ -1142,12 +1136,16 @@ with tabs[0]:
             <!-- CARD 2 -->
             <div class="number-card">
     
-                <div class="counter" id="videosApproved">
-                    0
-                </div>
+                <div class="number-content">
     
-                <div class="counter-label">
-                    Videos<br>Approved
+                    <div class="number-value" id="videosApproved">
+                        0
+                    </div>
+    
+                    <div class="number-label">
+                        Videos<br>Approved
+                    </div>
+    
                 </div>
     
             </div>
@@ -1155,12 +1153,16 @@ with tabs[0]:
             <!-- CARD 3 -->
             <div class="number-card">
     
-                <div class="counter">
-                    80%
-                </div>
+                <div class="number-content">
     
-                <div class="counter-label">
-                    Approval<br>Rate
+                    <div class="number-value">
+                        80%
+                    </div>
+    
+                    <div class="number-label">
+                        Approval<br>Rate
+                    </div>
+    
                 </div>
     
             </div>
@@ -1171,60 +1173,45 @@ with tabs[0]:
     
     <script>
     
-    /* ======================================
-       COUNTER ANIMATION
-    ====================================== */
+    /* =========================
+       SLOW COUNTER FUNCTION
+    ========================= */
+    function animateValue(id, start, end, duration, suffix="") {
     
-    /* VIDEOS SHARED */
-    let shared = 0;
+        let range = end - start;
     
-    const sharedTarget = 28;
+        let current = start;
     
-    const sharedCounter = document.getElementById("videosShared");
+        let increment = end > start ? 1 : -1;
     
-    const sharedInterval = setInterval(() => {
+        let stepTime = Math.abs(Math.floor(duration / range));
     
-        shared++;
+        let obj = document.getElementById(id);
     
-        sharedCounter.innerHTML = shared + "k+";
+        let timer = setInterval(function() {
     
-        if (shared >= sharedTarget) {
+            current += increment;
     
-            clearInterval(sharedInterval);
-        }
+            obj.innerHTML = current + suffix;
     
-    }, 80);
+            if (current == end) {
     
+                clearInterval(timer);
+            }
     
-    /* VIDEOS APPROVED */
-    let approved = 0;
+        }, stepTime);
+    }
     
-    const approvedTarget = 19.5;
+    /* RUN COUNTERS SLOWLY */
+    animateValue("videosShared", 0, 28, 7000, "k+");
     
-    const approvedCounter = document.getElementById("videosApproved");
-    
-    const approvedInterval = setInterval(() => {
-    
-        approved += 0.5;
-    
-        approvedCounter.innerHTML = approved.toFixed(1) + "k+";
-    
-        if (approved >= approvedTarget) {
-    
-            approvedCounter.innerHTML = "19.5k+";
-    
-            clearInterval(approvedInterval);
-        }
-    
-    }, 80);
+    animateValue("videosApproved", 0, 19.5, 9000, "k+");
     
     </script>
     
     </body>
     </html>
     """
-    
-    components.html(numbers_section, height=700)
     
 # ======================================
 # AI ANALYZER PAGE
