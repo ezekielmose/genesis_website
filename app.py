@@ -1001,7 +1001,7 @@ with tabs[0]:
     }
     
     /* ======================================
-       MODERN 3D GLASS CARD
+       DARK LUXURY CARD
     ====================================== */
     .number-card {
     
@@ -1015,13 +1015,14 @@ with tabs[0]:
     
         overflow: hidden;
     
-        background: rgba(255,255,255,0.18);
+        background: linear-gradient(
+            145deg,
+            #050505 0%,
+            #101010 45%,
+            #1a1a1a 100%
+        );
     
-        backdrop-filter: blur(16px);
-    
-        -webkit-backdrop-filter: blur(16px);
-    
-        border: 1px solid rgba(255,255,255,0.25);
+        border: 1px solid rgba(255,255,255,0.08);
     
         display: flex;
     
@@ -1032,44 +1033,45 @@ with tabs[0]:
         transition: all 0.45s ease;
     
         box-shadow:
-            0 10px 30px rgba(0,0,0,0.12),
-            0 20px 60px rgba(0,87,184,0.12);
+            0 10px 35px rgba(0,0,0,0.45),
+            0 0 20px rgba(0,87,184,0.08);
     
         cursor: pointer;
     }
     
-    /* GLOW EFFECT */
+    /* BLUE TOP GLOW */
     .number-card::before {
     
         content: "";
     
         position: absolute;
     
-        top: -80px;
+        top: 0;
     
-        left: -80px;
+        left: 0;
     
-        width: 180px;
+        width: 100%;
     
-        height: 180px;
+        height: 4px;
     
-        background: rgba(0,87,184,0.18);
+        background: linear-gradient(
+            90deg,
+            #0057b8,
+            #00c6ff,
+            #0057b8
+        );
     
-        border-radius: 50%;
-    
-        filter: blur(35px);
-    
-        transition: 0.5s ease;
+        box-shadow: 0 0 18px rgba(0,198,255,0.8);
     }
     
     /* HOVER EFFECT */
     .number-card:hover {
     
-        transform: translateY(-12px) scale(1.03);
+        transform: translateY(-10px);
     
         box-shadow:
-            0 18px 40px rgba(0,0,0,0.16),
-            0 25px 70px rgba(0,87,184,0.22);
+            0 18px 45px rgba(0,0,0,0.6),
+            0 0 30px rgba(0,87,184,0.18);
     }
     
     /* MOVE GLOW ON HOVER */
