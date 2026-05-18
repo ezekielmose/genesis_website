@@ -1190,14 +1190,13 @@ with tabs[0]:
     
         let timer = setInterval(function() {
     
-            current += increment;
-    
+            current = +(current + increment).toFixed(1);
+            
             obj.innerHTML = current + suffix;
-    
-            if (current == end) {
-    
-                clearInterval(timer);
-            }
+            
+            if (current >= end) {
+            
+                obj.innerHTML = end + suffix;
     
         }, stepTime);
     }
