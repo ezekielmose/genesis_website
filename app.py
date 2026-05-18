@@ -185,7 +185,171 @@ div[data-baseweb="tab-border"] {
 
     line-height: 1.8;
 }
+/* ======================================
+   HERO IMAGE SLIDER
+====================================== */
+.hero-slider {
 
+    width: 100%;
+
+    height: 420px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border-radius: 18px;
+
+    margin-top: 20px;
+
+    margin-bottom: 35px;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.hero-track {
+
+    display: flex;
+
+    width: 300%;
+
+    height: 100%;
+
+    animation: slideHero 90s infinite;
+}
+
+.hero-slide {
+
+    width: 100%;
+
+    height: 420px;
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+.hero-slide img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* DARK OVERLAY */
+.hero-overlay {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0,0,0,0.45);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding-left: 70px;
+
+    padding-right: 70px;
+}
+
+/* SLIDE TITLE */
+.hero-heading {
+
+    color: white;
+
+    font-size: 44px;
+
+    font-weight: 900;
+
+    margin-bottom: 18px;
+}
+
+/* SLIDE TEXT */
+.hero-text {
+
+    color: white;
+
+    font-size: 20px;
+
+    max-width: 750px;
+
+    line-height: 1.8;
+}
+
+/* SLIDE ANIMATION */
+@keyframes slideHero {
+
+    0% {
+        transform: translateX(0%);
+    }
+
+    30% {
+        transform: translateX(0%);
+    }
+
+    33% {
+        transform: translateX(-100%);
+    }
+
+    63% {
+        transform: translateX(-100%);
+    }
+
+    66% {
+        transform: translateX(-200%);
+    }
+
+    96% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* MOBILE */
+@media only screen and (max-width: 768px) {
+
+    .hero-slider {
+
+        height: 300px;
+    }
+
+    .hero-slide {
+
+        height: 300px;
+    }
+
+    .hero-overlay {
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+    .hero-heading {
+
+        font-size: 28px;
+    }
+
+    .hero-text {
+
+        font-size: 15px;
+    }
+}
 /* ======================================
    FOOTER
 ====================================== */
@@ -279,7 +443,81 @@ with col2:
 # HOME PAGE
 # ======================================
 with tabs[0]:
-
+    # ======================================
+# HERO IMAGE SLIDER
+# ======================================
+    st.markdown("""
+    <div class="hero-slider">
+    
+        <div class="hero-track">
+    
+            <!-- SLIDE 1 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        Who We Are
+                    </div>
+    
+                    <div class="hero-text">
+                        Genesis Digital is a next-generation creative and AI-powered
+                        company focused on digital transformation, intelligent media
+                        sourcing, and scalable analytics solutions.
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <!-- SLIDE 2 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        What We Do
+                    </div>
+    
+                    <div class="hero-text">
+                        We provide AI solutions, video sourcing, analytics,
+                        hospitality intelligence, and content infrastructure
+                        designed for modern digital ecosystems.
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <!-- SLIDE 3 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        What Makes Us Different
+                    </div>
+    
+                    <div class="hero-text">
+                        We combine creativity, operational excellence,
+                        automation, and human-centered strategy to deliver
+                        premium results faster and more intelligently.
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown(
         '<div class="home-subtitle">OUR EDGE</div>',
         unsafe_allow_html=True
