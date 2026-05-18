@@ -944,7 +944,7 @@ with tabs[0]:
         
     components.html(partners_slider, height=160)
 
-    components.html(numbers_section, height=520)
+    
 # ======================================
 # NUMBERS SECTION
 # ======================================
@@ -1212,7 +1212,7 @@ with tabs[0]:
     </body>
     </html>
     """
-    
+    components.html(numbers_section, height=520)
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
