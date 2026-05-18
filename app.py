@@ -324,31 +324,48 @@ div[data-baseweb="tab-border"] {
 /* MOBILE */
 @media only screen and (max-width: 768px) {
 
-    .hero-slider {
+    .numbers-title {
 
-        height: 300px;
+        font-size: 20px;
+
+        margin-bottom: 20px;
     }
 
-    .hero-slide {
+    /* STACK CARDS NICELY */
+    .numbers-row {
 
-        height: 300px;
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 20px;
     }
 
-    .hero-overlay {
+    .number-card {
 
-        padding-left: 25px;
+        width: 88%;
 
-        padding-right: 25px;
+        max-width: 240px;
+
+        height: 230px;
+
+        border-radius: 22px;
     }
 
-    .hero-heading {
+    .number-value {
 
-        font-size: 28px;
+        font-size: 48px;
+
+        margin-bottom: 10px;
     }
 
-    .hero-text {
+    .number-label {
 
-        font-size: 15px;
+        font-size: 16px;
+
+        line-height: 1.4;
     }
 }
 /* ======================================
