@@ -1005,11 +1005,11 @@ with tabs[0]:
     ====================================== */
     .number-card {
     
-        width: 290px;
+        width: 230px;
     
-        height: 360px;
+        height: 290px;
     
-        border-radius: 28px;
+        border-radius: 24px;
     
         position: relative;
     
@@ -1097,15 +1097,21 @@ with tabs[0]:
     /* BIG NUMBER */
     .number-value {
     
-        font-size: 92px;
+        font-size: 62px;
     
-        font-weight: 900;
+        font-weight: 800;
     
         line-height: 1;
     
-        margin-bottom: 22px;
+        margin-bottom: 14px;
     
         font-family: Arial Black, sans-serif;
+    
+        color: white;
+    
+        text-shadow:
+            0 0 12px rgba(0,198,255,0.35),
+            0 0 30px rgba(0,87,184,0.22);
     }
     
     /* LABEL */
