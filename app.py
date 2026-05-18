@@ -37,7 +37,7 @@ st.markdown("""
 }
 
 /* GLOBAL TEXT */
-.stMarkdown, .stText, label, span {
+.stMarkdown, .stText, label {
     color: black;
 }
 
@@ -443,10 +443,10 @@ with col2:
 # HOME PAGE
 # ======================================
 with tabs[0]:
-    # ======================================
+# ======================================
 # HERO IMAGE SLIDER
 # ======================================
-    st.markdown("""
+    hero_slider = """
     <div class="hero-slider">
     
         <div class="hero-track">
@@ -517,7 +517,10 @@ with tabs[0]:
         </div>
     
     </div>
-    """, unsafe_allow_html=True)
+    """
+    
+    st.markdown(hero_slider, unsafe_allow_html=True)
+    
     st.markdown(
         '<div class="home-subtitle">OUR EDGE</div>',
         unsafe_allow_html=True
