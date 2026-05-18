@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # ======================================
 # PAGE CONFIGURATION
@@ -37,7 +38,7 @@ st.markdown("""
 }
 
 /* GLOBAL TEXT */
-.stMarkdown, .stText, label {
+p, label, div {
     color: black;
 }
 
@@ -519,7 +520,7 @@ with tabs[0]:
     </div>
     """
     
-    st.markdown(hero_slider, unsafe_allow_html=True)
+    components.html(hero_slider, height=420)
     
     st.markdown(
         '<div class="home-subtitle">OUR EDGE</div>',
