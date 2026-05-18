@@ -788,125 +788,125 @@ st.markdown("""
 # ======================================
 # PARTNERS SLIDER
 # ======================================
-    partners_slider = """
-    <!DOCTYPE html>
-    <html>
+partners_slider = """
+<!DOCTYPE html>
+<html>
     
-    <head>
+<head>
     
-    <style>
+<style>
     
-    /* MAIN CONTAINER */
-    .partners-slider {
+ /* MAIN CONTAINER */
+.partners-slider {
     
-        width: 100%;
+    width: 100%;
     
-        overflow: hidden;
+    overflow: hidden;
     
-        position: relative;
+    position: relative;
     
-        padding-top: 10px;
+    padding-top: 10px;
     
-        padding-bottom: 20px;
+    padding-bottom: 20px;
+}
+    
+/* MOVING TRACK */
+.partners-track {
+    
+    display: flex;
+    
+    align-items: center;
+    
+    gap: 60px;
+    
+    width: max-content;
+    
+    animation: scrollPartners 35s linear infinite;
+}
+    
+/* LOGO CARD */
+.partner-logo {
+    
+    width: 180px;
+    
+    height: 90px;
+    
+    background: white;
+    
+    border-radius: 14px;
+    
+    display: flex;
+    
+    align-items: center;
+    
+    justify-content: center;
+    
+    padding: 15px;
+    
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    
+    flex-shrink: 0;
+}
+    
+/* LOGO IMAGE */
+.partner-logo img {
+    
+    max-width: 100%;
+    
+    max-height: 100%;
+    
+    object-fit: contain;
+}
+    
+/* CONTINUOUS SLIDE */
+@keyframes scrollPartners {
+    
+    0% {
+        transform: translateX(0);
     }
     
-    /* MOVING TRACK */
-    .partners-track {
-    
-        display: flex;
-    
-        align-items: center;
-    
-        gap: 60px;
-    
-        width: max-content;
-    
-        animation: scrollPartners 35s linear infinite;
+    100% {
+        transform: translateX(-50%);
     }
+}
     
-    /* LOGO CARD */
+/* MOBILE */
+@media only screen and (max-width: 768px) {
+    
     .partner-logo {
     
-        width: 180px;
+        width: 130px;
     
-        height: 90px;
-    
-        background: white;
-    
-        border-radius: 14px;
-    
-        display: flex;
-    
-        align-items: center;
-    
-        justify-content: center;
-    
-        padding: 15px;
-    
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    
-        flex-shrink: 0;
+        height: 70px;
     }
     
-    /* LOGO IMAGE */
-    .partner-logo img {
+    .partners-track {
     
-        max-width: 100%;
-    
-        max-height: 100%;
-    
-        object-fit: contain;
+        gap: 30px;
     }
+}
     
-    /* CONTINUOUS SLIDE */
-    @keyframes scrollPartners {
+</style>
     
-        0% {
-            transform: translateX(0);
-        }
+</head>
     
-        100% {
-            transform: translateX(-50%);
-        }
-    }
+<body>
     
-    /* MOBILE */
-    @media only screen and (max-width: 768px) {
+<div class="partners-slider">
     
-        .partner-logo {
+    <div class="partners-track">
     
-            width: 130px;
+        <!-- PARTNER 1 -->
+        <div class="partner-logo">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/unravel.JPG">
+        </div>
     
-            height: 70px;
-        }
+        <!-- PARTNER 2 -->
+        <div class="partner-logo">
+            <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/booking.JPG">
+        </div>
     
-        .partners-track {
-    
-            gap: 30px;
-        }
-    }
-    
-    </style>
-    
-    </head>
-    
-    <body>
-    
-    <div class="partners-slider">
-    
-        <div class="partners-track">
-    
-            <!-- PARTNER 1 -->
-            <div class="partner-logo">
-                <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/unravel.JPG">
-            </div>
-    
-            <!-- PARTNER 2 -->
-            <div class="partner-logo">
-                <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/booking.JPG">
-            </div>
-    
-            <!-- PARTNER 3 -->
+        <!-- PARTNER 3 -->
             <div class="partner-logo">
                 <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/yafreeka.JPG">
             </div>
@@ -934,15 +934,15 @@ st.markdown("""
                 <img src="https://raw.githubusercontent.com/ezekielmose/genesis_website/main/airtel.JPG">
             </div>
     
-        </div>
-    
     </div>
     
-    </body>
-    </html>
-    """
+</div>
     
-    components.html(partners_slider, height=160)
+</body>
+</html>
+"""
+    
+components.html(partners_slider, height=160)
 
 # ======================================
 # AI ANALYZER PAGE
