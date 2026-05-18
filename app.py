@@ -1174,37 +1174,43 @@ with tabs[0]:
     <script>
     
     /* =========================
-       SLOW COUNTER FUNCTION
+       COUNTER FUNCTION
     ========================= */
     function animateValue(id, start, end, duration, suffix="") {
     
-        let range = end - start;
+        let obj = document.getElementById(id);
     
         let current = start;
     
-        let increment = end > start ? 1 : -1;
+        let increment = 0.1;
     
-        let stepTime = Math.abs(Math.floor(duration / range));
-    
-        let obj = document.getElementById(id);
+        let stepTime = duration / ((end - start) / increment);
     
         let timer = setInterval(function() {
     
-            current = +(current + increment).toFixed(1);
-            
-            obj.innerHTML = current + suffix;
-            
+            current += increment;
+    
+            /* ROUND TO 1 DECIMAL */
+            current = Math.round(current * 10) / 10;
+    
+            /* UPDATE VALUE */
+            obj.innerHTML = current.toFixed(1) + suffix;
+    
+            /* STOP AT MAX VALUE */
             if (current >= end) {
-            
+    
                 obj.innerHTML = end + suffix;
+    
+                clearInterval(timer);
+            }
     
         }, stepTime);
     }
     
-    /* RUN COUNTERS SLOWLY */
-    animateValue("videosShared", 0, 28, 7000, "k+");
+    /* RUN COUNTERS */
+    animateValue("videosShared", 0, 28, 12000, "k+");
     
-    animateValue("videosApproved", 0, 19.7, 9000, "k+");
+    animateValue("videosApproved", 0, 19.7, 14000, "k+");
     
     </script>
     
