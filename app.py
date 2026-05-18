@@ -1000,20 +1000,28 @@ with tabs[0]:
         flex-wrap: wrap;
     }
     
-    /* OUTER CARD */
+    /* ======================================
+       MODERN 3D GLASS CARD
+    ====================================== */
     .number-card {
     
         width: 290px;
     
-        height: 430px;
+        height: 360px;
     
-        border-radius: 160px;
-    
-        background: #14003a;
+        border-radius: 28px;
     
         position: relative;
     
         overflow: hidden;
+    
+        background: rgba(255,255,255,0.18);
+    
+        backdrop-filter: blur(16px);
+    
+        -webkit-backdrop-filter: blur(16px);
+    
+        border: 1px solid rgba(255,255,255,0.25);
     
         display: flex;
     
@@ -1021,23 +1029,55 @@ with tabs[0]:
     
         justify-content: center;
     
+        transition: all 0.45s ease;
+    
         box-shadow:
-            0 0 25px rgba(98,0,255,0.45),
-            inset 0 0 20px rgba(255,255,255,0.06);
+            0 10px 30px rgba(0,0,0,0.12),
+            0 20px 60px rgba(0,87,184,0.12);
+    
+        cursor: pointer;
     }
     
-    /* INNER GLOW */
+    /* GLOW EFFECT */
     .number-card::before {
     
         content: "";
     
         position: absolute;
     
-        inset: 14px;
+        top: -80px;
     
-        border-radius: 160px;
+        left: -80px;
     
-        border: 2px solid #5c2dff;
+        width: 180px;
+    
+        height: 180px;
+    
+        background: rgba(0,87,184,0.18);
+    
+        border-radius: 50%;
+    
+        filter: blur(35px);
+    
+        transition: 0.5s ease;
+    }
+    
+    /* HOVER EFFECT */
+    .number-card:hover {
+    
+        transform: translateY(-12px) scale(1.03);
+    
+        box-shadow:
+            0 18px 40px rgba(0,0,0,0.16),
+            0 25px 70px rgba(0,87,184,0.22);
+    }
+    
+    /* MOVE GLOW ON HOVER */
+    .number-card:hover::before {
+    
+        top: -40px;
+    
+        left: -30px;
     }
     
     /* CARD CONTENT */
