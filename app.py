@@ -1205,7 +1205,7 @@ with tabs[0]:
     /* RUN COUNTERS SLOWLY */
     animateValue("videosShared", 0, 28, 7000, "k+");
     
-    animateValue("videosApproved", 0, 19.5, 9000, "k+");
+    animateValue("videosApproved", 0, 19.7, 9000, "k+");
     
     </script>
     
