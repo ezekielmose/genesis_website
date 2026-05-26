@@ -1767,22 +1767,22 @@ if st.session_state.logged_in:
 
     with tabs[2]:
 
-else:
-
-    with tabs[1]:
-    
-    st.title("Our Services")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.subheader("Video Sourcing")
-
-    with col2:
-        st.subheader("AI Solutions")
-
-    with col3:
-        st.subheader("Data Analysis")
+        else:
+        
+            with tabs[1]:
+            
+            st.title("Our Services")
+        
+            col1, col2, col3 = st.columns(3)
+        
+            with col1:
+                st.subheader("Video Sourcing")
+        
+            with col2:
+                st.subheader("AI Solutions")
+        
+            with col3:
+                st.subheader("Data Analysis")
 
 # ======================================
 # ABOUT PAGE
