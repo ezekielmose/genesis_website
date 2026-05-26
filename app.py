@@ -368,6 +368,35 @@ div[data-baseweb="tab-border"] {
         line-height: 1.4;
     }
 }
+
+/* ======================================
+   LOGIN BUTTON
+====================================== */
+div.stButton > button {
+
+    background-color: #0057b8 !important;
+
+    color: white !important;
+
+    border: none !important;
+
+    border-radius: 10px !important;
+
+    font-weight: 700 !important;
+
+    transition: all 0.3s ease !important;
+}
+
+/* HOVER EFFECT */
+div.stButton > button:hover {
+
+    background-color: red !important;
+
+    color: white !important;
+
+    transform: translateY(-2px);
+}
+
 /* ======================================
    FOOTER
 ====================================== */
@@ -492,10 +521,12 @@ with col3:
 
     # LOGIN BUTTON
     if not st.session_state.logged_in:
-
-        if st.button("Login"):
-
+    
+        if st.button("Login", key="login_btn"):
+    
             st.session_state.show_login = True
+    
+            st.rerun()
 
     # LOGOUT BUTTON
     else:
@@ -511,38 +542,63 @@ with col3:
 # ======================================
 if st.session_state.show_login and not st.session_state.logged_in:
 
-    st.markdown("## Management Login")
+    st.markdown("""
+    <div style="
+        text-align:center;
+        padding-top:40px;
+        padding-bottom:20px;
+    ">
+        <h1 style="
+            color:#0057b8;
+            font-size:42px;
+            font-weight:900;
+        ">
+            Management Login
+        </h1>
+    </div>
+    """, unsafe_allow_html=True)
 
-    username = st.text_input("Username")
+    col1, col2, col3 = st.columns([1,1.2,1])
 
-    password = st.text_input(
-        "Password",
-        type="password"
-    )
+    with col2:
 
-    if st.button("Enter"):
+        username = st.text_input("Username")
 
-        # ======================================
-        # LOGIN CREDENTIALS
-        # ======================================
-        if username == "admin" and password == "genesis123":
+        password = st.text_input(
+            "Password",
+            type="password"
+        )
 
-            st.session_state.logged_in = True
+        if st.button("Enter", key="enter_btn"):
+
+            # LOGIN CREDENTIALS
+            if username == "admin" and password == "genesis123":
+
+                st.session_state.logged_in = True
+
+                st.session_state.show_login = False
+
+                st.success("Login Successful")
+
+                st.rerun()
+
+            else:
+
+                st.error("Invalid Username or Password")
+
+        # BACK BUTTON
+        if st.button("Back", key="back_btn"):
 
             st.session_state.show_login = False
 
-            st.success("Login Successful")
-
             st.rerun()
-
-        else:
-
-            st.error("Invalid Username or Password")
 
 # ======================================
 # HOME PAGE
 # ======================================
-with tabs[0]:
+if not st.session_state.show_login:
+
+    with tabs[0]:
 # ======================================
 # HERO IMAGE SLIDER
 # ======================================
