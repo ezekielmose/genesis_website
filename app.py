@@ -1372,75 +1372,75 @@ if st.session_state.logged_in:
 
     with tabs[1]:
 
-    import pandas as pd
-
-    # CUSTOM BUTTON CSS
-    st.markdown("""
-    <style>
-
-    /* BUTTON STYLE */
-    div.stButton > button {
-        background-color: #0057b8 !important;
-        color: white !important;
-        font-size: 16px !important;
-        font-weight: bold !important;
-        border-radius: 12px !important;
-        border: none !important;
-        width: 120% !important;
-        height: 50px !important;
-        margin-bottom: 20px !important;
-        transition: 0.3s !important;
-    }
-
-    /* BUTTON TEXT */
-    div.stButton > button p {
-        color: white !important;
-    }
-
-    /* HOVER EFFECT */
-    div.stButton > button:hover {
-        background-color: red !important;
-        color: white !important;
-    }
-
-    div.stButton > button:hover p {
-        color: white !important;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.write("Choose an AI Tool Below")
-
-    # LEFT AND RIGHT LAYOUT
-    left_col, right_col = st.columns([1, 3])
-
-    # =========================
-    # LEFT SIDE BUTTONS
-    # =========================
-    with left_col:
+        import pandas as pd
     
-        if st.button("A Profile Finder"):
-            st.session_state.active_tool = "profile"
-
-        if st.button("Analyze a Video"):
-            st.session_state.active_tool = "video"
+        # CUSTOM BUTTON CSS
+        st.markdown("""
+        <style>
+    
+        /* BUTTON STYLE */
+        div.stButton > button {
+            background-color: #0057b8 !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            border-radius: 12px !important;
+            border: none !important;
+            width: 120% !important;
+            height: 50px !important;
+            margin-bottom: 20px !important;
+            transition: 0.3s !important;
+        }
+    
+        /* BUTTON TEXT */
+        div.stButton > button p {
+            color: white !important;
+        }
+    
+        /* HOVER EFFECT */
+        div.stButton > button:hover {
+            background-color: red !important;
+            color: white !important;
+        }
+    
+        div.stButton > button:hover p {
+            color: white !important;
+        }
+    
+        </style>
+        """, unsafe_allow_html=True)
+    
+        st.write("Choose an AI Tool Below")
+    
+        # LEFT AND RIGHT LAYOUT
+        left_col, right_col = st.columns([1, 3])
+    
         # =========================
-        # UPLOAD TO AIR BUTTON
+        # LEFT SIDE BUTTONS
         # =========================
-       # if st.button("Upload to Air"):
+        with left_col:
         
-           # st.markdown(
-              #  """
-               # <script>
-                  #  window.open(
-                      #  'https://app.air.inc/d/fc799c155',
-                      #  '_blank'
-                   # );
-               # </script>
-               # """,
-              #  unsafe_allow_html=True
-            #)
+            if st.button("A Profile Finder"):
+                st.session_state.active_tool = "profile"
+    
+            if st.button("Analyze a Video"):
+                st.session_state.active_tool = "video"
+            # =========================
+            # UPLOAD TO AIR BUTTON
+            # =========================
+           # if st.button("Upload to Air"):
+            
+               # st.markdown(
+                  #  """
+                   # <script>
+                      #  window.open(
+                          #  'https://app.air.inc/d/fc799c155',
+                          #  '_blank'
+                       # );
+                   # </script>
+                   # """,
+                  #  unsafe_allow_html=True
+                #)
     
 
 
