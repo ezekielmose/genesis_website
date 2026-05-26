@@ -439,23 +439,105 @@ div[data-baseweb="tab-border"] {
 """, unsafe_allow_html=True)
 
 # ======================================
+# LOGIN SESSION STATES
+# ======================================
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+if "show_login" not in st.session_state:
+    st.session_state.show_login = False
+
+
+# ======================================
 # HEADER
 # ======================================
-col1, col2 = st.columns([1, 8])
+col1, col2, col3 = st.columns([1, 6, 1])
 
+# ======================================
+# LOGO
+# ======================================
 with col1:
     st.image("logo.png", width=120)
 
 # ======================================
-# TOP MENU
+# DYNAMIC MENU
 # ======================================
 with col2:
-    tabs = st.tabs([
-        "Home",
-        "AI Analyzer",
-        "Our Services",
-        "About Us"
-    ])
+
+    # MENU BEFORE LOGIN
+    if not st.session_state.logged_in:
+
+        tabs = st.tabs([
+            "Home",
+            "Our Services",
+            "About Us"
+        ])
+
+    # MENU AFTER LOGIN
+    else:
+
+        tabs = st.tabs([
+            "Home",
+            "AI Analyzer",
+            "Our Services",
+            "About Us"
+        ])
+
+# ======================================
+# LOGIN / LOGOUT BUTTON
+# ======================================
+with col3:
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # LOGIN BUTTON
+    if not st.session_state.logged_in:
+
+        if st.button("Login"):
+
+            st.session_state.show_login = True
+
+    # LOGOUT BUTTON
+    else:
+
+        if st.button("Logout"):
+
+            st.session_state.logged_in = False
+
+            st.rerun()
+
+# ======================================
+# LOGIN FORM
+# ======================================
+if st.session_state.show_login and not st.session_state.logged_in:
+
+    st.markdown("## Management Login")
+
+    username = st.text_input("Username")
+
+    password = st.text_input(
+        "Password",
+        type="password"
+    )
+
+    if st.button("Enter"):
+
+        # ======================================
+        # LOGIN CREDENTIALS
+        # ======================================
+        if username == "admin" and password == "genesis123":
+
+            st.session_state.logged_in = True
+
+            st.session_state.show_login = False
+
+            st.success("Login Successful")
+
+            st.rerun()
+
+        else:
+
+            st.error("Invalid Username or Password")
 
 # ======================================
 # HOME PAGE
@@ -1286,7 +1368,9 @@ with tabs[0]:
 # ======================================
 # AI ANALYZER PAGE
 # ======================================
-with tabs[1]:
+if st.session_state.logged_in:
+
+    with tabs[1]:
 
     import pandas as pd
 
@@ -1679,8 +1763,14 @@ with tabs[1]:
 # ======================================
 # SERVICES PAGE
 # ======================================
-with tabs[2]:
+if st.session_state.logged_in:
 
+    with tabs[2]:
+
+else:
+
+    with tabs[1]:
+    
     st.title("Our Services")
 
     col1, col2, col3 = st.columns(3)
@@ -1697,7 +1787,13 @@ with tabs[2]:
 # ======================================
 # ABOUT PAGE
 # ======================================
-with tabs[3]:
+if st.session_state.logged_in:
+
+    with tabs[3]:
+
+else:
+
+    with tabs[2]:
 
     st.title("About Us")
     st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project")
