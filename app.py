@@ -1,6 +1,3 @@
-import streamlit as st
-import streamlit.components.v1 as components
-
 # ======================================
 # PAGE CONFIGURATION
 # ======================================
@@ -368,35 +365,6 @@ div[data-baseweb="tab-border"] {
         line-height: 1.4;
     }
 }
-
-/* ======================================
-   LOGIN BUTTON
-====================================== */
-div.stButton > button {
-
-    background-color: #0057b8 !important;
-
-    color: white !important;
-
-    border: none !important;
-
-    border-radius: 10px !important;
-
-    font-weight: 700 !important;
-
-    transition: all 0.3s ease !important;
-}
-
-/* HOVER EFFECT */
-div.stButton > button:hover {
-
-    background-color: red !important;
-
-    color: white !important;
-
-    transform: translateY(-2px);
-}
-
 /* ======================================
    FOOTER
 ====================================== */
@@ -521,12 +489,10 @@ with col3:
 
     # LOGIN BUTTON
     if not st.session_state.logged_in:
-    
-        if st.button("Login", key="login_btn"):
-    
+
+        if st.button("Login"):
+
             st.session_state.show_login = True
-    
-            st.rerun()
 
     # LOGOUT BUTTON
     else:
@@ -542,332 +508,307 @@ with col3:
 # ======================================
 if st.session_state.show_login and not st.session_state.logged_in:
 
-    st.markdown("""
-    <div style="
-        text-align:center;
-        padding-top:40px;
-        padding-bottom:20px;
-    ">
-        <h1 style="
-            color:#0057b8;
-            font-size:42px;
-            font-weight:900;
-        ">
-            Management Login
-        </h1>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## Management Login")
 
-    col1, col2, col3 = st.columns([1,1.2,1])
+    username = st.text_input("Username")
 
-    with col2:
+    password = st.text_input(
+        "Password",
+        type="password"
+    )
 
-        username = st.text_input("Username")
+    if st.button("Enter"):
 
-        password = st.text_input(
-            "Password",
-            type="password"
-        )
+        # ======================================
+        # LOGIN CREDENTIALS
+        # ======================================
+        if username == "admin" and password == "genesis123":
 
-        if st.button("Enter", key="enter_btn"):
-
-            # LOGIN CREDENTIALS
-            if username == "admin" and password == "genesis123":
-
-                st.session_state.logged_in = True
-
-                st.session_state.show_login = False
-
-                st.success("Login Successful")
-
-                st.rerun()
-
-            else:
-
-                st.error("Invalid Username or Password")
-
-        # BACK BUTTON
-        if st.button("Back", key="back_btn"):
+            st.session_state.logged_in = True
 
             st.session_state.show_login = False
 
+            st.success("Login Successful")
+
             st.rerun()
+
+        else:
+
+            st.error("Invalid Username or Password")
 
 # ======================================
 # HOME PAGE
 # ======================================
-if not st.session_state.show_login:
-
-    with tabs[0]:
+with tabs[0]:
 # ======================================
 # HERO IMAGE SLIDER
 # ======================================
-        hero_slider = """
-        <!DOCTYPE html>
-        <html>
-        
-        <head>
-        
-        <style>
-        
-        /* MAIN SLIDER */
+    hero_slider = """
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+    
+    <style>
+    
+    /* MAIN SLIDER */
+    .hero-slider {
+    
+        width: 100%;
+    
+        height: 420px;
+    
+        overflow: hidden;
+    
+        position: relative;
+    
+        border-radius: 18px;
+    
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    
+    /* TRACK */
+    .hero-track {
+    
+        display: flex;
+    
+        width: 300%;
+    
+        height: 100%;
+    
+        animation: slideHero 45s infinite;
+    }
+    
+    /* EACH SLIDE */
+    .hero-slide {
+    
+        width: 100%;
+    
+        height: 420px;
+    
+        position: relative;
+    
+        overflow: hidden;
+    
+        flex-shrink: 0;
+    }
+    
+    /* IMAGE */
+    .hero-slide img {
+    
+        width: 100%;
+    
+        height: 100%;
+    
+        object-fit: cover;
+    
+        animation: zoomImage 15s ease-in-out infinite alternate;
+    }
+    
+    /* OVERLAY */
+    .hero-overlay {
+    
+        position: absolute;
+    
+        top: 0;
+    
+        left: 0;
+    
+        width: 100%;
+    
+        height: 100%;
+    
+        background: rgba(0,0,0,0.45);
+    
+        display: flex;
+    
+        flex-direction: column;
+    
+        justify-content: center;
+    
+        padding-left: 70px;
+    
+        padding-right: 70px;
+    }
+    
+    /* TITLE */
+    .hero-heading {
+    
+        color: white;
+    
+        font-size: 44px;
+    
+        font-weight: 900;
+    
+        margin-bottom: 18px;
+    }
+    
+    /* TEXT */
+    .hero-text {
+    
+        color: white;
+    
+        font-size: 20px;
+    
+        max-width: 700px;
+    
+        line-height: 1.8;
+    }
+    
+    /* SLIDE LEFT ANIMATION */
+    @keyframes slideHero {
+    
+        0% {
+            transform: translateX(0%);
+        }
+    
+        30% {
+            transform: translateX(0%);
+        }
+    
+        33% {
+            transform: translateX(-100%);
+        }
+    
+        63% {
+            transform: translateX(-100%);
+        }
+    
+        66% {
+            transform: translateX(-200%);
+        }
+    
+        96% {
+            transform: translateX(-200%);
+        }
+    
+        100% {
+            transform: translateX(0%);
+        }
+    }
+    
+    /* IMAGE ZOOM */
+    @keyframes zoomImage {
+    
+        0% {
+            transform: scale(1);
+        }
+    
+        100% {
+            transform: scale(1.12);
+        }
+    }
+    
+    /* MOBILE */
+    @media only screen and (max-width: 768px) {
+    
         .hero-slider {
-        
-            width: 100%;
-        
-            height: 420px;
-        
-            overflow: hidden;
-        
-            position: relative;
-        
-            border-radius: 18px;
-        
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    
+            height: 280px;
         }
-        
-        /* TRACK */
-        .hero-track {
-        
-            display: flex;
-        
-            width: 300%;
-        
-            height: 100%;
-        
-            animation: slideHero 45s infinite;
-        }
-        
-        /* EACH SLIDE */
+    
         .hero-slide {
-        
-            width: 100%;
-        
-            height: 420px;
-        
-            position: relative;
-        
-            overflow: hidden;
-        
-            flex-shrink: 0;
+    
+            height: 280px;
         }
-        
-        /* IMAGE */
-        .hero-slide img {
-        
-            width: 100%;
-        
-            height: 100%;
-        
-            object-fit: cover;
-        
-            animation: zoomImage 15s ease-in-out infinite alternate;
-        }
-        
-        /* OVERLAY */
+    
         .hero-overlay {
-        
-            position: absolute;
-        
-            top: 0;
-        
-            left: 0;
-        
-            width: 100%;
-        
-            height: 100%;
-        
-            background: rgba(0,0,0,0.45);
-        
-            display: flex;
-        
-            flex-direction: column;
-        
-            justify-content: center;
-        
-            padding-left: 70px;
-        
-            padding-right: 70px;
+    
+            padding-left: 25px;
+    
+            padding-right: 25px;
         }
-        
-        /* TITLE */
+    
         .hero-heading {
-        
-            color: white;
-        
-            font-size: 44px;
-        
-            font-weight: 900;
-        
-            margin-bottom: 18px;
+    
+            font-size: 28px;
         }
-        
-        /* TEXT */
+    
         .hero-text {
-        
-            color: white;
-        
-            font-size: 20px;
-        
-            max-width: 700px;
-        
-            line-height: 1.8;
+    
+            font-size: 15px;
         }
-        
-        /* SLIDE LEFT ANIMATION */
-        @keyframes slideHero {
-        
-            0% {
-                transform: translateX(0%);
-            }
-        
-            30% {
-                transform: translateX(0%);
-            }
-        
-            33% {
-                transform: translateX(-100%);
-            }
-        
-            63% {
-                transform: translateX(-100%);
-            }
-        
-            66% {
-                transform: translateX(-200%);
-            }
-        
-            96% {
-                transform: translateX(-200%);
-            }
-        
-            100% {
-                transform: translateX(0%);
-            }
-        }
-        
-        /* IMAGE ZOOM */
-        @keyframes zoomImage {
-        
-            0% {
-                transform: scale(1);
-            }
-        
-            100% {
-                transform: scale(1.12);
-            }
-        }
-        
-        /* MOBILE */
-        @media only screen and (max-width: 768px) {
-        
-            .hero-slider {
-        
-                height: 280px;
-            }
-        
-            .hero-slide {
-        
-                height: 280px;
-            }
-        
-            .hero-overlay {
-        
-                padding-left: 25px;
-        
-                padding-right: 25px;
-            }
-        
-            .hero-heading {
-        
-                font-size: 28px;
-            }
-        
-            .hero-text {
-        
-                font-size: 15px;
-            }
-        }
-        
-        </style>
-        
-        </head>
-        
-        <body>
-        
-        <div class="hero-slider">
-        
-            <div class="hero-track">
-        
-                <!-- SLIDE 1 -->
-                <div class="hero-slide">
-        
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop">
-        
-                    <div class="hero-overlay">
-        
-                        <div class="hero-heading">
-                            Who We Are
-                        </div>
-        
-                        <div class="hero-text">
-                            Genesis Digital is a next-generation creative and AI-powered
-                            company focused on digital transformation and analytics solutions.
-                        </div>
-        
+    }
+    
+    </style>
+    
+    </head>
+    
+    <body>
+    
+    <div class="hero-slider">
+    
+        <div class="hero-track">
+    
+            <!-- SLIDE 1 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        Who We Are
                     </div>
-        
-                </div>
-        
-                <!-- SLIDE 2 -->
-                <div class="hero-slide">
-        
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop">
-        
-                    <div class="hero-overlay">
-        
-                        <div class="hero-heading">
-                            What We Do
-                        </div>
-        
-                        <div class="hero-text">
-                            We provide AI solutions, media sourcing,
-                            hospitality intelligence, and digital infrastructure.
-                        </div>
-        
+    
+                    <div class="hero-text">
+                        Genesis Digital is a next-generation creative and AI-powered
+                        company focused on digital transformation and analytics solutions.
                     </div>
-        
+    
                 </div>
-        
-                <!-- SLIDE 3 -->
-                <div class="hero-slide">
-        
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop">
-        
-                    <div class="hero-overlay">
-        
-                        <div class="hero-heading">
-                            What Makes Us Different
-                        </div>
-        
-                        <div class="hero-text">
-                            We combine creativity, automation,
-                            operational excellence, and scalable execution.
-                        </div>
-        
-                    </div>
-        
-                </div>
-        
+    
             </div>
-        
+    
+            <!-- SLIDE 2 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        What We Do
+                    </div>
+    
+                    <div class="hero-text">
+                        We provide AI solutions, media sourcing,
+                        hospitality intelligence, and digital infrastructure.
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <!-- SLIDE 3 -->
+            <div class="hero-slide">
+    
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop">
+    
+                <div class="hero-overlay">
+    
+                    <div class="hero-heading">
+                        What Makes Us Different
+                    </div>
+    
+                    <div class="hero-text">
+                        We combine creativity, automation,
+                        operational excellence, and scalable execution.
+                    </div>
+    
+                </div>
+    
+            </div>
+    
         </div>
-        
-        </body>
-        </html>
-        """
-        
-        components.html(hero_slider, height=420)
+    
+    </div>
+    
+    </body>
+    </html>
+    """
+    
+    components.html(hero_slider, height=420)
     
     st.markdown(
         '<div class="home-subtitle">OUR EDGE</div>',
@@ -1429,7 +1370,7 @@ if st.session_state.logged_in:
     with tabs[1]:
 
         import pandas as pd
-    
+
         # CUSTOM BUTTON CSS
         st.markdown("""
         <style>
@@ -1470,7 +1411,7 @@ if st.session_state.logged_in:
     
         # LEFT AND RIGHT LAYOUT
         left_col, right_col = st.columns([1, 3])
-    
+
         # =========================
         # LEFT SIDE BUTTONS
         # =========================
@@ -1497,12 +1438,12 @@ if st.session_state.logged_in:
                    # """,
                   #  unsafe_allow_html=True
                 #)
+        
     
-
-
-    # =========================
-    # RIGHT SIDE RESULTS
-    # =========================
+    
+        # =========================
+        # RIGHT SIDE RESULTS
+        # =========================
         with right_col:
     
             # ======================================
@@ -1819,67 +1760,53 @@ if st.session_state.logged_in:
 # ======================================
 # SERVICES PAGE
 # ======================================
-
 if st.session_state.logged_in:
 
     with tabs[2]:
 
-        st.title("Our Services")
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            st.subheader("Video Sourcing")
-
-        with col2:
-            st.subheader("AI Solutions")
-
-        with col3:
-            st.subheader("Data Analysis")
-
 else:
 
     with tabs[1]:
+    
+    st.title("Our Services")
 
-        st.title("Our Services")
+    col1, col2, col3 = st.columns(3)
 
-        col1, col2, col3 = st.columns(3)
+    with col1:
+        st.subheader("Video Sourcing")
 
-        with col1:
-            st.subheader("Video Sourcing")
+    with col2:
+        st.subheader("AI Solutions")
 
-        with col2:
-            st.subheader("AI Solutions")
+    with col3:
+        st.subheader("Data Analysis")
 
-        with col3:
-            st.subheader("Data Analysis")
 # ======================================
 # ABOUT PAGE
 # ======================================
 if st.session_state.logged_in:
 
     with tabs[3]:
-        st.title("About Us")
 
 else:
 
     with tabs[2]:
 
-        st.title("About Us")
-        st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project")
-    
-        # ======================================
-        # THIN BLUE LINE
-        # ======================================
-        st.markdown("""
-        <div style="
-            width:100%;
-            height:2px;
-            background-color:#0057b8;
-            margin-top:25px;
-            margin-bottom:25px;
-        "></div>
-        """, unsafe_allow_html=True)
+    st.title("About Us")
+    st.write("At Genesis Digital we specialize in sourcing and curating high-quality digital content to help businesses enhance their online presence. With a focus on video acquisition, metadata documentation, and quality assurance, we deliver engaging, scalable, and compliant solutions tailored to meet client needs. Backed by a skilled team and innovative strategies, we are committed to driving digital impact and delivering excellence with every project")
+
+    # ======================================
+    # THIN BLUE LINE
+    # ======================================
+    st.markdown("""
+    <div style="
+        width:100%;
+        height:2px;
+        background-color:#0057b8;
+        margin-top:25px;
+        margin-bottom:25px;
+    "></div>
+    """, unsafe_allow_html=True)
 
 # ======================================
 # OUR TEAM SLIDER CSS
