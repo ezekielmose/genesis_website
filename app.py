@@ -441,7 +441,7 @@ div[data-baseweb="tab-border"] {
 # ======================================
 # HEADER
 # ======================================
-col1, col2 = st.columns([1, 8])
+col1, col2, col3 = st.columns([1, 7, 1.5])
 
 with col1:
     st.image("logo.png", width=120)
@@ -456,6 +456,51 @@ with col2:
         "Our Services",
         "About Us"
     ])
+
+# ======================================
+# LOGIN BUTTON
+# ======================================
+with col3:
+
+    st.markdown("""
+    <style>
+
+    /* LOGIN BUTTON */
+    div.stButton > button[kind="secondary"] {
+
+        background-color: #0057b8 !important;
+
+        color: white !important;
+
+        border: none !important;
+
+        border-radius: 10px !important;
+
+        font-size: 16px !important;
+
+        font-weight: 700 !important;
+
+        padding: 10px 24px !important;
+
+        margin-top: 18px !important;
+
+        width: 100% !important;
+
+        transition: 0.3s ease;
+    }
+
+    /* HOVER */
+    div.stButton > button[kind="secondary"]:hover {
+
+        background-color: #004494 !important;
+
+        color: white !important;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    login_btn = st.button("Login")
 
 # ======================================
 # HOME PAGE
