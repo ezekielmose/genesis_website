@@ -549,6 +549,9 @@ if login_btn:
 # ======================================
 # LOGIN PAGE
 # ======================================
+# ======================================
+# LOGIN PAGE
+# ======================================
 if (
     st.session_state.show_login
     and not st.session_state.get("logged_in", False)
@@ -557,212 +560,133 @@ if (
     st.markdown("""
     <style>
 
-    /* LOGIN CONTAINER */
     .login-wrapper {
-
         display: flex;
-
         justify-content: center;
-
         align-items: center;
-
         min-height: 80vh;
     }
 
     .login-box {
-
         width: 420px;
-
         background: rgba(255,255,255,0.95);
-
         padding: 40px;
-
         border-radius: 18px;
-
         box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
 
     .login-title {
-
         text-align: center;
-
         color: #0057b8;
-
         font-size: 32px;
-
         font-weight: 900;
-
         margin-bottom: 30px;
     }
 
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown(
-        '<div class="login-title">Login Portal</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="login-title">Login Portal</div>', unsafe_allow_html=True)
 
-    # ======================================
-    # CENTERED LOGIN FORM
-    # ======================================
-    left_space, center_col, right_space = st.columns([1.5, 2, 1.5])
-    
-    with center_col:
-    
-        # USERNAME
-        username = st.text_input(
-            "Username",
-            placeholder="Enter your username"
+    # CENTERED FORM
+    left, center, right = st.columns([1.5, 2, 1.5])
+
+    with center:
+
+        # USERNAME (EMAIL)
+        email = st.text_input(
+            "Email",
+            placeholder="Enter your email"
         )
-    
-        # PASSWORD
+
         password = st.text_input(
             "Password",
             type="password",
             placeholder="Enter your password"
         )
-    
+
         st.markdown("<br>", unsafe_allow_html=True)
-    
+
         # LOGIN BUTTON
         if st.button("Log Me In", use_container_width=True):
-        
+
             try:
-        
-                user = auth.sign_in_with_email_and_password(
-                    username,
-                    password
-                )
-        
-                st.success("Login Successful ✅")
-        
+                user = auth.sign_in_with_email_and_password(email, password)
+
                 st.session_state.logged_in = True
-        
                 st.session_state.show_login = False
-        
+                st.session_state.auth_mode = "login"
+
+                st.success("Login Successful ✅")
                 st.rerun()
-        
+
             except:
-                st.error("Invalid Username or Password")
-    
-        # SIGN UP TEXT
-        st.markdown(
-            """
-            <div style="
-                text-align:center;
-                margin-top:18px;
-                font-size:16px;
-                color:#444;
-            ">
-                Don’t have an account?
-                <span style="
-                    color:#0057b8;
-                    font-weight:700;
-                    cursor:pointer;
-                ">
+                st.error("Invalid email or password")
 
         # SIGN UP TEXT
         st.markdown(
             """
-            <div style="
-                text-align:center;
-                margin-top:18px;
-                font-size:16px;
-                color:#444;
-            ">
+            <div style="text-align:center; margin-top:18px; font-size:16px;">
                 Don’t have an account?
             </div>
             """,
             unsafe_allow_html=True
         )
-        
+
         if st.button("Sign Up", use_container_width=True):
-        
             st.session_state.auth_mode = "signup"
-        
             st.rerun()
 
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    
-        st.stop()
+    st.stop()
 
-        # ======================================
-    # SIGN UP PAGE
-    # ======================================
-    if (
-        st.session_state.show_login
-        and st.session_state.auth_mode == "signup"
-    ):
-    
-        st.markdown("""
-        <style>
-    
-        .signup-title {
-    
-            text-align: center;
-    
-            color: #0057b8;
-    
-            font-size: 32px;
-    
-            font-weight: 900;
-    
-            margin-bottom: 30px;
-        }
-    
-        </style>
-        """, unsafe_allow_html=True)
-    
-        st.markdown(
-            '<div class="signup-title">Create Account</div>',
-            unsafe_allow_html=True
-        )
-    
-        left_space, center_col, right_space = st.columns([1.5, 2, 1.5])
-    
-        with center_col:
-    
-            email = st.text_input(
-                "Email",
-                placeholder="Enter your email"
-            )
-    
-            new_password = st.text_input(
-                "Password",
-                type="password",
-                placeholder="Create password"
-            )
-    
-            if st.button(
-                "Create Account",
-                use_container_width=True
-            ):
-    
-                try:
-    
-                    auth.create_user_with_email_and_password(
-                        email,
-                        new_password
-                    )
-    
-                    st.success(
-                        "Account Created Successfully ✅"
-                    )
-    
-                    st.session_state.auth_mode = "login"
-    
-                    st.rerun()
-    
-                except Exception as e:
-    
-                    st.error("Account creation failed")
-    
-        st.stop()
 
+# ======================================
+# SIGN UP PAGE
+# ======================================
+if (
+    st.session_state.show_login
+    and st.session_state.auth_mode == "signup"
+    and not st.session_state.get("logged_in", False)
+):
+
+    st.markdown("""
+    <style>
+
+    .signup-title {
+        text-align: center;
+        color: #0057b8;
+        font-size: 32px;
+        font-weight: 900;
+        margin-bottom: 30px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="signup-title">Create Account</div>', unsafe_allow_html=True)
+
+    left, center, right = st.columns([1.5, 2, 1.5])
+
+    with center:
+
+        email = st.text_input("Email", placeholder="Enter your email", key="signup_email")
+        password = st.text_input("Password", type="password", placeholder="Create password", key="signup_pass")
+
+        if st.button("Create Account", use_container_width=True):
+
+            try:
+                auth.create_user_with_email_and_password(email, password)
+
+                st.success("Account Created Successfully ✅")
+
+                st.session_state.auth_mode = "login"
+
+                st.rerun()
+
+            except Exception as e:
+                st.error("Account creation failed")
+
+    st.stop()
 # ======================================
 # HOME PAGE
 # ======================================
