@@ -467,33 +467,45 @@ with col3:
 
     /* LOGIN BUTTON */
     div.stButton > button[kind="secondary"] {
-
+    
         background-color: #0057b8 !important;
-
+    
         color: white !important;
-
+    
         border: none !important;
-
+    
         border-radius: 10px !important;
-
+    
         font-size: 16px !important;
-
+    
         font-weight: 700 !important;
-
+    
         padding: 10px 24px !important;
-
+    
         margin-top: 18px !important;
-
+    
         width: 100% !important;
-
+    
         transition: 0.3s ease;
     }
-
+    
+    /* FORCE BUTTON TEXT WHITE */
+    div.stButton > button[kind="secondary"] p {
+    
+        color: white !important;
+    }
+    
     /* HOVER */
     div.stButton > button[kind="secondary"]:hover {
-
-        background-color: #004494 !important;
-
+    
+        background-color: red !important;
+    
+        color: white !important;
+    }
+    
+    /* KEEP TEXT WHITE ON HOVER */
+    div.stButton > button[kind="secondary"]:hover p {
+    
         color: white !important;
     }
 
