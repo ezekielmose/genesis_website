@@ -514,9 +514,63 @@ with col3:
 
     login_btn = st.button("Login")
 
+        # ======================================
+    # LOGIN STATE
+    # ======================================
+    if "show_login" not in st.session_state:
+        st.session_state.show_login = False
+    
+    # OPEN LOGIN PAGE
+    if login_btn:
+        st.session_state.show_login = True
+
 # ======================================
 # HOME PAGE
 # ======================================
+
+# ======================================
+# LOGIN BUTTON
+# ======================================
+with col3:
+
+    st.markdown("""
+    ...
+    """, unsafe_allow_html=True)
+
+    login_btn = st.button("Login")
+
+# ======================================
+# LOGIN STATE
+# ======================================
+if "show_login" not in st.session_state:
+    st.session_state.show_login = False
+
+if login_btn:
+    st.session_state.show_login = True
+
+
+# ======================================
+# HOME PAGE
+# ======================================
+
+# ======================================
+# LOGIN PAGE
+# ======================================
+if st.session_state.show_login:
+
+    st.markdown("""
+    ...
+    """)
+
+    ...
+    
+    st.stop()
+
+
+with tabs[0]:
+
+    ...
+
 with tabs[0]:
 # ======================================
 # HERO IMAGE SLIDER
