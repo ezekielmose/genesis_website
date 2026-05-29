@@ -578,27 +578,56 @@ if st.session_state.show_login:
         unsafe_allow_html=True
     )
 
-    # USERNAME
-    username = st.text_input(
-        "Username",
-        placeholder="Enter your username"
-    )
-
-    # PASSWORD
-    password = st.text_input(
-        "Password",
-        type="password",
-        placeholder="Enter your password"
-    )
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # LOGIN BUTTON
-    if st.button("Log Me In"):
-
-        st.success("Login logic coming next...")
-
-    st.stop()
+    # ======================================
+    # CENTERED LOGIN FORM
+    # ======================================
+    left_space, center_col, right_space = st.columns([1.5, 2, 1.5])
+    
+    with center_col:
+    
+        # USERNAME
+        username = st.text_input(
+            "Username",
+            placeholder="Enter your username"
+        )
+    
+        # PASSWORD
+        password = st.text_input(
+            "Password",
+            type="password",
+            placeholder="Enter your password"
+        )
+    
+        st.markdown("<br>", unsafe_allow_html=True)
+    
+        # LOGIN BUTTON
+        if st.button("Log Me In", use_container_width=True):
+    
+            st.success("Login logic coming next...")
+    
+        # SIGN UP TEXT
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                margin-top:18px;
+                font-size:16px;
+                color:#444;
+            ">
+                Don’t have an account?
+                <span style="
+                    color:#0057b8;
+                    font-weight:700;
+                    cursor:pointer;
+                ">
+                    Sign Up
+                </span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+        st.stop()
 
 # ======================================
 # HOME PAGE
