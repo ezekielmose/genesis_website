@@ -514,20 +514,6 @@ with col3:
 
     login_btn = st.button("Login")
 
-        # ======================================
-    # LOGIN STATE
-    # ======================================
-    if "show_login" not in st.session_state:
-        st.session_state.show_login = False
-    
-    # OPEN LOGIN PAGE
-    if login_btn:
-        st.session_state.show_login = True
-
-# ======================================
-# HOME PAGE
-# ======================================
-
 # ======================================
 # LOGIN BUTTON
 # ======================================
@@ -545,13 +531,9 @@ with col3:
 if "show_login" not in st.session_state:
     st.session_state.show_login = False
 
+# OPEN LOGIN PAGE
 if login_btn:
     st.session_state.show_login = True
-
-
-# ======================================
-# HOME PAGE
-# ======================================
 
 # ======================================
 # LOGIN PAGE
@@ -559,19 +541,81 @@ if login_btn:
 if st.session_state.show_login:
 
     st.markdown("""
-    ...
-    """)
+    <style>
 
-    ...
-    
+    /* LOGIN CONTAINER */
+    .login-wrapper {
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        min-height: 80vh;
+    }
+
+    .login-box {
+
+        width: 420px;
+
+        background: rgba(255,255,255,0.95);
+
+        padding: 40px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .login-title {
+
+        text-align: center;
+
+        color: #0057b8;
+
+        font-size: 32px;
+
+        font-weight: 900;
+
+        margin-bottom: 30px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="login-title">Login Portal</div>',
+        unsafe_allow_html=True
+    )
+
+    # USERNAME
+    username = st.text_input(
+        "Username",
+        placeholder="Enter your username"
+    )
+
+    # PASSWORD
+    password = st.text_input(
+        "Password",
+        type="password",
+        placeholder="Enter your password"
+    )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # LOGIN BUTTON
+    if st.button("Log Me In"):
+
+        st.success("Login logic coming next...")
+
     st.stop()
 
-
+# ======================================
+# HOME PAGE
+# ======================================
 with tabs[0]:
 
-    ...
-
-with tabs[0]:
 # ======================================
 # HERO IMAGE SLIDER
 # ======================================
