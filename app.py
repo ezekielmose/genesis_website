@@ -1,5 +1,23 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import pyrebase
+
+
+# ======================================
+# FIREBASE CONFIG
+# ======================================
+firebaseConfig = {
+    "apiKey": "AIzaSyAnbNXzFuVBVp4S0HRmGmO79iQWaE5Ssn4",
+    "authDomain": "genesis-edab0.firebaseapp.com",
+    "projectId": "genesis-edab0",
+    "storageBucket": "genesis-edab0.firebasestorage.app",
+    "messagingSenderId": "1026235007894",
+    "appId": "1:1026235007894:web:9304a716a82278bc7513b7"
+}
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+
+auth = firebase.auth()
 
 # ======================================
 # PAGE CONFIGURATION
@@ -457,6 +475,9 @@ with col2:
         "About Us"
     ])
 
+if "auth_mode" not in st.session_state:
+    st.session_state.auth_mode = "login"
+
 # ======================================
 # LOGIN BUTTON
 # ======================================
@@ -527,7 +548,10 @@ if login_btn:
 # ======================================
 # LOGIN PAGE
 # ======================================
-if st.session_state.show_login:
+if (
+    st.session_state.show_login
+    and not st.session_state.get("logged_in", False)
+):
 
     st.markdown("""
     <style>
@@ -602,8 +626,24 @@ if st.session_state.show_login:
     
         # LOGIN BUTTON
         if st.button("Log Me In", use_container_width=True):
-    
-            st.success("Login logic coming next...")
+        
+            try:
+        
+                user = auth.sign_in_with_email_and_password(
+                    username,
+                    password
+                )
+        
+                st.success("Login Successful ✅")
+        
+                st.session_state.logged_in = True
+        
+                st.session_state.show_login = False
+        
+                st.rerun()
+        
+            except:
+                st.error("Invalid Username or Password")
     
         # SIGN UP TEXT
         st.markdown(
@@ -620,7 +660,40 @@ if st.session_state.show_login:
                     font-weight:700;
                     cursor:pointer;
                 ">
-                    Sign Up
+                    if st.button("Sign Up"):
+
+                        st.session_state.auth_mode = "signup"
+
+                    # ======================================
+                    # SIGN UP PAGE
+                    # ======================================
+                    if st.session_state.show_login and st.session_state.auth_mode == "signup":
+                    
+                        st.title("Create Account")
+                    
+                        email = st.text_input("Email")
+                    
+                        password = st.text_input(
+                            "Password",
+                            type="password"
+                        )
+                    
+                        if st.button("Create Account"):
+                    
+                            try:
+                    
+                                auth.create_user_with_email_and_password(
+                                    email,
+                                    password
+                                )
+                    
+                                st.success("Account Created Successfully ✅")
+                    
+                                st.session_state.auth_mode = "login"
+                    
+                            except Exception as e:
+                    
+                                st.error("Account creation failed")
                 </span>
             </div>
             """,
