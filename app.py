@@ -9,6 +9,7 @@ import pyrebase
 firebaseConfig = {
     "apiKey": "AIzaSyAnbNXzFuVBVp4S0HRmGmO79iQWaE5Ssn4",
     "authDomain": "genesis-edab0.firebaseapp.com",
+    "databaseURL": "https://genesis-edab0-default-rtdb.firebaseio.com",
     "projectId": "genesis-edab0",
     "storageBucket": "genesis-edab0.firebasestorage.app",
     "messagingSenderId": "1026235007894",
@@ -660,45 +661,105 @@ if (
                     font-weight:700;
                     cursor:pointer;
                 ">
-                    if st.button("Sign Up"):
 
-                        st.session_state.auth_mode = "signup"
-
-                    # ======================================
-                    # SIGN UP PAGE
-                    # ======================================
-                    if st.session_state.show_login and st.session_state.auth_mode == "signup":
-                    
-                        st.title("Create Account")
-                    
-                        email = st.text_input("Email")
-                    
-                        password = st.text_input(
-                            "Password",
-                            type="password"
-                        )
-                    
-                        if st.button("Create Account"):
-                    
-                            try:
-                    
-                                auth.create_user_with_email_and_password(
-                                    email,
-                                    password
-                                )
-                    
-                                st.success("Account Created Successfully ✅")
-                    
-                                st.session_state.auth_mode = "login"
-                    
-                            except Exception as e:
-                    
-                                st.error("Account creation failed")
-                </span>
+        # SIGN UP TEXT
+        st.markdown(
+            """
+            <div style="
+                text-align:center;
+                margin-top:18px;
+                font-size:16px;
+                color:#444;
+            ">
+                Don’t have an account?
             </div>
             """,
             unsafe_allow_html=True
         )
+        
+        if st.button("Sign Up", use_container_width=True):
+        
+            st.session_state.auth_mode = "signup"
+        
+            st.rerun()
+
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    
+        st.stop()
+
+        # ======================================
+    # SIGN UP PAGE
+    # ======================================
+    if (
+        st.session_state.show_login
+        and st.session_state.auth_mode == "signup"
+    ):
+    
+        st.markdown("""
+        <style>
+    
+        .signup-title {
+    
+            text-align: center;
+    
+            color: #0057b8;
+    
+            font-size: 32px;
+    
+            font-weight: 900;
+    
+            margin-bottom: 30px;
+        }
+    
+        </style>
+        """, unsafe_allow_html=True)
+    
+        st.markdown(
+            '<div class="signup-title">Create Account</div>',
+            unsafe_allow_html=True
+        )
+    
+        left_space, center_col, right_space = st.columns([1.5, 2, 1.5])
+    
+        with center_col:
+    
+            email = st.text_input(
+                "Email",
+                placeholder="Enter your email"
+            )
+    
+            new_password = st.text_input(
+                "Password",
+                type="password",
+                placeholder="Create password"
+            )
+    
+            if st.button(
+                "Create Account",
+                use_container_width=True
+            ):
+    
+                try:
+    
+                    auth.create_user_with_email_and_password(
+                        email,
+                        new_password
+                    )
+    
+                    st.success(
+                        "Account Created Successfully ✅"
+                    )
+    
+                    st.session_state.auth_mode = "login"
+    
+                    st.rerun()
+    
+                except Exception as e:
+    
+                    st.error("Account creation failed")
     
         st.stop()
 
