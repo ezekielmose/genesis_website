@@ -458,6 +458,31 @@ div[data-baseweb="tab-border"] {
 """, unsafe_allow_html=True)
 
 # ======================================
+# PAGE ROUTER (MOST IMPORTANT FIX)
+# ======================================
+
+if st.session_state.get("page") == "dashboard":
+
+    st.markdown(
+        """
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:80vh;
+            font-size:40px;
+            font-weight:800;
+            color:#0057b8;
+        ">
+            Under Development 🚧
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.stop()
+
+# ======================================
 # HEADER
 # ======================================
 col1, col2, col3 = st.columns([1, 7, 1.5])
@@ -536,6 +561,7 @@ with col3:
 # ======================================
 # SESSION STATE (MUST BE AT TOP)
 # ======================================
+
 if "show_login" not in st.session_state:
     st.session_state.show_login = False
 
@@ -545,8 +571,9 @@ if "auth_mode" not in st.session_state:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+# ✅ ADD THIS HERE
 if "page" not in st.session_state:
-    st.session_state.page = "login"
+    st.session_state.page = "app"   # app | login | dashboard
 
 
 # ======================================
@@ -629,11 +656,7 @@ if (
         
                 st.session_state.logged_in = True
                 st.session_state.show_login = False
-                
-                st.session_state.page = "main"
-                st.rerun()
-        
-                st.toast("Login Successful ✅")  # non-blocking cleaner UI
+                st.session_state.page = "dashboard"
                 st.rerun()
         
             except Exception:
@@ -649,33 +672,6 @@ if not st.session_state.get("logged_in", False):
 
     # SHOW LOGIN PAGE ONLY
     # (your existing login logic stays above this)
-    st.stop()
-
-# ======================================
-# AFTER LOGIN PAGE
-# ======================================
-
-if st.session_state.logged_in:
-
-    st.set_page_config(page_title="Dashboard", layout="wide")
-
-    st.markdown(
-        """
-        <div style="
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:80vh;
-            font-size:40px;
-            font-weight:800;
-            color:#0057b8;
-        ">
-            Under Development 🚧
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
     st.stop()
 
 # ======================================
