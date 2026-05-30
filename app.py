@@ -1543,6 +1543,9 @@ with tabs[1]:
     
             if st.button("Analyze a Video"):
                 st.session_state.active_tool = "video"
+
+            if st.button("Dashboard"):
+                st.session_state.active_tool = "dashboard"
             # =========================
             # UPLOAD TO AIR BUTTON
             # =========================
@@ -1877,6 +1880,14 @@ with tabs[1]:
                     # =========================
                     if st.button ("Analyze the Video"):
                         st.write("UNDER DEVELOPMENT")
+                        
+            # ======================================
+            # DASHBOARD SECTION
+            # ======================================
+
+            elif st.session_state.get("active_tool") == "dashboard":
+                st.subheader("📊 Dashboard")
+                st.write("Dashboard section coming soon...")
                         
 # ======================================
 # SERVICES PAGE
