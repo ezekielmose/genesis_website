@@ -1389,7 +1389,7 @@ with tabs[1]:
 
     if not st.session_state.get("logged_in", False):
 
-        st.warning("🔒 Please log in to access AI Analyzer")
+        st.warning("🔒 Please log in to access AI Analyzer Incase You dont Have an Accoun, Please Ask your Admin to Create One")
 
         st.markdown("""
         <div style="
