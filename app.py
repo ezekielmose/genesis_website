@@ -1389,6 +1389,8 @@ with tabs[1]:
 
     if not st.session_state.get("logged_in", False):
 
+        st.warning("🔒 Please log in to access AI Analyzer")
+
         st.markdown("""
         <div style="
             text-align:center;
@@ -1401,6 +1403,40 @@ with tabs[1]:
         </div>
         """, unsafe_allow_html=True)
 
+        st.markdown("""
+        <style>
+        
+        /* LOGIN BUTTON */
+        div.stButton > button {
+            background-color: #0057b8 !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            height: 50px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* LOGIN BUTTON HOVER */
+        div.stButton > button:hover {
+            background-color: red !important;
+            color: white !important;
+            border: none !important;
+        }
+        
+        /* KEEP TEXT WHITE */
+        div.stButton > button p {
+            color: white !important;
+        }
+        
+        div.stButton > button:hover p {
+            color: white !important;
+        }
+        
+        </style>
+        """, unsafe_allow_html=True)
+        
         col1, col2, col3 = st.columns([1.5, 2, 1.5])
 
         with col2:
