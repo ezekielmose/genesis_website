@@ -655,14 +655,6 @@ if st.session_state.show_login and not st.session_state.logged_in:
     
 
 # ======================================
-# AUTH GATE
-# ======================================
-
-if not st.session_state.get("logged_in", False):
-    st.warning("Please log in first")
-    st.stop()
-
-# ======================================
 # HOME PAGE
 # ======================================
 with tabs[0]:
