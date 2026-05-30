@@ -476,9 +476,6 @@ with col2:
         "About Us"
     ])
 
-if "auth_mode" not in st.session_state:
-    st.session_state.auth_mode = "login"
-
 # ======================================
 # LOGIN BUTTON
 # ======================================
@@ -636,68 +633,8 @@ if (
             except:
                 st.error("Invalid email or password")
 
-        st.markdown(
-            "<div style='text-align:center;'>Don't have an account?</div>",
-            unsafe_allow_html=True
-        )
-
-        if st.button("Go to Sign Up", use_container_width=True):
-            st.session_state.auth_mode = "signup"
-            st.rerun()
-
     st.stop()
 
-
-# ======================================
-# SIGN UP PAGE
-# ======================================
-if (
-    st.session_state.show_login
-    and st.session_state.auth_mode == "signup"
-    and not st.session_state.logged_in
-):
-
-    st.markdown("""
-    <style>
-
-    .signup-title {
-        text-align: center;
-        color: #0057b8;
-        font-size: 32px;
-        font-weight: 900;
-        margin-bottom: 30px;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="signup-title">Create Account</div>', unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns([1.5, 2, 1.5])
-
-    with col2:
-
-        email = st.text_input("Email", key="signup_email")
-        password = st.text_input("Password", type="password", key="signup_pass")
-
-        if st.button("Create Account", use_container_width=True):
-
-            try:
-                auth.create_user_with_email_and_password(email, password)
-
-                st.success("Account Created Successfully ✅")
-
-                st.session_state.auth_mode = "login"
-                st.rerun()
-
-            except Exception as e:
-                st.error("Signup failed")
-
-        if st.button("Back to Login", use_container_width=True):
-            st.session_state.auth_mode = "login"
-            st.rerun()
-
-    st.stop()
 # ======================================
 # HOME PAGE
 # ======================================
