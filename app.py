@@ -620,17 +620,17 @@ if (
         password = st.text_input("Password", type="password")
 
         if st.button("Log In", use_container_width=True):
-
+        
             try:
-                auth.sign_in_with_email_and_password(email, password)
-
+                user = auth.sign_in_with_email_and_password(email, password)
+        
                 st.session_state.logged_in = True
                 st.session_state.show_login = False
-
-                st.success("Login Successful ✅")
+        
+                st.toast("Login Successful ✅")  # non-blocking cleaner UI
                 st.rerun()
-
-            except:
+        
+            except Exception:
                 st.error("Invalid email or password")
 
     st.stop()
