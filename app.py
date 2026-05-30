@@ -1457,23 +1457,34 @@ with tabs[1]:
                 use_container_width=True,
                 key="login_btn"
             ):
-
+            
+                progress = st.progress(0)
+            
                 try:
-
+            
+                    import time
+            
+                    for i in range(100):
+                        progress.progress(i + 1)
+                        time.sleep(0.01)
+            
                     user = auth.sign_in_with_email_and_password(
                         email,
                         password
                     )
-
+            
                     st.session_state.logged_in = True
-
-                    st.success("Login successful ✅")
-
+            
+                    st.success("✅ Login successful")
+            
+                    time.sleep(1)
+            
                     st.rerun()
-
+            
                 except Exception:
-
-                    st.error("Invalid email or password")
+            
+                    progress.empty()
+                    st.error("❌ Invalid email or password")
 
         st.stop()
 
