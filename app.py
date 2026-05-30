@@ -496,14 +496,11 @@ if st.session_state.get("page") == "dashboard":
 # ======================================
 # HEADER
 # ======================================
-col1, col2, col3 = st.columns([1, 7, 1.5])
+col1, col2 = st.columns([1, 8])
 
 with col1:
     st.image("logo.png", width=120)
 
-# ======================================
-# TOP MENU
-# ======================================
 with col2:
     tabs = st.tabs([
         "Home",
@@ -566,34 +563,6 @@ with col3:
 
     </style>
     """, unsafe_allow_html=True)
-
-   # login_btn = st.button("Login")
-
-
-# ======================================
-# LOGIN BUTTON (TOP BAR)
-# ======================================
-with col3:
-
-    st.markdown("""
-    <style>
-
-    div.stButton > button {
-        background-color: #0057b8 !important;
-        color: white !important;
-        border-radius: 10px !important;
-        font-weight: 700 !important;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-    login_btn = st.button("Login")
-
-    if login_btn:
-        st.session_state.show_login = True
-        st.session_state.auth_mode = "login"
-        st.rerun()
 
 
 # ======================================
