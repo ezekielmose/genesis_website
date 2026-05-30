@@ -1493,394 +1493,408 @@ with tabs[0]:
 # ======================================
 with tabs[1]:
 
-    import pandas as pd
-
-    # CUSTOM BUTTON CSS
-    st.markdown("""
-    <style>
-
-    /* BUTTON STYLE */
-    div.stButton > button {
-        background-color: #0057b8 !important;
-        color: white !important;
-        font-size: 16px !important;
-        font-weight: bold !important;
-        border-radius: 12px !important;
-        border: none !important;
-        width: 120% !important;
-        height: 50px !important;
-        margin-bottom: 20px !important;
-        transition: 0.3s !important;
-    }
-
-    /* BUTTON TEXT */
-    div.stButton > button p {
-        color: white !important;
-    }
-
-    /* HOVER EFFECT */
-    div.stButton > button:hover {
-        background-color: red !important;
-        color: white !important;
-    }
-
-    div.stButton > button:hover p {
-        color: white !important;
-    }
-
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.write("Choose an AI Tool Below")
-
-    # LEFT AND RIGHT LAYOUT
-    left_col, right_col = st.columns([1, 3])
-
+        # =========================
+    # LOGIN REQUIRED ONLY HERE
     # =========================
-    # LEFT SIDE BUTTONS
-    # =========================
-    with left_col:
+    if not st.session_state.get("logged_in", False):
+
+        st.warning("🔒 Please log in to access AI Analyzer")
+
+        if st.button("Go to Login"):
+            st.session_state.show_login = True
+            st.session_state.auth_mode = "login"
+            st.rerun()
+
+    else:
+
+        import pandas as pd
     
-        if st.button("A Profile Finder"):
-            st.session_state.active_tool = "profile"
-
-        if st.button("Analyze a Video"):
-            st.session_state.active_tool = "video"
+        # CUSTOM BUTTON CSS
+        st.markdown("""
+        <style>
+    
+        /* BUTTON STYLE */
+        div.stButton > button {
+            background-color: #0057b8 !important;
+            color: white !important;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            border-radius: 12px !important;
+            border: none !important;
+            width: 120% !important;
+            height: 50px !important;
+            margin-bottom: 20px !important;
+            transition: 0.3s !important;
+        }
+    
+        /* BUTTON TEXT */
+        div.stButton > button p {
+            color: white !important;
+        }
+    
+        /* HOVER EFFECT */
+        div.stButton > button:hover {
+            background-color: red !important;
+            color: white !important;
+        }
+    
+        div.stButton > button:hover p {
+            color: white !important;
+        }
+    
+        </style>
+        """, unsafe_allow_html=True)
+    
+        st.write("Choose an AI Tool Below")
+    
+        # LEFT AND RIGHT LAYOUT
+        left_col, right_col = st.columns([1, 3])
+    
         # =========================
-        # UPLOAD TO AIR BUTTON
+        # LEFT SIDE BUTTONS
         # =========================
-       # if st.button("Upload to Air"):
+        with left_col:
         
-           # st.markdown(
-              #  """
-               # <script>
-                  #  window.open(
-                      #  'https://app.air.inc/d/fc799c155',
-                      #  '_blank'
-                   # );
-               # </script>
-               # """,
-              #  unsafe_allow_html=True
-            #)
+            if st.button("A Profile Finder"):
+                st.session_state.active_tool = "profile"
     
-
-
-    # =========================
-    # RIGHT SIDE RESULTS
-    # =========================
-    with right_col:
-
-        # ======================================
-        # PROFILE FINDER SECTION
-        # ======================================
-        if st.session_state.get("active_tool") == "profile":
-
-            st.subheader("Hotel Profiles Analyzer")
-
-            st.write("Find the best matching Instagram profile for a hotel.")
-
-            # -----------------------------
-            # GOOGLE SHEET CONFIG
-            # -----------------------------
-            SHEET_ID = "1gh2QMj4vngL-JLf6SPmWvjSuCgl9uItTAMteY3acVNg"
-            SHEET_GID = "204054788"
-
-            SHEET_URL = (
-                f"https://docs.google.com/spreadsheets/d/"
-                f"{SHEET_ID}/export?format=csv&gid={SHEET_GID}"
-            )
-
-            @st.cache_data
-            def Loading_():
-                return pd.read_csv(SHEET_URL, dtype=str)
-
-            def clean_id(value):
-                return str(value).strip().lower() if value else ""
-
-            # -----------------------------
-            # AUTO FILL SECTION
-            # -----------------------------
-            st.subheader(" Auto Fill from Item ID")
-
-            item_id = st.text_input(
-                "Item ID",
-                placeholder="e.g. 846e9ee4-e5e4-434d-b6ac-ef67c301b3e8"
-            )
-
-            if st.button(" Auto Fill"):
-
-                if item_id:
-
-                    try:
-                        df = Loading_()
-
-                        id_column = df.iloc[:, 1].apply(clean_id)
-
-                        input_id = clean_id(item_id)
-
-                        match = df[id_column == input_id]
-
-                        if not match.empty:
-
-                            st.session_state.hotel_name = str(
-                                match.iloc[0, 2]
-                            ).strip()
-
-                            st.session_state.city = str(
-                                match.iloc[0, 3]
-                            ).strip()
-
-                            st.session_state.country = str(
-                                match.iloc[0, 4]
-                            ).strip()
-
-                            st.success("✅ Auto-filled successfully!")
-
+            if st.button("Analyze a Video"):
+                st.session_state.active_tool = "video"
+            # =========================
+            # UPLOAD TO AIR BUTTON
+            # =========================
+           # if st.button("Upload to Air"):
+            
+               # st.markdown(
+                  #  """
+                   # <script>
+                      #  window.open(
+                          #  'https://app.air.inc/d/fc799c155',
+                          #  '_blank'
+                       # );
+                   # </script>
+                   # """,
+                  #  unsafe_allow_html=True
+                #)
+        
+    
+    
+        # =========================
+        # RIGHT SIDE RESULTS
+        # =========================
+        with right_col:
+    
+            # ======================================
+            # PROFILE FINDER SECTION
+            # ======================================
+            if st.session_state.get("active_tool") == "profile":
+    
+                st.subheader("Hotel Profiles Analyzer")
+    
+                st.write("Find the best matching Instagram profile for a hotel.")
+    
+                # -----------------------------
+                # GOOGLE SHEET CONFIG
+                # -----------------------------
+                SHEET_ID = "1gh2QMj4vngL-JLf6SPmWvjSuCgl9uItTAMteY3acVNg"
+                SHEET_GID = "204054788"
+    
+                SHEET_URL = (
+                    f"https://docs.google.com/spreadsheets/d/"
+                    f"{SHEET_ID}/export?format=csv&gid={SHEET_GID}"
+                )
+    
+                @st.cache_data
+                def Loading_():
+                    return pd.read_csv(SHEET_URL, dtype=str)
+    
+                def clean_id(value):
+                    return str(value).strip().lower() if value else ""
+    
+                # -----------------------------
+                # AUTO FILL SECTION
+                # -----------------------------
+                st.subheader(" Auto Fill from Item ID")
+    
+                item_id = st.text_input(
+                    "Item ID",
+                    placeholder="e.g. 846e9ee4-e5e4-434d-b6ac-ef67c301b3e8"
+                )
+    
+                if st.button(" Auto Fill"):
+    
+                    if item_id:
+    
+                        try:
+                            df = Loading_()
+    
+                            id_column = df.iloc[:, 1].apply(clean_id)
+    
+                            input_id = clean_id(item_id)
+    
+                            match = df[id_column == input_id]
+    
+                            if not match.empty:
+    
+                                st.session_state.hotel_name = str(
+                                    match.iloc[0, 2]
+                                ).strip()
+    
+                                st.session_state.city = str(
+                                    match.iloc[0, 3]
+                                ).strip()
+    
+                                st.session_state.country = str(
+                                    match.iloc[0, 4]
+                                ).strip()
+    
+                                st.success("✅ Auto-filled successfully!")
+    
+                            else:
+                                st.error("❌ Item ID not found in sheet.")
+    
+                        except Exception as e:
+                            st.error(f"Error loading sheet: {e}")
+    
+                    else:
+                        st.warning("⚠️ Please enter an Item ID.")
+    
+                # -----------------------------
+                # INPUT FIELDS
+                # -----------------------------
+                hotel_name = st.text_input(
+                    "Hotel Name",
+                    value=st.session_state.get("hotel_name", "")
+                )
+    
+                city = st.text_input(
+                    "City",
+                    value=st.session_state.get("city", "")
+                )
+    
+                country = st.text_input(
+                    "Country",
+                    value=st.session_state.get("country", "")
+                )
+                
+                    # =========================
+                    # INSTAGRAM PAGE BUTTON (SERPAPI VERSION)
+                    # =========================
+                    
+                if st.button("Instagram Page"):
+                    
+                    if hotel_name:
+                    
+                        import requests
+                        import urllib.parse
+                    
+                        query = f"{hotel_name} {city} {country} Instagram".strip()
+                    
+                        #st.write("Search Query:", query)
+                    
+                        instagram_link = None
+                    
+                            # =========================
+                            # SERPAPI SEARCH
+                            # =========================
+                        try:
+                            SERPAPI_KEY = "c8e0fb2951ecb7f988a06e141ba0318c76749e8bf548e25468f3eba84ea242bc"
+                    
+                            params = {
+                                "engine": "google",
+                                "q": query,
+                                "api_key": SERPAPI_KEY
+                            }
+                    
+                            response = requests.get("https://serpapi.com/search.json", params=params)
+                            data = response.json()
+                    
+                            # extract organic results
+                            for result in data.get("organic_results", []):
+                                link = result.get("link", "")
+                    
+                                if "instagram.com" in link:
+                                    instagram_link = link
+                                    break
+                    
+                        except Exception as e:
+                            st.warning(f"SerpAPI failed: {e}")
+                    
+                            # =========================
+                            # OUTPUT LOGIC
+                            # =========================
+                        if instagram_link:
+                    
+                            st.success("Instagram Profile Found 🎯")
+                    
+                            st.markdown(
+                                f"""
+                                <a href="{instagram_link}" target="_blank"
+                                    style="
+                                        color:#0057b8;
+                                        font-size:18px;
+                                        font-weight:bold;
+                                        text-decoration:none;
+                                    ">
+                                    Open Instagram Profile
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                    
                         else:
-                            st.error("❌ Item ID not found in sheet.")
-
-                    except Exception as e:
-                        st.error(f"Error loading sheet: {e}")
-
-                else:
-                    st.warning("⚠️ Please enter an Item ID.")
-
-            # -----------------------------
-            # INPUT FIELDS
-            # -----------------------------
-            hotel_name = st.text_input(
-                "Hotel Name",
-                value=st.session_state.get("hotel_name", "")
-            )
-
-            city = st.text_input(
-                "City",
-                value=st.session_state.get("city", "")
-            )
-
-            country = st.text_input(
-                "Country",
-                value=st.session_state.get("country", "")
-            )
+                    
+                            google_url = (
+                                "https://www.google.com/search?q="
+                                + urllib.parse.quote(query)
+                            )
+                    
+                            st.warning("No Instagram profile found — opening Google results")
+                    
+                            st.markdown(
+                                f"""
+                                <a href="{google_url}" target="_blank"
+                                    style="
+                                        color:#0057b8;
+                                        font-size:18px;
+                                        font-weight:bold;
+                                        text-decoration:none;
+                                    ">
+                                    Search on Google
+                                </a>
+                                """,
+                                unsafe_allow_html=True
+                            )
+                    
+                    else:
+                        st.warning("⚠️ Please fill in hotel details first.")
+    
+    
+            
+            # ======================================
+            # ANALYZE VIDEO SECTION
+            # ======================================
+            
+            elif st.session_state.get("active_tool") == "video":
+            
+                import tempfile
+                import os
+                import base64
+            
+                st.subheader("🎬 Analyze a Video")
+            
+                st.write("Upload a video from your device for analysis.")
             
                 # =========================
-                # INSTAGRAM PAGE BUTTON (SERPAPI VERSION)
+                # CUSTOM CSS
                 # =========================
-                
-            if st.button("Instagram Page"):
-                
-                if hotel_name:
-                
-                    import requests
-                    import urllib.parse
-                
-                    query = f"{hotel_name} {city} {country} Instagram".strip()
-                
-                    #st.write("Search Query:", query)
-                
-                    instagram_link = None
-                
-                        # =========================
-                        # SERPAPI SEARCH
-                        # =========================
-                    try:
-                        SERPAPI_KEY = "c8e0fb2951ecb7f988a06e141ba0318c76749e8bf548e25468f3eba84ea242bc"
-                
-                        params = {
-                            "engine": "google",
-                            "q": query,
-                            "api_key": SERPAPI_KEY
-                        }
-                
-                        response = requests.get("https://serpapi.com/search.json", params=params)
-                        data = response.json()
-                
-                        # extract organic results
-                        for result in data.get("organic_results", []):
-                            link = result.get("link", "")
-                
-                            if "instagram.com" in link:
-                                instagram_link = link
-                                break
-                
-                    except Exception as e:
-                        st.warning(f"SerpAPI failed: {e}")
-                
-                        # =========================
-                        # OUTPUT LOGIC
-                        # =========================
-                    if instagram_link:
-                
-                        st.success("Instagram Profile Found 🎯")
-                
-                        st.markdown(
-                            f"""
-                            <a href="{instagram_link}" target="_blank"
-                                style="
-                                    color:#0057b8;
-                                    font-size:18px;
-                                    font-weight:bold;
-                                    text-decoration:none;
-                                ">
-                                Open Instagram Profile
-                            </a>
-                            """,
-                            unsafe_allow_html=True
-                        )
-                
-                    else:
-                
-                        google_url = (
-                            "https://www.google.com/search?q="
-                            + urllib.parse.quote(query)
-                        )
-                
-                        st.warning("No Instagram profile found — opening Google results")
-                
-                        st.markdown(
-                            f"""
-                            <a href="{google_url}" target="_blank"
-                                style="
-                                    color:#0057b8;
-                                    font-size:18px;
-                                    font-weight:bold;
-                                    text-decoration:none;
-                                ">
-                                Search on Google
-                            </a>
-                            """,
-                            unsafe_allow_html=True
-                        )
-                
-                else:
-                    st.warning("⚠️ Please fill in hotel details first.")
-
-
-        
-        # ======================================
-        # ANALYZE VIDEO SECTION
-        # ======================================
-        
-        elif st.session_state.get("active_tool") == "video":
-        
-            import tempfile
-            import os
-            import base64
-        
-            st.subheader("🎬 Analyze a Video")
-        
-            st.write("Upload a video from your device for analysis.")
-        
-            # =========================
-            # CUSTOM CSS
-            # =========================
-            st.markdown("""
-            <style>
-        
-            /* =========================
-               INNER DROP AREA
-               (200MB per file • MP4, MOV)
-            ========================= */
-            [data-testid="stFileUploaderDropzone"] {
-                background-color: white !important;
-                border: 2px dashed black !important;
-                border-radius: 12px !important;
-                color: black !important;
-            }
-        
-            /* TEXT INSIDE DROPZONE */
-            [data-testid="stFileUploaderDropzone"] * {
-                color: black !important;
-            }
-        
-            /* =========================
-               UPLOAD BUTTON
-            ========================= */
-            [data-testid="stFileUploaderDropzone"] button {
-                background-color: #0057b8 !important;
-                color: white !important;
-                border: none !important;
-                border-radius: 10px !important;
-                font-weight: bold !important;
-                padding: 10px 18px !important;
-            }
-        
-            /* BUTTON HOVER */
-            [data-testid="stFileUploaderDropzone"] button:hover {
-                background-color: #004494 !important;
-                color: white !important;
-            }
-        
-            /* =========================
-               VIDEO SIZE
-            ========================= */
-            [data-testid="stVideo"] {
-                max-width: 320px;
-            }
-        
-            /* VIDEO PLAYER */
-            [data-testid="stVideo"] video {
-                max-width: 320px !important;
-                max-height: 500px !important;
-                border-radius: 12px !important;
-            }
-        
-            </style>
-            """, unsafe_allow_html=True)
-        
-            # =========================
-            # VIDEO UPLOADER
-            # =========================
-            uploaded_video = st.file_uploader(
-                "Upload Video",
-                type=["mp4", "mov"],
-                help="Upload a video file for analysis"
-            )
-        
-            # =========================
-            # PROCESS VIDEO
-            # =========================
-            if uploaded_video is not None:
-        
-                st.success("✅ Video uploaded successfully!")
-        
+                st.markdown("""
+                <style>
+            
+                /* =========================
+                   INNER DROP AREA
+                   (200MB per file • MP4, MOV)
+                ========================= */
+                [data-testid="stFileUploaderDropzone"] {
+                    background-color: white !important;
+                    border: 2px dashed black !important;
+                    border-radius: 12px !important;
+                    color: black !important;
+                }
+            
+                /* TEXT INSIDE DROPZONE */
+                [data-testid="stFileUploaderDropzone"] * {
+                    color: black !important;
+                }
+            
+                /* =========================
+                   UPLOAD BUTTON
+                ========================= */
+                [data-testid="stFileUploaderDropzone"] button {
+                    background-color: #0057b8 !important;
+                    color: white !important;
+                    border: none !important;
+                    border-radius: 10px !important;
+                    font-weight: bold !important;
+                    padding: 10px 18px !important;
+                }
+            
+                /* BUTTON HOVER */
+                [data-testid="stFileUploaderDropzone"] button:hover {
+                    background-color: #004494 !important;
+                    color: white !important;
+                }
+            
+                /* =========================
+                   VIDEO SIZE
+                ========================= */
+                [data-testid="stVideo"] {
+                    max-width: 320px;
+                }
+            
+                /* VIDEO PLAYER */
+                [data-testid="stVideo"] video {
+                    max-width: 320px !important;
+                    max-height: 500px !important;
+                    border-radius: 12px !important;
+                }
+            
+                </style>
+                """, unsafe_allow_html=True)
+            
                 # =========================
-                # CREATE TEMP FILE
+                # VIDEO UPLOADER
                 # =========================
-                temp_video = tempfile.NamedTemporaryFile(
-                    delete=False,
-                    suffix=".mp4"
+                uploaded_video = st.file_uploader(
+                    "Upload Video",
+                    type=["mp4", "mov"],
+                    help="Upload a video file for analysis"
                 )
-        
-                temp_video.write(uploaded_video.read())
-        
-                video_path = temp_video.name
-        
-                temp_video.close()
-        
+            
                 # =========================
-                # PLAY VIDEO
+                # PROCESS VIDEO
                 # =========================
-                st.video(video_path)
+                if uploaded_video is not None:
+            
+                    st.success("✅ Video uploaded successfully!")
+            
+                    # =========================
+                    # CREATE TEMP FILE
+                    # =========================
+                    temp_video = tempfile.NamedTemporaryFile(
+                        delete=False,
+                        suffix=".mp4"
+                    )
+            
+                    temp_video.write(uploaded_video.read())
+            
+                    video_path = temp_video.name
+            
+                    temp_video.close()
+            
+                    # =========================
+                    # PLAY VIDEO
+                    # =========================
+                    st.video(video_path)
+            
+                    # =========================
+                    # VIDEO INFO
+                    # =========================
+                    file_size = uploaded_video.size / (1024 * 1024)
+            
+                    st.markdown("### 📊 Video Info")
+            
+                    st.write(f"**File Name:** {uploaded_video.name}")
+            
+                    st.write(f"**Size:** {file_size:.2f} MB")
         
-                # =========================
-                # VIDEO INFO
-                # =========================
-                file_size = uploaded_video.size / (1024 * 1024)
-        
-                st.markdown("### 📊 Video Info")
-        
-                st.write(f"**File Name:** {uploaded_video.name}")
-        
-                st.write(f"**Size:** {file_size:.2f} MB")
-    
-                
-                # =========================
-                # ANALYZE BUTTON
-                # =========================
-                if st.button ("Analyze the Video"):
-                    st.write("UNDER DEVELOPMENT")
                     
+                    # =========================
+                    # ANALYZE BUTTON
+                    # =========================
+                    if st.button ("Analyze the Video"):
+                        st.write("UNDER DEVELOPMENT")
+                        
 # ======================================
 # SERVICES PAGE
 # ======================================
