@@ -531,17 +531,26 @@ if st.session_state.show_login and not st.session_state.logged_in:
 
         if st.button("Log In", use_container_width=True):
         
-            try:
-                user = auth.sign_in_with_email_and_password(email, password)
+            with st.spinner("Processing Your Request..."):
         
-                st.session_state.logged_in = True
-                st.session_state.show_login = False
-                st.session_state.active_tool = None
-                st.success("Login successful!")
-                st.rerun()
-                
-            except Exception:
-                st.error("Invalid email or password")
+                try:
+                    user = auth.sign_in_with_email_and_password(
+                        email,
+                        password
+                    )
+        
+                    st.success("Login successful ✅")
+        
+                    st.session_state.logged_in = True
+                    st.session_state.show_login = False
+        
+                    import time
+                    time.sleep(1)
+        
+                    st.rerun()
+        
+                except Exception:
+                    st.error("Invalid email or password")
 
     
 
