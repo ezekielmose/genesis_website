@@ -468,25 +468,7 @@ div[data-baseweb="tab-border"] {
 
 </style>
 """, unsafe_allow_html=True)
-# ======================================
-# PAGE ROUTER (MOST IMPORTANT FIX) 
-# ======================================
-if st.session_state.get("page") == "dashboard":
-    st.markdown( 
-    """
-    <div style=" 
-    display:flex; 
-    justify-content:center; 
-    align-items:center; 
-    height:80vh; 
-    font-size:40px; 
-    font-weight:800; 
-    color:#0057b8; 
-    "> Under Development 🚧 
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+
 
 # ======================================
 # HEADER
@@ -554,9 +536,10 @@ if st.session_state.show_login and not st.session_state.logged_in:
         
                 st.session_state.logged_in = True
                 st.session_state.show_login = False
-                st.session_state.page = "dashboard"
+                st.session_state.active_tool = None
+                st.success("Login successful!")
                 st.rerun()
-        
+                
             except Exception:
                 st.error("Invalid email or password")
 
@@ -1403,6 +1386,7 @@ with tabs[1]:
         if st.button("Go to Login"):
             st.session_state.show_login = True
             st.session_state.auth_mode = "login"
+            st.session_state.return_to_ai = True
             st.rerun()
 
     else:
