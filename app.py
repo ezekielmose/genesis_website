@@ -3,6 +3,18 @@ import streamlit.components.v1 as components
 import pyrebase
 
 
+if "page" not in st.session_state:
+    st.session_state.page = "app"   # app | login | dashboard
+
+if "show_login" not in st.session_state:
+    st.session_state.show_login = False
+
+if "auth_mode" not in st.session_state:
+    st.session_state.auth_mode = "login"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
 # ======================================
 # FIREBASE CONFIG
 # ======================================
@@ -480,7 +492,6 @@ if st.session_state.get("page") == "dashboard":
         unsafe_allow_html=True
     )
 
-    st.stop()
 
 # ======================================
 # HEADER
@@ -558,25 +569,6 @@ with col3:
 
    # login_btn = st.button("Login")
 
-# ======================================
-# SESSION STATE (MUST BE AT TOP)
-# ======================================
-if "page" not in st.session_state:
-    st.session_state.page = "app"
-
-if "show_login" not in st.session_state:
-    st.session_state.show_login = False
-
-if "auth_mode" not in st.session_state:
-    st.session_state.auth_mode = "login"
-
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-
-# ✅ ADD THIS HERE
-if "page" not in st.session_state:
-    st.session_state.page = "app"   # app | login | dashboard
-
 
 # ======================================
 # LOGIN BUTTON (TOP BAR)
@@ -607,11 +599,7 @@ with col3:
 # ======================================
 # LOGIN PAGE
 # ======================================
-if (
-    st.session_state.show_login
-    and st.session_state.auth_mode == "login"
-    and not st.session_state.logged_in
-):
+if st.session_state.show_login and not st.session_state.logged_in:
 
     st.markdown("""
     <style>
@@ -664,7 +652,7 @@ if (
             except Exception:
                 st.error("Invalid email or password")
 
-    st.stop()
+    
 
 # ======================================
 # AUTH GATE
@@ -674,7 +662,7 @@ if not st.session_state.get("logged_in", False):
 
     # SHOW LOGIN PAGE ONLY
     # (your existing login logic stays above this)
-    st.stop()
+
 
 # ======================================
 # HOME PAGE
