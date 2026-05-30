@@ -561,6 +561,8 @@ with col3:
 # ======================================
 # SESSION STATE (MUST BE AT TOP)
 # ======================================
+if "page" not in st.session_state:
+    st.session_state.page = "app"
 
 if "show_login" not in st.session_state:
     st.session_state.show_login = False
