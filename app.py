@@ -468,8 +468,25 @@ div[data-baseweb="tab-border"] {
 
 </style>
 """, unsafe_allow_html=True)
-
-
+# ======================================
+# PAGE ROUTER (MOST IMPORTANT FIX) 
+# ======================================
+if st.session_state.get("page") == "dashboard":
+    st.markdown( 
+    """
+    <div style=" 
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    height:80vh; 
+    font-size:40px; 
+    font-weight:800; 
+    color:#0057b8; 
+    "> Under Development 🚧 
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
 
 # ======================================
 # HEADER
