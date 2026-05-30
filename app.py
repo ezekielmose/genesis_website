@@ -543,7 +543,7 @@ if (
     st.session_state.show_login
     and st.session_state.auth_mode == "login"
     and not st.session_state.get("logged_in", False)
-):
+)
 
 # OPEN LOGIN PAGE
 if login_btn:
