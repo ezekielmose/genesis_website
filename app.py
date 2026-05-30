@@ -491,6 +491,8 @@ with col2:
 # ======================================
 if st.session_state.show_login and not st.session_state.logged_in:
 
+    # Hide all other page content while login is required
+
     st.markdown("""
     <style>
 
@@ -1389,15 +1391,12 @@ with tabs[1]:
     # LOGIN REQUIRED ONLY HERE
     # =========================
     if not st.session_state.get("logged_in", False):
-
+    
         st.warning("🔒 Please log in to access AI Analyzer")
-
-        if st.button("Go to Login"):
-            st.session_state.show_login = True
-            st.session_state.auth_mode = "login"
-            st.session_state.return_to_ai = True
-            st.rerun()
-
+    
+        # Automatically open login form
+        st.session_state.show_login = True
+    
     else:
 
         import pandas as pd
