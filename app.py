@@ -1387,16 +1387,60 @@ with tabs[0]:
 # ======================================
 with tabs[1]:
 
-        # =========================
-    # LOGIN REQUIRED ONLY HERE
-    # =========================
     if not st.session_state.get("logged_in", False):
-    
-        st.warning("🔒 Please log in to access AI Analyzer")
-    
-        # Automatically open login form
-        st.session_state.show_login = True
-    
+
+        st.markdown("""
+        <div style="
+            text-align:center;
+            color:#0057b8;
+            font-size:32px;
+            font-weight:900;
+            margin-bottom:30px;
+        ">
+            Login Portal
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1.5, 2, 1.5])
+
+        with col2:
+
+            email = st.text_input(
+                "Email",
+                key="login_email"
+            )
+
+            password = st.text_input(
+                "Password",
+                type="password",
+                key="login_password"
+            )
+
+            if st.button(
+                "Log In",
+                use_container_width=True,
+                key="login_btn"
+            ):
+
+                try:
+
+                    user = auth.sign_in_with_email_and_password(
+                        email,
+                        password
+                    )
+
+                    st.session_state.logged_in = True
+
+                    st.success("Login successful ✅")
+
+                    st.rerun()
+
+                except Exception:
+
+                    st.error("Invalid email or password")
+
+        st.stop()
+
     else:
 
         import pandas as pd
