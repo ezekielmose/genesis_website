@@ -659,10 +659,8 @@ if st.session_state.show_login and not st.session_state.logged_in:
 # ======================================
 
 if not st.session_state.get("logged_in", False):
-
-    # SHOW LOGIN PAGE ONLY
-    # (your existing login logic stays above this)
-
+    st.warning("Please log in first")
+    st.stop()
 
 # ======================================
 # HOME PAGE
