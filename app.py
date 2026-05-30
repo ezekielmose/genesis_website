@@ -537,27 +537,51 @@ with col3:
     login_btn = st.button("Login")
 
 # ======================================
-# LOGIN STATE
+# SESSION STATE (MUST BE AT TOP)
+# ======================================
+if "show_login" not in st.session_state:
+    st.session_state.show_login = False
+
+if "auth_mode" not in st.session_state:
+    st.session_state.auth_mode = "login"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+
+# ======================================
+# LOGIN BUTTON (TOP BAR)
+# ======================================
+with col3:
+
+    st.markdown("""
+    <style>
+
+    div.stButton > button {
+        background-color: #0057b8 !important;
+        color: white !important;
+        border-radius: 10px !important;
+        font-weight: 700 !important;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    login_btn = st.button("Login")
+
+    if login_btn:
+        st.session_state.show_login = True
+        st.session_state.auth_mode = "login"
+        st.rerun()
+
+
+# ======================================
+# LOGIN PAGE
 # ======================================
 if (
     st.session_state.show_login
     and st.session_state.auth_mode == "login"
-    and not st.session_state.get("logged_in", False)
-)
-
-# OPEN LOGIN PAGE
-if login_btn:
-    st.session_state.show_login = True
-
-# ======================================
-# LOGIN PAGE
-# ======================================
-# ======================================
-# LOGIN PAGE
-# ======================================
-if (
-    st.session_state.show_login
-    and not st.session_state.get("logged_in", False)
+    and not st.session_state.logged_in
 ):
 
     st.markdown("""
@@ -591,34 +615,20 @@ if (
 
     st.markdown('<div class="login-title">Login Portal</div>', unsafe_allow_html=True)
 
-    # CENTERED FORM
-    left, center, right = st.columns([1.5, 2, 1.5])
+    col1, col2, col3 = st.columns([1.5, 2, 1.5])
 
-    with center:
+    with col2:
 
-        # USERNAME (EMAIL)
-        email = st.text_input(
-            "Email",
-            placeholder="Enter your email"
-        )
+        email = st.text_input("Email")
+        password = st.text_input("Password", type="password")
 
-        password = st.text_input(
-            "Password",
-            type="password",
-            placeholder="Enter your password"
-        )
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # LOGIN BUTTON
-        if st.button("Log Me In", use_container_width=True):
+        if st.button("Log In", use_container_width=True):
 
             try:
-                user = auth.sign_in_with_email_and_password(email, password)
+                auth.sign_in_with_email_and_password(email, password)
 
                 st.session_state.logged_in = True
                 st.session_state.show_login = False
-                st.session_state.auth_mode = "login"
 
                 st.success("Login Successful ✅")
                 st.rerun()
@@ -626,17 +636,12 @@ if (
             except:
                 st.error("Invalid email or password")
 
-        # SIGN UP TEXT
         st.markdown(
-            """
-            <div style="text-align:center; margin-top:18px; font-size:16px;">
-                Don’t have an account?
-            </div>
-            """,
+            "<div style='text-align:center;'>Don't have an account?</div>",
             unsafe_allow_html=True
         )
 
-        if st.button("Sign Up", use_container_width=True):
+        if st.button("Go to Sign Up", use_container_width=True):
             st.session_state.auth_mode = "signup"
             st.rerun()
 
@@ -649,7 +654,7 @@ if (
 if (
     st.session_state.show_login
     and st.session_state.auth_mode == "signup"
-    and not st.session_state.get("logged_in", False)
+    and not st.session_state.logged_in
 ):
 
     st.markdown("""
@@ -668,12 +673,12 @@ if (
 
     st.markdown('<div class="signup-title">Create Account</div>', unsafe_allow_html=True)
 
-    left, center, right = st.columns([1.5, 2, 1.5])
+    col1, col2, col3 = st.columns([1.5, 2, 1.5])
 
-    with center:
+    with col2:
 
-        email = st.text_input("Email", placeholder="Enter your email", key="signup_email")
-        password = st.text_input("Password", type="password", placeholder="Create password", key="signup_pass")
+        email = st.text_input("Email", key="signup_email")
+        password = st.text_input("Password", type="password", key="signup_pass")
 
         if st.button("Create Account", use_container_width=True):
 
@@ -683,11 +688,14 @@ if (
                 st.success("Account Created Successfully ✅")
 
                 st.session_state.auth_mode = "login"
-
                 st.rerun()
 
             except Exception as e:
-                st.error("Account creation failed")
+                st.error("Signup failed")
+
+        if st.button("Back to Login", use_container_width=True):
+            st.session_state.auth_mode = "login"
+            st.rerun()
 
     st.stop()
 # ======================================
