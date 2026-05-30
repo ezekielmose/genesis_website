@@ -534,7 +534,7 @@ with col3:
     </style>
     """, unsafe_allow_html=True)
 
-    login_btn = st.button("Login")
+   # login_btn = st.button("Login")
 
 # ======================================
 # SESSION STATE (MUST BE AT TOP)
