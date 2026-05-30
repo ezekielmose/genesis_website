@@ -528,7 +528,7 @@ if st.session_state.show_login and not st.session_state.logged_in:
 
     with col2:
 
-        email = st.text_input("Email")
+        email = st.text_input("Username")
         password = st.text_input("Password", type="password")
 
         if st.button("Log In", use_container_width=True):
@@ -552,7 +552,7 @@ if st.session_state.show_login and not st.session_state.logged_in:
                     st.rerun()
         
                 except Exception:
-                    st.error("Invalid email or password")
+                    st.error("Invalid Username or password")
 
     
 
@@ -1442,7 +1442,7 @@ with tabs[1]:
         with col2:
 
             email = st.text_input(
-                "Email",
+                "Username",
                 key="login_email"
             )
 
@@ -1484,7 +1484,7 @@ with tabs[1]:
                 except Exception:
             
                     progress.empty()
-                    st.error("❌ Invalid email or password")
+                    st.error("❌ Invalid username or password")
 
         st.stop()
 
