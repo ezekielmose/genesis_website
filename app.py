@@ -668,9 +668,6 @@ if not st.session_state.get("logged_in", False):
 # HOME PAGE
 # ======================================
 with tabs[0]:
-
-
-
 # ======================================
 # HERO IMAGE SLIDER
 # ======================================
