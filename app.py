@@ -481,8 +481,8 @@ with col1:
 with col2:
     tabs = st.tabs([
         "Home",
-        "AI Analyzer",
         "Our Services",
+        "AI Analyzer",
         "About Us"
     ])
 
