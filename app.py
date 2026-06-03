@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pyrebase
+import pandas as pd
 
 
 if "page" not in st.session_state:
@@ -23,6 +24,9 @@ if "dashboard_role" not in st.session_state:
 
 if "dashboard_logged_in" not in st.session_state:
     st.session_state.dashboard_logged_in = False
+
+if "show_reports" not in st.session_state:
+    st.session_state.show_reports = False
 
 # ======================================
 # FIREBASE CONFIG
@@ -2126,10 +2130,30 @@ with tabs[1]:
                     # =========================
                     if st.button ("Analyze the Video"):
                         st.write("UNDER DEVELOPMENT")
-                        
+
+
+                
             elif st.session_state.get("active_tool") == "dashboard":
             
                 st.subheader("📊 Dashboard")
+            
+                # =========================
+                # GOOGLE SHEET REPORT LOADER
+                # =========================
+                def load_daily_report():
+                    SHEET_ID = "1gh2QMj4vngL-JLf6SPmWvjSuCgl9uItTAMteY3acVNg"
+                    SHEET_NAME = "DailyReport"
+            
+                    url = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet={SHEET_NAME}"
+            
+                    df = pd.read_csv(url)
+                    return df
+            
+                # =========================
+                # INITIAL STATE SAFETY
+                # =========================
+                if "show_reports" not in st.session_state:
+                    st.session_state.show_reports = False
             
                 left, right = st.columns([1, 3])
             
@@ -2142,11 +2166,13 @@ with tabs[1]:
             
                     if st.button("Admin"):
                         st.session_state.dashboard_role = "admin"
-                        st.session_state.dashboard_logged_in = False  # reset login
+                        st.session_state.dashboard_logged_in = False
+                        st.session_state.show_reports = False  # reset reports
             
                     if st.button("Executive"):
                         st.session_state.dashboard_role = "executive"
-                        st.session_state.dashboard_logged_in = True  # auto access
+                        st.session_state.dashboard_logged_in = True
+                        st.session_state.show_reports = False  # reset reports
             
                     st.markdown("---")
             
@@ -2190,8 +2216,33 @@ with tabs[1]:
             
                             st.markdown("## 🛠 Admin Panel")
             
-                            st.button("Manage Users")
-                            st.button("View Reports")
+                            col1, col2 = st.columns(2)
+            
+                            with col1:
+                                if st.button("Manage Users"):
+                                    st.info("User management coming soon...")
+            
+                            with col2:
+                                if st.button("View Reports"):
+                                    st.session_state.show_reports = True
+            
+                            # =========================
+                            # REPORT TABLE DISPLAY
+                            # =========================
+                            if st.session_state.show_reports:
+            
+                                st.markdown("### 📊 Daily Report (A1:D3)")
+            
+                                try:
+                                    df = load_daily_report()
+            
+                                    # enforce A1:D3 range
+                                    df = df.iloc[:3, :4]
+            
+                                    st.dataframe(df, use_container_width=True)
+            
+                                except Exception as e:
+                                    st.error(f"Failed to load report: {e}")
             
                     # =========================
                     # EXECUTIVE FLOW → NO LOGIN
