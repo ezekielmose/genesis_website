@@ -18,6 +18,12 @@ if "logged_in" not in st.session_state:
 if "role" not in st.session_state:
     st.session_state.role = None
 
+if "dashboard_role" not in st.session_state:
+    st.session_state.dashboard_role = None
+
+if "dashboard_logged_in" not in st.session_state:
+    st.session_state.dashboard_logged_in = False
+
 # ======================================
 # FIREBASE CONFIG
 # ======================================
@@ -2122,58 +2128,84 @@ with tabs[1]:
                         st.write("UNDER DEVELOPMENT")
                         
             elif st.session_state.get("active_tool") == "dashboard":
-
+            
                 st.subheader("📊 Dashboard")
             
-                # =========================
-                # TWO COLUMN DASHBOARD LAYOUT
-                # =========================
                 left, right = st.columns([1, 3])
             
                 # =========================
-                # LEFT SIDE (ROLE SELECTOR)
+                # LEFT SIDE (ROLE SELECTION)
                 # =========================
                 with left:
             
                     st.markdown("### Login as:")
             
                     if st.button("Admin"):
-                        st.session_state.role = "admin"
+                        st.session_state.dashboard_role = "admin"
+                        st.session_state.dashboard_logged_in = False  # reset login
             
                     if st.button("Executive"):
-                        st.session_state.role = "executive"
+                        st.session_state.dashboard_role = "executive"
+                        st.session_state.dashboard_logged_in = True  # auto access
             
                     st.markdown("---")
             
-                    if st.session_state.role:
-                        st.success(f"Logged in as: {st.session_state.role.capitalize()}")
-                    else:
-                        st.info("Please select a role")
+                    if st.session_state.dashboard_role:
+                        st.success(f"Selected: {st.session_state.dashboard_role.capitalize()}")
             
                 # =========================
-                # RIGHT SIDE (CONTENT AREA)
+                # RIGHT SIDE (LOGIC)
                 # =========================
                 with right:
             
-                    if st.session_state.role == "admin":
+                    # =========================
+                    # ADMIN FLOW → LOGIN REQUIRED
+                    # =========================
+                    if st.session_state.dashboard_role == "admin":
             
-                        st.markdown("## 🛠 Admin Panel")
+                        if not st.session_state.dashboard_logged_in:
             
-                        st.write("Welcome Admin. You have full control access.")
+                            st.markdown("### 🔐 Admin Login")
             
-                        st.button("Manage Users")
-                        st.button("System Settings")
-                        st.button("View Reports")
+                            email = st.text_input("Admin Email", key="admin_email")
+                            password = st.text_input("Password", type="password", key="admin_password")
             
-                    elif st.session_state.role == "executive":
+                            if st.button("Login as Admin"):
+            
+                                with st.spinner("Authenticating..."):
+            
+                                    try:
+                                        user = auth.sign_in_with_email_and_password(email, password)
+            
+                                        st.session_state.dashboard_logged_in = True
+            
+                                        st.success("Admin login successful ✅")
+            
+                                        st.rerun()
+            
+                                    except Exception:
+                                        st.error("Invalid admin credentials")
+            
+                        else:
+            
+                            st.markdown("## 🛠 Admin Panel")
+            
+                            st.button("Manage Users")
+                            st.button("View Reports")
+            
+                    # =========================
+                    # EXECUTIVE FLOW → NO LOGIN
+                    # =========================
+                    elif st.session_state.dashboard_role == "executive":
             
                         st.markdown("## 📈 Executive Dashboard")
             
-                        st.write("Welcome Executive. You have reporting access only.")
+                        st.write("Analytics Summary")
             
-                        st.button("View Analytics")
-                        st.button("Performance Reports")
-                        st.button("Download Summary")
+                        st.metric("Total Reports", "128")
+                        st.metric("Approved Videos", "87")
+                        st.metric("Pending Reviews", "41")
             
                     else:
-                        st.warning("Select a role from the left to continue")
+            
+                        st.info("Select Admin or Executive on the left to continue")
