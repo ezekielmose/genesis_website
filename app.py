@@ -2231,7 +2231,7 @@ with tabs[1]:
                             # =========================
                             if st.session_state.show_reports:
             
-                                st.markdown("### 📊 Daily Report (A1:D3)")
+                                st.markdown("### REPORT SINCE LAST INVOICE")
             
                                 try:
                                     df = load_daily_report()
