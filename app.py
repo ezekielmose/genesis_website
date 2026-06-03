@@ -15,6 +15,9 @@ if "auth_mode" not in st.session_state:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
+if "role" not in st.session_state:
+    st.session_state.role = None
+
 # ======================================
 # FIREBASE CONFIG
 # ======================================
@@ -2118,10 +2121,59 @@ with tabs[1]:
                     if st.button ("Analyze the Video"):
                         st.write("UNDER DEVELOPMENT")
                         
-            # ======================================
-            # DASHBOARD SECTION
-            # ======================================
-
             elif st.session_state.get("active_tool") == "dashboard":
+
                 st.subheader("📊 Dashboard")
-                st.write("Dashboard section coming soon...")
+            
+                # =========================
+                # TWO COLUMN DASHBOARD LAYOUT
+                # =========================
+                left, right = st.columns([1, 3])
+            
+                # =========================
+                # LEFT SIDE (ROLE SELECTOR)
+                # =========================
+                with left:
+            
+                    st.markdown("### Login as:")
+            
+                    if st.button("Admin"):
+                        st.session_state.role = "admin"
+            
+                    if st.button("Executive"):
+                        st.session_state.role = "executive"
+            
+                    st.markdown("---")
+            
+                    if st.session_state.role:
+                        st.success(f"Logged in as: {st.session_state.role.capitalize()}")
+                    else:
+                        st.info("Please select a role")
+            
+                # =========================
+                # RIGHT SIDE (CONTENT AREA)
+                # =========================
+                with right:
+            
+                    if st.session_state.role == "admin":
+            
+                        st.markdown("## 🛠 Admin Panel")
+            
+                        st.write("Welcome Admin. You have full control access.")
+            
+                        st.button("Manage Users")
+                        st.button("System Settings")
+                        st.button("View Reports")
+            
+                    elif st.session_state.role == "executive":
+            
+                        st.markdown("## 📈 Executive Dashboard")
+            
+                        st.write("Welcome Executive. You have reporting access only.")
+            
+                        st.button("View Analytics")
+                        st.button("Performance Reports")
+                        st.button("Download Summary")
+            
+                    else:
+                        st.warning("Select a role from the left to continue")
